@@ -1,0 +1,72 @@
+\documentclass[10pt]{report}
+\input{preamble.tex}
+%PER CAMBIARE I MARGINI
+%\usepackage[margin=2cm]{geometry}
+
+\newcommand{\znz}[1]{{\Z/#1\Z}}
+
+%----------- Setup stilistico ----------------
+\definecolor{DarkRed}{HTML}{B6321C}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=DarkRed,
+    filecolor=blue,
+    citecolor = black,
+    urlcolor=cyan,
+}
+\renewcommand\thefootnote{\textcolor{blue}{\arabic{footnote}}}
+
+%\AddToHook{cmd/section/before}{\clearpage}
+%--------- Comandi dattilografici ------------
+\newcommand{\alg}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\pasg}[3]{\overset{\hyperref[#3]{\text{#2}}}{#1}}
+\newcommand{\pasgnl}[2]{\overset{\text{#2}}{#1}}
+\newcommand{\pasgnlmath}[2]{\overset{#2}{#1}}
+
+\newcommand{\PV}{{\mathbb{P}(V)}}
+\newcommand{\PW}{{\mathbb{P}(W)}}
+\newcommand{\ser}[1]{\sum_{#1=0}^\infty}
+\newcommand{\Ind}{\mathrm{Ind}}
+\newcommand{\Res}{\mathrm{Res}}
+\newcommand{\gf}[2]{\pi_1(#1,#2)}
+
+
+\NewDocumentCommand{\PGL}{o m}{
+    \IfNoValueTF{#1}
+        {{\mathbb{P}GL(#2)}}
+    {{\mathbb{P}GL_{#1}(#2)}}
+}
+\NewDocumentCommand{\GL}{o m}{
+    \IfNoValueTF{#1}
+        {{GL(#2)}}
+    {{GL_{#1}(#2)}}
+}
+
+
+% power of denominator / center point / function / path
+% use small o for no parameter
+\NewDocumentCommand{\cauchyint}{oD<>{-z_0} O{f} m}{
+    \IfNoValueTF{#1}
+        {{\frac1{2\pi i}\int_{{#4}}\frac{{#3}(\zeta)}{\zeta{#2}}d\zeta}}
+    {{\frac1{2\pi i}\int_{{#4}}\frac{{#3}(\zeta)}{(\zeta{#2})^{#1}}d\zeta}}
+}
+% =====================================================
+\title{\Huge{Cheat Sheet di Geometria 2}}
+\date{A.A 2022-2023}
+\author{}
+
+\begin{document}
+\maketitle
+
+\begin{multicols*}{2}
+    \tableofcontents
+\end{multicols*}
+
+\newpage
+\input{sections/1-geometria-proiettiva.tex}
+\input{sections/2-topologia.tex}
+\input{sections/3-topologia-algebrica.tex}
+\input{sections/4-analisi-complessa.tex}
+
+
+\end{document}

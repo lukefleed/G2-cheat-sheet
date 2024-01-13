@@ -1,0 +1,1090 @@
+\chapter{Teoria dell'omotopia e Rivestimenti}
+\setlength{\parindent}{2pt}
+
+\begin{multicols*}{2}
+
+
+\section{La categoria hTop}
+\begin{definition}[Omotopia]
+Siano $f,g:X\to Y$ funzioni continue. Una \textbf{omotopia} tra $f$ e $g$ è una funzione continua
+\[H:X\times [0,1]\to Y\]
+tale che
+\begin{itemize}[noitemsep]
+\item $H(x,0)=f(x)$
+\item $H(x,1)=g(x)$
+\end{itemize}
+\end{definition}
+\begin{remark}
+Stiamo definendo una famiglia di funzioni $H_t=H(\cdot,t):X\to Y$ che possiamo interpretare come ``snapshot" di una trasformazione continua di $f$ in $g$.
+\end{remark}
+
+\begin{notation}
+Se esiste una omotopia tra $f$ e $g$ scriviamo\footnote{I professori usano la notazione $f\sim g$, ma data l'abbondanza di relazioni di equivalenza in questo corso, e dato che la notazione $\simeq$ è usata in alcuni libri, l'ho preferita per evitare ambiguità nel lettore (e per gusto personale).} $f\simeq g$ e diciamo che $f$ e $g$ sono mappe \textbf{omotope}.
+\end{notation}
+
+\begin{proposition}[Omotopia è relazione di equivalenza]\label{OmotopiaTraMappeERelazioneEquivalenza}
+La relazione $f\sim g\coimplies f\simeq g$ è una relazione di equivalenza sull'insieme delle funzioni continue da $X$ a $Y$.
+\end{proposition}
+\begin{notation}
+Se $C(X,Y)=\{f:X\to Y\text{ continue}\}$ allora poniamo
+\[[X,Y]=\quot{C(X,Y)}\simeq\]
+e data $f\in C(X,Y)$ indichiamo la sua classe in $[X,Y]$ con $[f]$ o $[f]_\simeq$ se si presenta ambiguità.
+\end{notation}
+
+\begin{proposition}[Composizione passa alla relazione di omotopia]\label{ComposizioneDiOmotopeDaOmotope}
+Siano $X,Y,Z$ spazi topologici. Se $f,f':X\to Y$ e $g,g':Y\to Z$ sono mappe continue tali che $f\simeq f'$ e $g\simeq g'$ allora
+\[g\circ f\simeq g'\circ f'.\]
+\end{proposition}
+
+\noindent Grazie a queste proprietà possiamo dare la definizione degli isomorfismi tra spazi equivalenti per omotopia:
+\begin{definition}[Inversa omotopica e Equivalenza omotopica]
+Sia $f:X\to Y$ continua. Una \textbf{inversa omotopica} di $f$ è una mappa $g:Y\to X$ continua tale che
+\[g\circ f\simeq id_X\qquad f\circ g\simeq id_Y.\]
+Se $f$ ammette inversa omotopica diremo che $f$ è una \textbf{equivalenza omotopica} e che $X$ e $Y$ sono \textbf{omotopicamente equivalenti}.
+\end{definition}
+\begin{remark}
+Spazi omeomorfi sono omotopicamente equivalenti.
+\end{remark}
+\begin{notation}
+Se $X$ e $Y$ sono omotopicamente equivalenti scriviamo $X\simeq Y$
+\end{notation}
+
+
+\begin{proposition}[Equivalenza omotopica è una equivalenza]\label{EquivalenzaOmotopicaERelazioneEquivalenza}
+La relazione $X\sim Y\coimplies X\simeq Y$ è una relazione di equivalenza.
+\end{proposition}
+
+
+\begin{proposition}[]
+Sia $f:X\to Y$ un'identificazione e $Z$ uno spazio localmente compatto, allora la funzione
+\[H:\funcDef{X\times Z}{Y\times Z}{(x,t)}{(f(x),t)}\]
+\`e un'identificazione.
+\end{proposition}
+\begin{corollary}[Omotopie passano al quoziente]\label{OmotopiaPassaAlQuoziente}
+Se $\sim$ \`e una relazione di equivalenza su $X$ e $H:X\times[0,1]\to Z$ \`e una omotopia tale che $x\sim y\implies H(x,t)=H(y,t)$ allora
+\[\ol H:\funcDef{\quot X\sim\times[0,1]}{Z}{([x],t)}{H(x,t)}\]
+\`e un'omotopia.
+\end{corollary}
+
+\subsection{Funtore delle componenti connesse per archi}
+Ricordiamo che $\pi_0$ è un funtore dalla categoria degli spazi topologici $Top$ alla categoria degli insiemi $Set$ (\ref{Pi0EFuntoreDaTopASet}), sappiamo cioè che
+\[\pi_0(X)=\{\text{componenti connesse per archi di $X$}\}\]
+è un insieme e che $f:X\to Y$ continua induce una mappa $f_\ast=\pi_0(f):\pi_0(X)\to\pi_0(Y)$ ben definita. Vediamo che il funtore e le omotopie sono compatibili, cioè
+\begin{theorem}[Mappe omotope inducono la stessa mappa nei $\pi_0$]\label{MappeOmotopeInduconoLaStessaMappaNeiPi0}
+Se $f,g:X\to Y$ sono mappe omotope allora inducono la stessa mappa $f_\ast=g_\ast:\pi_0(X)\to\pi_0(Y)$.
+\end{theorem}
+\noindent
+Il teorema pu\`o essere interpretato come la buona definizione del funtore $\pi_0:hTop\to Set$ per quanto riguarda le frecce. Una conseguenza immediata della funtorialit\`a \`e il seguente
+\begin{corollary}\label{SpaziOmotopicamenteEquivalentiHannoPi0InBigezione}
+Se $X\simeq Y$ allora $\pi_0(X)$ è in bigezione con $\pi_0(Y)$.
+\end{corollary}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Gruppo fondamentale}
+In questa sezione definiamo l'oggetto più importante del capitolo, cioè il gruppo fondamentale.
+\subsection{Omotopia di cammini}
+\begin{notation}
+Indichiamo l'insieme dei cammini da $x_0$ a $x_1$ in $X$ come
+\[\Omega(X,x_0,x_1).\]
+Se $X$ è chiaro dal contesto potremo ometterlo. Se $x_0=x_1$ potremo scrivere $\Omega(X,x_0)$, o addirittura $\Omega(x_0)$.\\
+Un cammino tale che $x_0=x_1$ è detto \textbf{laccio} o \textbf{loop}.
+\end{notation}
+\noindent Per lavorare bene coi cammini notiamo che non possiamo usare le omotopie ``libere" definite precedentemente, infatti
+\begin{remark}
+Un cammino $\gamma$ è omotopo alla funzione costante $x\mapsto \gamma(0)$. In particolare cammini con un estremo in comune sono sempre omotopi.
+\end{remark}
+\noindent Per aggirare questo inconveniente diamo la seguente
+
+\begin{definition}[Omotopia di cammini]
+Una \textbf{omotopia di cammini} (o \textbf{omotopia a estremi fissati}) fra $\gamma_0, \gamma_1\in\Omega(X,x_0,x_1)$ è una omotopia $H:[0,1]\times[0,1]\to X$ tale che
+\begin{enumerate}[noitemsep]
+\item $H(x,0)=\gamma_0(x)$ e $H(x,1)=\gamma_1(x)$
+\item $H(0,t)=x_0$ e $H(1,t)=x_1$, cioè $H(\cdot,t)\in\Omega(X,x_0,x_1)$.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+Le omotopie di cammini inducono una relazione di equivalenza su $\Omega(X,x_0,x_1)$.
+\end{proposition}
+
+\begin{notation}
+Se $\gamma_1$ e $\gamma_2$ sono omotope a estremi fissati scriviamo $\gamma_1\simeq \gamma_2$.
+Dato che cammini sono sempre omotopi a costanti per omotopie libere, con la notazione sopra intenderemo che esiste una omotopia a estremi fissi che porta l'uno nell'altro se non altrimenti specificato. Se scriviamo che $\gamma_1\simeq \gamma_2$ in $\Omega(X,x_0,x_1)$ allora intendiamo che sono omotope a estremi fissati.
+\end{notation}
+
+\begin{theorem}
+Se $\gamma_1\simeq\gamma_1'$ in $\Omega(x_0,x_1)$ e $\gamma_2\simeq \gamma_2'$ in $\Omega(x_1,x_2)$, allora $\gamma_1\ast \gamma_2\simeq \gamma_1'\ast \gamma_2'$ in $\Omega(x_0,x_2)$.
+\end{theorem}
+
+\subsection{Gruppo Fondamentale}
+
+\begin{definition}[Gruppo Fondamentale]
+Sia $X$ uno spazio topologico e sia $x_0\in X$. Il \textbf{gruppo fondamentale} (o \textbf{primo gruppo di omotopia}) di $X$ con \textbf{punto base} $x_0\in X$ è
+\[\pi_1(X,x_0)=\quot{\Omega(X,x_0,x_0)}{\simeq},\]
+cioè l'insieme delle classi di equivalenza di lacci in $X$ passanti per $x_0$ per la relazione di omotopia a estremi fissati.
+\end{definition}
+
+\begin{remark}
+$\pi_1(X,x_0)$ dipende solo dalla componente connessa per archi che contiene $x_0$.
+\end{remark}
+
+\noindent Mostriamo che il gruppo fondamentale è effettivamente un gruppo con l'operazione di giunzione. Consideriamo prima il seguente lemma
+\begin{lemma}[Riparametrizzazioni]\label{RiparametrizzazioniRestituisconoCamminiOmotopi}
+Sia $j:[0,1]\to[0,1]$ continua tale che $j(0)=0$ e $j(1)=1$. Allora $\alpha\simeq \al\circ j$ per ogni $\al\in\Omega(X,x_0,x_1)$.
+\end{lemma}
+
+\begin{theorem}[Il gruppo fondamentale è un gruppo]
+Se $\ast$ è la mappa indotta dalla giunzione in omotopia, si ha che
+\[(\pi_1(X,x_0),\ast)\text{ è un gruppo.}\]
+\end{theorem}
+
+\begin{definition}[Semplicemente connesso]
+Uno spazio topologico $X$ è \textbf{semplicemente connesso} se è connesso per archi e $\pi_1(X,x_0)=\{1\}$ per qualsiasi $x_0\in X$
+\end{definition}
+
+\subsection{Cammini chiusi come applicazioni dal cerchio}
+Per questa sezione poniamo
+\[p:\funcDef{[0,1]}{S^1}{t}{e^{2\pi i t}}\]
+dove consideriamo $S^1=\{e^{i\theta}\mid \theta\in[0,2\pi)\}\subseteq \C\cong\R^2$.
+\bigskip
+\begin{remark}
+Esiste una corrispondenza biunivoca tra $\Omega(X,x_0)$ e $\{f:S^1\to X\mid x_0\in \imm f\}$
+\end{remark}
+
+\noindent Dalla definizione del gruppo fondamentale sospettiamo che questo ci permetta di determinare quando nello spazio sono presenti ``buchi" (definizioni più precise saranno date dopo). La seguente proposizione comincia a far intravedere questo concetto in modo più formale:
+\begin{proposition}[Continua su bordo si estende se e solo se classe di omotopia banale]\label{OmotopiaBanaleEEstensioneDalCerchioAlDisco}
+Dato $\al\in\Omega(x_0)$, si ha che
+\[[\al]=1\text{ in }\pi_1(X,x_0)\coimplies \wh\al \text{ si estende da $S^1$ a $D^2$.}\]
+\end{proposition}
+
+\begin{proposition}
+La corrispondenza $\al\mapsto\wh\al$ induce una mappa $\psi:\pi_1(X,x_0)\to[S^1,X]$ ben definita.
+\end{proposition}
+
+\begin{lemma}[Cammini complementari sul bordo di convesso]\label{CamminiComplementariSuBordoConvesso}
+Sia $D$ un sottoinsieme convesso di $\R^2$ chiuso e limitato. Siano $\gamma_1$ e $\gamma_2$ due archi complementari su $\partial D$ (che per le ipotesi è connesso per archi) che vanno da $p$ a $q$, cioè $\gamma_1(0)=\gamma_2(0)=p,\ \gamma_1(1)=\gamma_2(1)=q$, $\imm \gamma_1\cap \imm\gamma_2=\{p,q\}$ e hanno supporto nel bordo. Allora $\gamma_1$ e $\gamma_2$ sono omotope a estremi fissi.
+\end{lemma}
+
+\begin{theorem}[Propriet\`a della corrispondenza tra $\pi_1(X)$ e $\spa{S^1,X}$]
+Valgono le seguenti affermazioni:
+\begin{itemize}[noitemsep]
+\item Se $X$ è connesso per archi la $\psi:\pi_1(X,x_0)\to[S^1,X]$ definita prima è surgettiva.
+\item $\psi(g)=\psi(h)$ se e solo se $g$ e $h$ sono coniugati in $\pi_1(X,x_0)$.
+\end{itemize}
+\end{theorem}
+
+\noindent Riassumiamo i risultati ottenuti in questa sezione nella seguente
+\begin{proposition}[Corrispondenza tra omotopie di cammini in $\Omega(X,x_0)$ e omotopie libere in ${[S^1,X]}$]\label{CorrispondenzaTraOmotopieDiCamminiTraLoopEOmotopieLibereDiMappeDefiniteSullaSfere}
+Valgono i seguenti fatti:
+\begin{itemize}[noitemsep]
+\item C'è una corrispondenza biunivoca tra $\Omega(X,x_0)$ e le funzioni continue da $S^1$ a $X$ tali che $x_0$ appartiene all'immagine.
+\item Un loop corrisponde alla classe banale nel gruppo fondamentale se e solo se la sua mappa su $S^1$ corrispondente si può estendere in modo continuo a tutto $D^2$
+\item La corrispondenza sopra induce $\psi:\pi_1(X,x_0)\to[S^1,X]$ tale che
+\begin{itemize}[noitemsep]
+\item è costante sulle classi di coniugio del gruppo fondamentale e su classi diverse ha immagine diversa
+\item Se $X$ è connesso per archi allora è surgettiva.
+\end{itemize}
+\end{itemize}
+\end{proposition}
+
+\subsection{Funtorialità del gruppo fondamentale}
+Abbiamo visto come gli spazi topologici considerati con le funzioni continue formano una categoria. Se consideriamo gli spazi topologici fissando anche un punto, detto \textbf{punto base}, e consideriamo le mappe continue che mandano il punto base nel punto base troviamo un'altra categoria molto simile, che indichiamo con $Top_\ast$. Più formalmente
+\begin{definition}[Categoria degli spazi topologici puntati]
+Definiamo $Top_\ast$ come la categoria i cui oggetti sono coppie della forma $(X,x_0)$ con $X$ spazio topologico e $x_0\in X$, e i cui morfismi sono mappe continue $f:X\to Y$ che rispettano i punti base, cioè se $f:(X,x_0)\to(Y,y_0)$ allora $f$ è continua e $f(x_0)=y_0$. Gli oggetti di $Top_\ast$ sono detti \textbf{spazi topologici puntati} e i morfismi di $Top_\ast$ sono detti \textbf{mappe continue puntate}.
+\end{definition}
+
+\begin{remark}
+Se $f:X\to Y$ continua manda $x_0$ in $y_0$ allora se $\al\in\Omega(x_0)$ abbiamo che $f\circ \al\in\Omega(y_0)$. Inoltre, se $\al\simeq \beta$ come cammini allora $f\circ \al\simeq f\circ \beta$, sempre come cammini (basta comporre l'omotopia con $f$).
+\end{remark}
+\noindent Quanto appena osservato ci dice che $f:X\to Y$ induce una mappa
+\[f_\ast:\funcDef{\pi_1(X,x_0)}{\pi_1(Y,f(x_0))}{[\al]}{[f\circ \al]}.\]
+
+\begin{proposition}[Funtore da $Top_\ast$ a $Grp$]\label{FuntorialitaDaMappePuntateAOmomorfismiDeiGruppiFondamentali}
+Consideriamo la seguente associazione:
+\begin{align*}
+(X,x_0)&\mapsto\pi_1(X,x_0)
+f:X\to Y&\mapsto f_\ast:\pi_1(X,x_0)\to\pi_1(Y,y_0)
+\end{align*}
+dove $f_\ast$ indica la mappa indotta da $f$ come sopra.
+Si ha che questa associazione è un funtore da $Top_\ast$ a $Grp$, cioè
+\begin{itemize}[noitemsep]
+\item $id_\ast=id_{\pi_1(X,x_0)}$
+\item Se $f:X\to Y$ e $g:Y\to Z$ continue tali che $y_0=f(x_0)$ e $z_0=g(y_0)$, allora
+\[(g\circ f)_\ast=g_\ast\circ f_\ast:\pi_1(X,x_0)\to\pi_1(Z,z_0)\]
+\item $f_\ast$ è un omomorfismo di gruppi.
+\end{itemize}
+\end{proposition}
+\begin{corollary}
+Se $f:X\to Y$ è un omeomorfismo allora $f_\ast:\pi_1(X,x_0)\to\pi_1(Y,y_0)$ è un isomorfismo di gruppi.
+\end{corollary}
+
+\noindent Definiamo ora l'analogo delle omotopie su $Top_\ast$:
+
+\begin{definition}[Omotopia puntata]
+Se $f,g:(X,x_0)\to(Y,y_0)$ sono continue e puntate definiamo una \textbf{omotopia puntata} da $f$ a $g$ una omotopia $H$ da $f$ a $g$ tale che  $H_t(\cdot ,t)$ è una mappa continua puntata da $(X,x_0)$ a $(Y,y_0)$, cioè  $H(x_0,t)=y_0$ per ogni $t\in[0,1]$.
+\end{definition}
+
+\begin{proposition}[Mappe omotope puntate inducono la stessa mappa sui gruppi fondamentali]\label{MappeOmotopePuntateInduconoStessaMappaSuGruppiFondamentali}
+Siano $f,g:(X,x_0)\to(Y,y_0)$ mappe continue puntate omotope tramite una omotopia puntata $H$. Allora $f_\ast=g_\ast$ come mappe da $\pi_1(X,x_0)\to\pi_1(Y,y_0)$.
+\end{proposition}
+
+\noindent
+Abbiamo quindi mostrato che $\pi_1$ \`e un funtore da $hTop_\ast$ a $Grp$.
+
+\subsection{Dipendenze del gruppo fondamentale}
+
+\begin{theorem}[Il punto base determina $\pi_1(X)$ a meno di isomorfismo]\label{PuntoBaseDeterminaPi1GruppoFondamentaleAMenoDiIsomorfismo}
+Sia $X$ connesso per archi e siano $x_0,x_1\in X$. Ogni cammino $\gamma:[0,1]\to X$  da $x_0$ a $x_1$ induce un isomorfismo di gruppi $\gamma_\sharp:\pi_1(X,x_1)\to\pi_1(X,x_0)$.
+\end{theorem}
+
+\begin{remark}
+L'isomorfismo dipende dal cammino.
+\end{remark}
+
+\begin{proposition}[Mappa omotopa all'identità induce isomorfismo]
+Sia $f:X\to X$ una mappa omotopa all'identità e sia $x_0\in X$. Allora $f_\ast:\pi_1(X,x_0)\to\pi_1(X,f(x_0))$ è un isomorfismo di gruppi.
+\end{proposition}
+
+\begin{corollary}[Invarianza omotopica]\label{InvarianzaOmotopicaDelGruppoFondamentale}
+Sia $f:X\to Y$ una equivalenza omotopica e sia $x_0\in X$. Si ha che $f_\ast:\pi_1(X,x_0)\to\pi_1(Y,f(x_0))$ è un isomorfismo. In particolare spazi omotopi hanno $\pi_1$ isomorfo.
+\end{corollary}
+
+
+\section{Spazi contraibili e retratti}
+\subsection{Spazi contraibili}
+Studiamo la classe banale per equivalenza omotopica:
+\begin{definition}[Spazio contraibile]
+Uno spazio $X$ è \textbf{contraibile} se è omotopicamente equivalente ad un punto.
+\end{definition}
+
+\noindent Uno degli esempi più comuni di spazi contraibili sono i seguenti:
+\begin{definition}[Insieme stellato]
+Un insime $\Omega\subseteq \R^n$ è \textbf{stellato} rispetto a $x_0\in \Omega$ se
+\[\forall x\in\Omega,\ [x,x_0]\subseteq \Omega,\]
+dove $[x,x_0]=\{tx+(1-t)x_0\mid t\in[0,1]\}$ indica il segmento con estremi $x$ e $x_0$.
+\end{definition}
+\begin{definition}[Insieme Convesso]
+Un insime $\Omega\subseteq \R^n$ è \textbf{convesso} se è stellato rispetto a ogni suo punto, cioè se
+\[\forall x,y\in \Omega,\ [x,y]\subseteq \Omega.\]
+\end{definition}
+\begin{remark}
+Ogni insieme convesso è stellato, ma non ogni insieme stellato è convesso.
+\end{remark}
+\begin{remark}
+Un insieme stellato è connesso per archi, infatti ogni punto appartiene alla classe di $x_0$ nel $\pi_0$.
+\end{remark}
+
+\begin{proposition}[Mappe a immagine in stellato]\label{MappeAImmagineInStellato}
+Se $\Omega\subseteq \R^n$ è stellato e $X$ è uno spazio topologico qualsiasi allora tutte le mappe continue da $X$ a $\Omega$ sono omotope.
+\end{proposition}
+\begin{corollary}\label{StellatiSOnoContraibili}
+Gli insiemi stellati sono contraibili.
+\end{corollary}
+
+\begin{remark}
+Dato che $\R^n$ è stellato rispetto a $0$, esso è contraibile.
+\end{remark}
+
+\subsection{Retratti di Deformazione}
+Nel definire un ``retratto" di $X$ potremmo pensare alla seguente
+\begin{definition}[Retratto]
+Sia $X$ uno spazio topologico e sia $Y\subseteq X$. $Y$ è un \textbf{retratto} di $X$ se esiste una mappa $r:X\to Y$ continua (detta \textbf{retrazione}) tale che $r(y)=y$ per ogni $y\in Y$.
+\end{definition}
+
+\begin{proposition}[Proprietà dei retratti]
+Sia $Y\subseteq X$ un retratto e sia $r:X\to Y$ una retrazione. Si ha che
+\begin{itemize}[noitemsep]
+\item Se $X$ è $T_2$ allora $Y$ è chiuso.
+\item Chiamando $i:Y\inj X$ l'inclusione si ha che $i_\ast:\pi_1(Y,y_0)\to\pi_1(X,y_0)$ è iniettiva.
+\end{itemize}
+\end{proposition}
+\noindent
+Purtroppo questa definizione non è molto significativa da sola, come ci mostra la seguente
+\begin{remark}
+Ogni punto $x_0\in X$ è un retratto di $X$.
+\end{remark}
+
+\noindent Le omotopie ci permettono di catturare meglio il concetto che volevamo descrivere:
+\begin{definition}[Retratto di deformazione]
+Sia $X$ uno spazio topologico e $Y\subseteq X$. $Y$ è un \textbf{retratto di deformazione} di $X$ se esiste una mappa $H:X\times[0,1]\to X$ continua tale che
+\begin{enumerate}[noitemsep]
+\item $H(x,0)=x$ per ogni $x\in X$,
+\item $H(x,1)\in Y$ per ogni $x\in X$
+\item $H(y,t)=y$ per ogni $y\in Y$ e per ogni $t\in [0,1]$,
+\end{enumerate}
+chiediamo cioè che esista una omotopia tra $id_X$ e una retrazione $r:X\to Y$ che fissi $Y$ ad ogni istante.
+$H(\cdot,1):X\to Y\subseteq X$ è detta \textbf{retrazione di deformazione}.
+\end{definition}
+\begin{remark}
+Se $Y$ è un retratto di deformazione di $X$ allora $Y\simeq X$
+\end{remark}
+\begin{remark}
+Non tutti i retratti sono retratti di deformazione, infatti se $\#\pi_0(X)>1$ allora un punto è un retratto di $X$ ma non un retratto di deformazione perché $\#\pi_0(X)\neq\#\pi_0(\{pt.\})=1$ (\ref{SpaziOmotopicamenteEquivalentiHannoPi0InBigezione}).
+\end{remark}
+\begin{remark}
+$S^n$ è un retratto di deformazione di $\R^{n+1}\nz$.
+\end{remark}
+
+
+\section{Rivestimenti}
+\subsection{Omeomorfismi locali}
+\begin{definition}[Omeomorfismo Locale]
+Una funzione $f:X\to Y$ è un \textbf{omeomorfismo locale} se per ogni $x\in X$ esiste un intorno aperto $U$ di $x$ tale che $f(U)$ è aperto in $Y$ e $f\res U:U\to f(U)$ è un omeomorfismo.
+Le mappe $s:f(U)\to U$ definite come $f\res{U}\ii$ sono dette \textbf{sezioni} di $f$.
+\end{definition}
+
+\begin{remark}\label{ContinuaIniettivaEApertaImplicaOmeomorfismoLocale}
+Una mappa continua, iniettiva e aperta è un omeomorfismo locale.
+\end{remark}
+
+\begin{proposition}[Omeomorfismo locale implica aperta]
+Se $f:X\to Y$ è un omeomorfismo locale allora $f$ è una mappa aperta.
+\end{proposition}
+
+\begin{remark}
+La restrizione di un omeomorfismo locale ad un aperto è un omeomorfismo locale.
+\end{remark}
+
+
+\subsection{Rivestimenti}
+\begin{definition}[Rivestimento]
+Una funzione continua $p:E\to X$ è un \textbf{rivestimento} se
+\begin{enumerate}[noitemsep]
+\item $X$ è connesso
+\item Per ogni $x\in X$ esiste un intorno $U$ di $x$ aperto, detto intorno \textbf{ben rivestito}, tale che
+\[p\ii(U)=\bigsqcup_{i\in I}W_i,\]
+dove per ogni $i\in I$ abbiamo che $W_i$ è aperto in $E$ e che $p\res {W_i}:W_i\to U$ è un omeomorfismo.
+\end{enumerate}
+In questa definizione, $X$ è detto \textbf{spazio base}, mentre $E$ è detto \textbf{spazio totale}.
+\end{definition}
+
+\begin{proposition}[Rivestimento implica Omeomorfismo locale]\label{RivestimentoImplicaOmeomorfismoLocale}
+Se $p:E\to X$ è un rivestimento allora è anche un omeomorfismo locale.
+\end{proposition}
+
+\begin{definition}[Fibra]
+Se $p:E\to X$ è un rivestimento e $x_0\in X$ chiamiamo $p\ii(x_0)\subseteq E$ la \textbf{fibra} di $x_0$.
+\end{definition}
+
+\begin{theorem}[Teorema delle Fibre]\label{TeoremaFibre}
+Sia $p:E\to X$ un rivestimento e siano $x,y\in X$. Si ha che $|p\ii(x)|=|p\ii(y)|$, cioè le fibre hanno cardinalità costante.
+\end{theorem}
+
+\noindent Il teorema ci permette di definire una quantità importate per i rivestimenti:
+\begin{definition}[Grado di un rivestimento]
+Dato un rivestimento $p:E\to X$, chiamiamo \textbf{grado} del rivestimento la cardinalità di una qualsiasi fibra.
+\end{definition}
+
+\begin{remark}
+Il teorema delle fibre (\ref{TeoremaFibre}) può essere riformulato in ``Il grado è definito per ogni rivestimento".
+\end{remark}
+
+\begin{remark}[I rivestimenti sono surgettivi]\label{RivestimentiSonoSurgettivi}
+Se $p:E\to X$ è un rivestimento e $E\neq \emptyset$ allora $p$ è surgettivo.
+\end{remark}
+
+\begin{definition}[Rivestimento banale]
+Un rivestimento è \textbf{banale} se ha grado 1.
+\end{definition}
+
+\begin{remark}
+Un rivestimento è un omeomorfismo locale surgettivo, ma non vale l'implicazione opposta.
+\end{remark}
+\begin{example}
+La retta con doppia origine e $\funcDef{(0,5)}{S^1}{t}{e^{2\pi it}}$ sono omeomorfismi locali surgettivi ma non sono rivestimenti, per esempio perché il grado non è ben definito.
+\end{example}
+
+\noindent Concludiamo la sezione fornendo un modo per trovare rivestimenti
+\begin{theorem}[Rivestimento da azione propriamente discontinua]\label{ProiezioneQuozienteAzionePropriamenteDiscontinuaERivestimento}
+Sia $G\acts X$ una azione propriamente discontinua tale che $\quot XG$ sia connesso. Allora $\pi:X\to\quot XG$ è un rivestimento.
+\end{theorem}
+
+\begin{remark}[Grado rivestimenti derivanti da propriamente discontinue]\label{GradoRivestimentiDaAzioniPropriamenteDiscontinue}
+Un'azione propriamente discontinua è libera, quindi le orbite sono in bigezione con $G$. Dato che le orbite corrispondono a fibre, il grado di un rivestimento ottenuto da una azione propriamente discontinua è $|G|$.
+\end{remark}
+
+\begin{remark}[Rivestimento di proiettivi reali]
+Consideriamo la proiezione che identifica gli antipodali
+\[\pi:S^n\to\quot{S^n}{\{\pm id\}}\cong \Pj^n\R.\]
+L'azione $\znz2\acts S^n$ corrispondente è propriamente discontinua e come sappiamo $\Pj^n\R$ è connesso. Segue che l'identificazione antipodale è un rivestimento di grado 2 di $\Pj^n\R$.
+\end{remark}
+
+
+\subsection{Sollevamenti}
+I rivestimenti ci permettono di prendere funzioni a valori nello spazio base e di ``sollevarle" a funzioni nello spazio totale. Questo ci permette di evidenziare differenze difficili da esplicitare nello spazio base.
+\begin{definition}[Sollevamento]
+Sia $p:E\to X$ un rivestimento e sia $f:Y\to X$ una funzione continua data. Un \textbf{sollevamento} di $f$ è una funzione continua $\wt f:Y\to E$ tale che $f=p\circ \wt f$, cioè fa commutare il diagramma
+\[\begin{tikzcd}
+	& E \\
+	Y & X
+	\arrow["f", from=2-1, to=2-2]
+	\arrow["p", from=1-2, to=2-2]
+	\arrow["{\wt f}", dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{theorem}[Unicità del sollevamento]\label{UnicitaSollevamenti}
+Siano $p:E\to X$ un rivestimento e $f:Y\to X$ funzione continua fissata con $Y$ connesso. Se $\wt f_1$ e $\wt f_2$ sono due sollevamenti di $f$ che coincidono in un punto allora $\wt f_1=\wt f_2$.
+\end{theorem}
+
+
+\begin{theorem}[Esistenza e unicità del sollevamento dei cammini]\label{EsistenzaUnicitaSollevamentoCammini}
+Sia $\gamma:[0,1]\to X$ un cammino tale che $\gamma(0)=x_0$ e sia $p:E\to X$ un rivestimento. Allora per ogni $\wt x_0\in p\ii(x_0)$ esiste un unico sollevamento $\wt \gamma:[0,1]\to E$ di $\gamma$ tale che $\wt \gamma(0)=\wt x_0$.
+\end{theorem}
+
+
+\begin{notation}
+Se $p:E\to X$ è un rivestimento, $\al:[0,1]\to X$ è un cammino e $\wt x_0$ è un punto della fibra di $\al(0)$ allora indichiamo con $\wt \al_{\wt x_0}$ l'unico sollevamento di $\al$ che parte da $\wt x_0$.
+\end{notation}
+
+\begin{theorem}[Sollevamento dell'omotopia]\label{TeoremaSollevamentoOmotopia}
+Siano $p:E\to X$  un rivestimento, $f:Y\to X$ continua, $\wt f:Y\to E$ un sollevamento di $f$ e $H:Y\times [0,1]\to X$ una omotopia tale che $H(\cdot,0)=f$. Allora esiste un (unico) sollevamento $\wt H:Y\times[0,1]\to E$ di $H$ ($p\circ \wt H=H$) tale che $\wt H(\cdot, 0)=\wt f$.
+\end{theorem}
+
+\begin{theorem}[Sollevamento delle omotopie di cammini]\label{SollevamentoOmotopieDiCammini}
+Sia $H:[0,1]\times[0,1]\to X$ un'omotopia di cammini da $\al$ a $\beta$ in $\Omega(X,x_0,x_1)$. Sia $p:E\to X$ un rivestimento e fissiamo $\wt x_0\in p\ii(x_0)$. Allora $H$ si solleva ad una omotopia di cammini da $\wt \al_{\wt x_0}$ a $\wt \beta_{\wt x_0}$. In particolare se $\al\simeq \beta$ come cammini allora $\wt\al_{\wt x_0}$ e $\wt \beta_{\wt x_0}$ hanno lo stesso punto finale.
+\end{theorem}
+
+\begin{corollary}[Mappa sui $\pi_1$ indotta da rivestimento]\label{MappaIndottaDaRivestimentoSuGruppoFondamentaleEIniettiva}
+Se $p:E\to X$ è un rivestimento allora $p_\ast:\pi_1(E,\wt x_0)\to \pi_1(X,x_0)$ è iniettiva (abbiamo scelto $\wt x_0$ e $x_0$ tali che $p(\wt x_0)=x_0$).
+\end{corollary}
+
+\begin{remark}[Il cerchio non è semplicemente connesso]
+$\pi_1(S^1)\neq 0$.
+\end{remark}
+
+
+
+
+\section{Azione di Monodromia}
+In questa sezione trattiamo una azione del gruppo fondamentale. Questa sarà una azione destra, cioè rispetta i soliti assiomi di una azione eccetto la seguente differenza nell'associatività:
+\[\under{\text{azione sinistra}}{(gh)\cdot x=g\cdot(h\cdot x)=g(h(x))}\qquad \under{\text{azione destra}}{x\cdot (gh)=(x\cdot g)\cdot h=h(g(x))}.\]
+
+\begin{definition}[Azione di monodromia]
+Sia $p:E\to X$ un rivestimento, $x_0\in X$ e sia $F=p\ii(x_0)$ la fibra di $x_0$. Definiamo \textbf{l'azione di monodromia} di $\pi_1(X,x_0)$ su $F$ come segue:
+\[\funcDef{F\times\pi_1(X,x_0)}{F}{(\wt x,[\al])}{\wt x\cdot[\al]=\wt\al_{\wt x}(1)}\]
+\end{definition}
+\begin{proposition}
+L'azione di monodromia è una azione destra.
+\end{proposition}
+
+
+\begin{theorem}[Proprietà dell'azione di monodromia]\label{ProprietaAzioneMonodromia}
+Siano $p:E\to X$ un rivestimento, $x_0\in X$ e  $F=p\ii(x_0)$ la fibra di $x_0$. Si ha che
+\begin{enumerate}[noitemsep]
+\item Se $X$ \`e connesso per archi l'azione di monodromia $\pi_1(X,x_0)\acts F$ è transitiva se e solo se $E$ è connesso per archi.
+\item Per ogni $\wt x\in E$ si ha che
+\[\stab(\wt x)=\{[\al]\in\pi_1(X,x_0)\mid \wt x\cdot[\al]=\wt x\}=p_\ast(\pi_1(E,\wt x)).\]
+\end{enumerate}
+\end{theorem}
+
+\begin{corollary}
+Se $X$ ammette rivestimento connesso non banale allora $\pi_1(X,x_0)\neq \{1\}$ per ogni $x_0\in X$, cioè $X$ NON è semplicemente connesso.
+\end{corollary}
+\begin{corollary}
+Ogni rivestimento connesso di uno spazio semplicemente connesso è banale, cioè è un omeomorfismo.
+\end{corollary}
+
+\begin{corollary}
+$S^1$ e $\Pj^n\R$ non sono semplicemente connessi.
+\end{corollary}
+
+\subsubsection{Sollevamento di mappe qualsiasi}
+
+Grazie alle propriet\`a dell'azione di monodromia possiamo dare una caratterizzazione esatta di quando le mappe ammettono sollevamento:
+\begin{theorem}[Sollevamento di mappe qualsiasi]\label{SollevamentoMappeQualsiasi}
+Sia $p:\wt X\to X$ un rivestimento e fissiamo $x_0\in X$ e $\wt x_0\in p\ii(x_0)$. Sia $f:Y\to X$ continua e $y_0\in Y$ tale che $f(y_0)=x_0$.\\
+Supponiamo che $Y$ sia connesso e localmente connesso per archi, allora \[\exists !\wt f:Y\to \wt X\ t.c.\ \wt f(y_0)=\wt x_0,\ p\circ \wt f=f\coimplies f_\ast(\gf Y{y_0})\subseteq p_\ast(\gf{\wt X}{\wt x_0}).\]
+\[\begin{tikzcd}
+	& {(\wt X,\wt x_0)} \\
+	{(Y,y_0)} & {(X,x_0)}
+	\arrow["p", from=1-2, to=2-2]
+	\arrow["f"', from=2-1, to=2-2]
+	\arrow["{\wt f}", dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+\end{theorem}
+
+
+
+
+
+
+
+
+\subsection{Applicazioni dell'azione di Monodromia}
+Siamo (finalmente) pronti per calcolare il gruppo fondamentale di $S^1$:
+\begin{theorem}[Gruppo fondamentale del cerchio]\label{GruppoFondamentaleCerchio}
+$\pi_1(S^1)\cong \Z$ tramite l'isomorfismo
+\[\psi:\funcDef{\pi_1(S^1,1)}{\Z}{[\al]}{0\cdot [\al]}\]
+dove il punto indica l'azione di monodromia per il rivestimento $p:\R\to S^1$ dato da $p(t)=e^{2\pi it}$.
+\end{theorem}
+\begin{remark}\label{SeSpazioCompletoSemplicementeConnessoAlloraGruppoFondamentaleIsomorfoAIsomorfismi}
+Questo è un caso particolare del seguente risultato, che mostreremo verso la fine del capitolo (\ref{AutomorfismiDelRivestimentoUniversaleSonoIlGruppoFondamentale}):
+\begin{center}
+Se $p:E\to X$ è un rivestimento con $E$ semplicemente connesso, allora $\pi_1(X)\cong \Aut(p)=\{\gamma:E\to E\mid \gamma\text{ omeomorfismo t.c. }p\circ\gamma=p\}.$
+\end{center}
+\end{remark}
+
+\begin{corollary}
+Se $D\subseteq\R^2$ è semplicemente connesso e $D\supseteq S^1$ allora $S^1$ non è un retratto di $D$.
+\end{corollary}
+
+
+\begin{theorem}[Teorema di Brower]\label{TeoremaBrower}
+Sia $f:D^2\to D^2$ continua. Allora $f$ ha un punto fisso, cioè esiste $x\in D$ tale che $f(x)=x$.
+\end{theorem}
+
+\begin{remark}
+Il teorema di Brower vale per $f:D\to D$ se $D\subseteq \R^n$ con $D$ convesso compatto. L'idea è più o meno la stessa sfruttando l'idea che $S^{n-1}$ non è un retratto di $D^n$, però il $\pi_1$ non basta per mostrare questo fatto.
+\end{remark}
+
+\begin{remark}
+Esistono $f:\R^n\to \R^n$ continue senza punti fissi. Più in generale esiste $f:\Omega\to\Omega$ continua senza punti fissi anche con $\Omega$ aperto, limitato e contraibile.
+\bigskip
+
+\noindent
+Esiste $f:C\to C$ continua senza punti fissi con $C$ chiuso illimitato contraibile.
+\end{remark}
+
+\section{Teorema di Seifert-Van Kampen}
+In questa sezione e la prossima cerchiamo di rispondere alla domanda
+\begin{center}
+Come calcolo i gruppi fondamentali?
+\end{center}
+Chiaramente se $X\simeq Y$, per l'invarianza omotopica del gruppo fondamentale (\ref{InvarianzaOmotopicaDelGruppoFondamentale}), $\pi_1(X)\cong \pi_1(Y)$.
+
+\begin{example}
+$S^1$ è un retratto di $\R^2\nz$, quindi $\pi_1(\R^2\nz)\cong \pi_1(S^1)\cong \Z$.
+\end{example}
+
+\noindent Ma come calcolo il gruppo di $\R^2\bs\{0,1\}$\footnote{Sto indentificando $\R^2$ con $\C$.} per esempio?  Si vede che $\R^2\bs\{0,1\}$ è omotopicamente equivalente a $S^1\vee S^1$, ma come calcolo il gruppo fondamentale di questo Bouquet?
+\medskip
+
+\noindent
+Un'idea pu\`o essere spezzare lo spazio che ci interessa in pezzi pi\`u gestibili. Questo approccio \`e incapsulato dal seguente
+
+
+\begin{theorem}[Seifert-Van Kampen]\label{TeoremaVanKampen}
+Sia $X$ uno spazio topologico e siano $A,B$ aperti di $X$ tali che $X=A\cup B$. Supponiamo che $A,\ B$ e $A\cap B\neq \emptyset$ siano connessi per archi. Indichiamo le inclusioni come segue
+\begin{align*}
+&i_A:A\inj X &j_A:A\cap B\inj A\\
+&i_B:B\inj X &j_B:A\cap B\inj B
+\end{align*}
+Fissiamo $x_0\in A\cap B$.\\
+Sia $G$ un gruppo e siano $\vp_A:\pi_1(A,x_0)\to G$ e $\vp_B:\pi_1(B,x_0)\to G$ tali che
+\[\vp_A\circ (j_A)_\ast=\vp_B\circ (j_B)_\ast:\gf{A\cap B}{x_0}\to G.\]
+Allora esiste un unico omomorfismo $\vp:\gf X{x_0}\to G$ tale che $\vp_A=\vp\circ (i_A)_\ast$ e $\vp_B=\vp\circ (i_B)_\ast$, cioè esiste un'unica $\vp$ che fa commutare il seguente diagramma\footnote{Il teorema afferma che $\gf{X}{x_0}$ con le mappe date \`e il coprodotto fibrato di $\gf A{x_0}$ e $\gf B{x_0}$ rispetto a $\gf{A\cap B}{x_0}$ nella categoria $Grp$. In termini pi\`u adatti al corso, vedremo che ne \`e il prodotto amalgamato perch\'e rispetta la propriet\`a universale (\ref{EsistenzaUnicitaProdottoAmalgamato}).}
+\[\begin{tikzcd}
+	& {\gf A{x_0}} \\
+	{\gf{A\cap B}{x_0}} && {\gf X{x_0}} && G \\
+	& {\gf B{x_0}}
+	\arrow["{(j_A)_\ast}", from=2-1, to=1-2]
+	\arrow["{(j_B)_\ast}"', from=2-1, to=3-2]
+	\arrow["{(i_B)_\ast}"', from=3-2, to=2-3]
+	\arrow["{(i_A)_\ast}", from=1-2, to=2-3]
+	\arrow["{\vp_A}", curve={height=-18pt}, from=1-2, to=2-5]
+	\arrow["{\vp_B}", curve={height=18pt}, from=3-2, to=2-5]
+	\arrow["\vp", dashed, from=2-3, to=2-5]
+\end{tikzcd}\]
+Inoltre $\gf X{x_0}$ è generato da $(i_A)_\ast(\gf A{x_0})$ e $(i_B)_\ast(\gf B{x_0})$.
+\end{theorem}
+
+\begin{corollary}[Divisione in semplicemente connessi con intersezione connessa per archi implica semplicemente connesso]
+Sia $X=A\cup B$ con $A,B$ semplicemente connessi e $A\cap B$ connesso per archi. Allora $X$ è semplicemente connesso.
+\end{corollary}
+
+\begin{corollary}
+$S^n$ è semplicemente connesso per $n\geq 2$.
+\end{corollary}
+
+
+
+
+\section{Calcolo del Gruppo fondamentale}
+\subsection{Gruppo fondamentale del prodotto}
+
+\begin{theorem}[Gruppo fondamentale del prodotto]\label{GruppoFondamentaleProdotto}
+Siano $X,Y$ spazi topologici connessi per archi e siano $x_0\in X,\ y_0\in Y$. Si ha che
+\[\pi_1(X\times Y,(x_0,y_0))\cong \pi_1(X,x_0)\times\gf Y{y_0}.\]
+\end{theorem}
+
+\subsection{Prodotto libero e gruppi liberi}
+
+\begin{definition}[Prodotto libero]
+Dati due gruppi $G,H$, un \textbf{prodotto libero} di $G$ e $H$ \`e un gruppo $K$ con omomorfismi $i_G:G\to K$ e $i_H:H\to K$ tale che per ogni coppia di omomorfismi $\vp_G:G\to Z,\ \vp_H:H\to Z$ esiste un unico $\vp:K\to Z$ tale che $\vp_G=\vp\circ i_G$ e $\vp_H=\vp\circ i_H$.
+\[\begin{tikzcd}
+	G \\
+	& K && Z \\
+	H
+	\arrow["{i_G}", from=1-1, to=2-2]
+	\arrow["{i_H}"', from=3-1, to=2-2]
+	\arrow["\vp", dashed, from=2-2, to=2-4]
+	\arrow["{\vp_G}", curve={height=-12pt}, from=1-1, to=2-4]
+	\arrow["{\vp_H}"', curve={height=12pt}, from=3-1, to=2-4]
+\end{tikzcd}\]
+\end{definition}
+
+\begin{theorem}[Esistenza del prodotto libero]\label{EsistenzaUnicitaGruppoLibero}
+Il prodotto libero $K$ esiste ed \`e unico a meno di isomorfismo. Si denota $K=G\ast H$.
+\end{theorem}
+
+\begin{remark}
+(NON DATA DURANTE IL CORSO) Il prodotto libero di due gruppi è il loro coprodotto nella categoria $Grp$. Intuitivamente torna abbiamo unito i due gruppi e ne abbiamo considerato il generato imponendo unicamente le relazioni di $H$ e di $G$.
+\end{remark}
+
+\begin{fact}[Propriet\`a dei prodotti liberi]
+Valgono le seguenti proposizioni
+\begin{enumerate}[noitemsep]
+\item $G\ast\{1\}\cong G$
+\item $G\ast H\cong H\ast G$
+\item $(G_1\ast G_2)\ast G_3\cong G_1\ast(G_2\ast G_3)$
+\item Se $G\neq \{1\}$ e $H\neq \{1\}$ allora $G\ast H$ non \`e abeliano \footnote{Per esempio, se $g\in G\bs\{1_G\}$ e $h\in H\bs\{1_H\}$ allora $gh\neq hg$ perch\'e forme ridotte diverse.}
+\end{enumerate}
+\end{fact}
+
+\begin{definition}[Gruppo libero]
+Il \textbf{gruppo libero} di rango $n$ \`e il gruppo
+\[F_n\cong \under{n\text{ volte}}{\Z\ast\Z\ast\cdots\ast\Z}.\]
+Se $x_i$ \`e un generatore dell'$i-$esima copia di $\Z$ nel prodotto libero allora un generico elemento di $F_n$ \`e dato da
+\[x_{i_1}^{n_1}x_{i_2}^{n_2}\cdots x_{i_k}^{n_k}\quad \text{con }k\in\N,\ i_k\in\{1,\cdots,n\},\ n_i\in\Z.\]
+\end{definition}
+
+\begin{theorem}[Propriet\`a universale del gruppo libero]\label{ProprietaUniversaleGruppoLibero}
+Sia $X$ un insieme e sia $f:X\to Z$ una funzione con $Z$ gruppo. Sia $F(X)$ il gruppo libero su $X$, cio\`e
+\[F(X)=\bigast_{x\in X}\Z_x,\]
+dove $\Z_x$ \`e una copia di $\Z$ generata formalmente da $x$.\\
+Allora esiste un unico $\vp:F(X)\to Z$ omomorfismo di gruppi che estende $f$, in particolare quello dato da $\vp(x)=f(x)$, dove interpreto l'argomento di $\vp$ come la stringa data da un solo carattere.
+\end{theorem}
+
+\subsection{Van Kampen per intersezioni semplicemente connesse}
+\begin{lemma}[Van Kampen per intersezione semplicemente connessa]\label{VanKampenIntersezioneSemplicementeConnessa}
+Sia $X=A\cup B$ con $A,B$ aperti connessi per archi, $A\cap B$ connesso per archi e semplicemente connesso. Sia $x_0\in A\cap B$. Allora
+\[\gf X{x_0}\cong \gf A{x_0}\ast \gf B{x_0}.\]
+\end{lemma}
+
+
+\begin{theorem}[Gruppo fondamentale del Bouquet di $n$ circonferenze]
+Sia $X_n=\under{n\text{volte}}{S^1\vee\cdots\vee S^1}$, allora
+\[\pi_1(X_n)=F_n\]
+\end{theorem}
+
+\subsection{Prodotto amalgamato}
+Vogliamo generalizzare il prodotto libero in modo da poterlo usare nel calcolo anche per $A\cap B$ non semplicemente connesso.
+\begin{definition}[Prodotto amalgamato]
+Siano $H,G_1,G_2$ gruppi e siano $j_1:H\to G_1$ e $j_2:H\to G_2$ omomorfismi. Il \textbf{prodotto amalgamato} di $G_1$ e $G_2$ lungo $H$ \`e un gruppo $K$ con omomorfismi $i_1:G_1\to K$ e $i_2:G_2\to K$ tali che $i_1\circ j_1=i_2\circ j_2$ tali che per ogni coppia di omomorfismi $\vp_1:G_1\to Z,\vp_2:G_2\to Z$ con $\vp_1\circ j_1=\vp_2\circ j_2$ esiste un unico omomorfismo $\vp:K\to Z$ con $\vp\circ i_1=\vp_1$ e $\vp\circ i_2=\vp_2$.
+\[\begin{tikzcd}
+	& {G_1} \\
+	H && K && Z \\
+	& {G_2}
+	\arrow["{j_1}", from=2-1, to=1-2]
+	\arrow["{j_2}"', from=2-1, to=3-2]
+	\arrow["{i_2}"', from=3-2, to=2-3]
+	\arrow["{i_1}", from=1-2, to=2-3]
+	\arrow["{\vp_1}", curve={height=-12pt}, from=1-2, to=2-5]
+	\arrow["{\vp_2}"', curve={height=12pt}, from=3-2, to=2-5]
+	\arrow["\vp", dashed, from=2-3, to=2-5]
+\end{tikzcd}\]
+Spesso si scrive $K=G_1\ast_H G_2$ (attenzione perch\'e $K$ dipende anche da $j_1$ e $j_2$).
+\end{definition}
+\begin{remark}
+Nel caso $H=\{1\}$ si ricade nella definizione del prodotto libero.
+\end{remark}
+
+\begin{notation}[Sottogruppo normale generato]
+Dato un gruppo $G$ e un sottoinsieme $S$ poniamo
+\[\ps{\ps S}=\bigcap_{\smat{Z\normal G\\Z\supseteq S}}Z.\]
+\end{notation}
+
+\begin{theorem}[Esistenza e unicit\`a del prodotto amalgamato]\label{EsistenzaUnicitaProdottoAmalgamato}
+Il prodotto amalgamato esiste ed \`e unico a meno di isomorfismo.
+\end{theorem}
+
+\begin{fact}\label{PerNormaleProdottoAmalgamatoBastaImporreRelazioniSuGeneratori}
+Con le notazioni del teorema, se $\Omega$ \`e un insieme di generatori di $H$ allora al posto di $S=\{j_1(h)j_2(h)\ii\mid h\in H\}$ si pu\`o considerare $S'=\{j_1(h)j_2(h)\ii\mid h\in \Omega\}$ e generare comunque $N$.
+\end{fact}
+
+\subsection{Presentazioni di gruppi}
+\begin{definition}[Presentazione]
+Dato un insieme di simboli $S$ e $R\subseteq F(S)$  (dette \textbf{relazioni}) allora
+\[G=\ps{S\mid R}=\quot {F(S)}{\ps{\ps{R}}}.\]
+La scrittura $\ps{S\mid R}$ \`e detta \textbf{presentazione} di $G$.
+\end{definition}
+\begin{remark}[Problema della parola]
+Chiedersi se una parola $w\in F(S)$ rappresenta l'identit\`a di $\ps{S\mid R}$ \`e equivalente a chiedersi se esistono $j\in\N$, $w_i\in F(S)$ e $r_{k_i}\in R$ tali che
+\[w=\prod_{i=1}^jw_ir_i^{\pm 1}w_i\ii.\]
+Questo problema in generale non ammette soluzione algoritmica (non possiamo stimare quanti tentativi dovremmo fare).
+\end{remark}
+
+\begin{proposition}[Propriet\`a universale delle presentazioni]\label{ProprietaUniversalePresentazioni}
+Siano $G=\ps{S\mid R}$, $H$ un gruppo e $f:S\to H$ una funzione. Si ha che esiste un unico omomorfismo $\vp:G\to H$ tale che per ogni $s\in S$ \[\vp(\ol s)=f(s),\] dove $\ol s$ \`e la classe della parola data dal solo carattere $s$ se e solo se per ogni $s_{i_1}^{\e_1}\cdots s_{i_j}^{\e_j}\in R$ si ha
+\[f(s_{i_1})^{\e_1}\cdots f(s_{i_j})^{\e_j}=1_H.\]
+\end{proposition}
+
+\begin{example}[Esempio del calcolo di una presentazione]
+$\ps{a,b\mid aba\ii b\ii}=\Z\oplus\Z$.
+\end{example}
+
+\begin{proposition}[Presentazione del prodotto amalgamato]\label{PresentazioneProdottoAmalgamato}
+Siano $j_1:H\to G_1$ e $j_2:H\to G_2$ omomorfismi. Siano $h_1,\cdots, h_k$ dei generatori di $H$ e siano $G_1=\ps{S_1\mid R_1},\ G_2=\ps{S_2\mid R_2}$. Allora una presentazione di $G_1\ast_H G_2$ \`e data da
+\[G_1\ast_HG_2=\ps{S_1\cup S_2\mid R_1\cup R_2\cup R_3},\]
+dove $R_3=\{w_iz_i\ii \mid i\in \{1,\cdots, k\}\}$, dove $w_i$ \`e una parola in $F(S_1)$ che rappresenta $j_1(h_i)$ e $z_i$ \`e una parola in $F(S_2)$ che rappresenta $j_2(h_i)$.
+\end{proposition}
+\subsection{Rango}
+\begin{definition}[Rango]
+Dato un gruppo $G$, il suo \textbf{rango} (che indichiamo $\rnk G$) \`e il minimo numero di generatori di $G$ (evitiamo questioni di buona definizione).
+\end{definition}
+\begin{example}[Rango di $\Z^n$]
+$\rnk \Z^n=n$.
+\end{example}
+
+\begin{remark}[Rango e omomorfismi surgettivi]\label{RangoEOmomorfismiSurgettivi}
+Se $\vp:G\to H$ \`e un omomorfismo di gruppi surgettivo allora $\rnk G\geq \rnk H$.
+\end{remark}
+
+\begin{remark}[Rango di sottogruppi pu\`o crescere]\label{RangoDiSottogruppiPuoCrescere}
+Esistono esempi di gruppi $G$ tali che $H\leq G$ e $\rnk H>\rnk G$.
+\end{remark}
+
+\begin{example}[Gruppo con sottogruppo di rango più grande]
+Il gruppo libero $F_2=\ps{a,b}$ ha rango $2$. Per ogni $k\geq 1$ poniamo $y_k=x^kyx^{-k}$ e per $m\geq 3$ sia $G_m<F_2$ il sottogruppo generato da $y_1,\cdots, y_m$. Si verifica che $G_m=F(\{y_1,\cdots,y_m\})$, che ha rango $m>2$.
+\end{example}
+
+\subsection{Gruppi fondamentali di proiettivi}
+\begin{theorem}[I proiettivi complessi sono semplicemente connessi]\label{ProiettiviComplessiSonoSemplicementeConnessi}
+$\Pj^n\C$ \`e semplicemente connesso per ogni $n$.
+\end{theorem}
+
+\begin{theorem}[Gruppi fondamentali dei proiettivi reali]\label{GruppiFondamentaliProiettiviReali}
+Valgono le seguenti identit\`a
+\begin{align*}
+&\pi_1(\Pj^1\R)=\Z,\\
+&\pi_1(\Pj^n\R)=\znz2.
+\end{align*}
+\end{theorem}
+
+\subsection{Gruppi fondamentali di superfici}
+\subsubsection{Toro}
+Potremmo usare il fatto che $T^2=S^1\times S^1$ e che i gruppi fondamentali rispettano il prodotto diretto, ma preferiamo dare un'altra dimostrazione che si generalizza ad una classe pi\`u ampia di superfici.
+
+\begin{theorem}[Gruppo fondamentale del toro]\label{GruppoFondamentaleToro}
+Si ha che
+\[\pi_1(T^2)=\ps{a,b\mid aba\ii b\ii}\cong \Z\oplus \Z.\]
+\end{theorem}
+
+\subsubsection{Superfici con dato genere}
+Per ogni $g\in\N$ indichiamo con $\Sigma_g$ la superficie compatta di genere $g$ (cio\`e con $g$ ``buchi"). Per $g=0$ e $g=1$ si ha che $\Sigma_g$ \`e $S^2$ e $S^1\times S^1$ rispettivamente.
+
+\begin{fact}[Classificazione delle superfici compatte orientabili]
+La famiglia delle $\Sigma_g$ contiene tutte e sole le superfici compatte orientabili.
+\end{fact}
+
+\noindent Come per il toro, possiamo scrivere ogni $\Sigma_g$ in termini di un poligono quozientato per una relazione che identifica dei lati:\\
+\ul{\textit{Costruzione di $\Sigma_g$}}) Sia $Q$ un $4g-$agono e numeriamo i vertici con $v_1,\cdots, v_{4g}$. Diamo un nome ai lati come segue:
+\[a_i=v_{4i-3}v_{4i-2},\ b_i=v_{4i-2}v_{4i-1},\ c_i=v_{4i-1}v_{4i},\ d_i=v_{4i}v_{4i+1}.\]
+Scrivendo i lati in ordine troveremmo
+\[a_1,b_1,c_1,d_1,a_2,\cdots, d_{g-1},a_g,b_g,c_g,d_g.\]
+Vogliamo imporre la seguente identificazione: $a_i$ si identifica con $c_i$ in modo tale che $v_{4i-3}\sim v_{4i}$ e $v_{4i-2}\sim v_{4i-1}$ e similmente $b_i$ si identifica con $d_i$ invertendo l'ordine di percorrenza del bordo.
+\bigskip
+
+\noindent Per rendere pi\`u chiaro come si realizzano queste identificazioni tagliamo $Q$ con i lati $v_1v_{4i+1}$ in modo da ottenere $g$ pezzi.
+
+Il primo e l'ultimo pezzo (come indice massimo del vertice presente) hanno 5 lati, mentre i pezzi centrali hanno 6 lati. In ogni pezzo, 4 lati adiacenti sono della forma $a_i, b_i, c_i, d_i$.\\
+Identificando questi quattro lati come detto prima troviamo:
+\begin{itemize}[noitemsep]
+\item per il primo e l'ultimo pezzo abbiamo un toro con un buco che ha come bordo una circonferenza
+\item per i pezzi in mezzo abbiamo un toro con un buco che ha come bordo un bouquet di due cerchi.
+\end{itemize}
+Per completare l'identificazione dobbiamo riattaccare i pezzi: il primo pezzo si attacca lungo la circonferenza che ne \`e il bordo al primo pezzo centrale colmando una delle due circonferenze del bouquet. Reiterando questi incollamenti attacchiamo a catena tutti i pezzi fino all'ultimo, che colma l'ultima circonferenza rimasta nel bouquet che definisce il bordo del penultimo pezzo.
+
+Abbiamo cos\`i ottenuto una superficie senza bordo con $g$ buchi, cio\`e $\Sigma_g$.
+
+\begin{theorem}[Gruppo fondamentale delle superfici di genere $g$]\label{GruppoFondamentaleSuperficiDiGenereg}
+Si ha che
+\[\pi_1(\Sigma_g)=\ps{a_1,b_1,\cdots, a_g,b_g\mid \spa{a_1,b_1}\cdots\spa{a_g,b_g}},\] dove le quadre indicano i commutatori\footnote{$[a,b]=aba\ii b\ii$.}.
+\end{theorem}
+
+
+\begin{proposition}[Genere determina univocamente il $\pi_1$]\label{RangoDeterminaGruppoFondamentaleDisuperficieConGenereg}
+Poniamo $\Gamma_g=\pi_1(\Sigma_g)$. Si ha che
+\[\Gamma_g\cong \Gamma_{g'}\coimplies g=g'.\]
+\end{proposition}
+
+\begin{theorem}[Genere, classe di Omotopia e $\pi_1$ sono invarianti completi]\label{GenereClassiOmotopiaEGruppoFondamentaleSonoInvariantiCompletiPerSuperficiCompatte}
+Le seguenti affermazioni sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $g=g'$
+\item $\Sigma_g\cong \Sigma_{g'}$ (omeomorfismo)
+\item $\Sigma_g\simeq \Sigma_{g'}$ (equivalenza omotopica)
+\item $\pi_1(\Sigma_g)\cong \pi_1(\Sigma_{g'})$
+\end{enumerate}
+\end{theorem}
+
+\begin{fact}
+\`E possibile dimostrare che ogni superficie compatta non orientabile ammette un rivestimento a due fogli dato da una superficie compatta orientabile.
+\end{fact}
+
+\section{Rivestimento Universale}
+\begin{definition}[Rivestimento universale]
+Un rivestimento $p:E\to X$ \`e \textbf{universale} se $E$ \`e semplicemente connesso.
+\end{definition}
+
+\begin{example}
+I seguenti sono rivestimenti universali
+\begin{itemize}[noitemsep]
+\item $p:\R\to S^1$ data da $p(t)=e^{2\pi it}$
+\item $p:\R^n\to (S^1)^n$ data da $p(t_1,\cdots, t_n)=(e^{2\pi it_1},\cdots, e^{2\pi it_n})$
+\item Per $n\geq 2$, $p:S^n\to \Pj^n\R$ data da $p(v)=[v]$.
+\end{itemize}
+\end{example}
+
+Vedremo che il rivestimento universale, se esiste, \`e unico a meno di isomorfismo ed \`e definito da una propriet\`a universale.
+
+\begin{theorem}[Gruppo fondamentale e fibra nel punto sono in bigezione]\label{GruppoFondamentaleEFibraSonoInBigezione}
+Sia $p:E\to X$ un rivestimento universale e sia $x_0\in X$. Allora
+\[|\gf X{x_0}|=|p\ii(x_0)|.\]
+\end{theorem}
+
+\begin{example}[Gruppi fondamentali dei proiettivi]
+Per $n\geq 2$ si ha che $\pi_1(\Pj^n\R)\cong \znz2$.
+\end{example}
+
+\noindent
+Cerchiamo di capire quando esistono i rivestimenti universali:
+\begin{definition}[Semilocalmente semplicemente connesso]
+Uno spazio $X$ \`e \textbf{semilocalmente semplicemente connesso} se ogni $x_0\in X$ ammette un intorno $U\subseteq X$ tale che se $i:U\inj X$ \`e l'inclusione allora $i_\ast:\gf U{x_0}\to \gf X{x_0}$ \`e l'omomorfismo banale, cio\`e
+\begin{center}
+``ogni laccio contenuto in $U$ \`e omotopicamente equivalente a $c_{x_0}$ in $X$."
+\end{center}
+\end{definition}
+
+\begin{example}[Spazio non semilocalmente semplicemente connesso]
+Consideriamo gli orecchini hawaiiani
+\[H=\bigcup_{n\geq 1}\under{\doteqdot C_n}{\cpa{(x,y)\sep x^2+\pa{y-\frac1n}^2=\frac1{n^2}}}\subseteq\R^2.\]
+\end{example}
+\begin{corollary}
+L'orecchino hawaiiano NON \`e omeomorfo al bouquet di infinite circonferenze perch\'e questo \`E semilocalmente semplicemente connesso.
+\end{corollary}
+
+\begin{remark}
+Localmente semplicemente connesso implica semilocalmente semplicemente connesso.
+\end{remark}
+
+\begin{example}
+Un bouquet di un numero finito di circonferenze e le variet\`a topologiche sono semilocalmente semplicemente connesse.
+\end{example}
+
+\begin{theorem}[Esistenza dei rivestimenti universali]\label{EsistenzaRivestimentiUniversali}
+$X$ ammette un rivestimento universale se e solo se $X$ \`e semilocalmente semplicemente connesso.
+\end{theorem}
+
+
+
+
+\subsection{Propriet\`a categoriche dei rivestimenti}
+\begin{lemma}[Fattorizzazione di rivestimenti]\label{FattorizzazioneDiRivestimenti}
+Dati $\wt X_1,\ \wt X_2,\ X$ connessi per archi e localmente connessi per archi, se il diagramma commuta
+\[\begin{tikzcd}
+	{\wt X_1} \\
+	X & {\wt X_2}
+	\arrow["\vp", from=1-1, to=2-2]
+	\arrow["{p_2}", from=2-2, to=2-1]
+	\arrow["{p_1}"', from=1-1, to=2-1]
+\end{tikzcd}\]
+e sia $p_1$ che $p_2$ sono rivestimenti allora anche $\vp$ lo \`e.
+\end{lemma}
+
+\begin{remark}
+Un risultato analogo vale se $p_1$ e $\vp$ sono rivestimenti. Il caso per $p_2$ e $\vp$ rivestimenti invece vale supponendo $X$ semilocalmente semplicemente connesso, ma non in generale.
+\end{remark}
+
+
+\begin{proposition}[Propriet\`a universale del rivestimento universale]\label{ProprietaUniversaleRiverstimentoUniversale}
+Sia $p:E\to X$ un rivestimento universale e sia $\pi:\wt X\to X$ un rivestimento con $\wt X$ connesso per archi. Fissiamo $x_0\in X$ e siano $\hat x_0\in E,\ \wt x_0\in \wt X$ tali che $p(\hat x_0)=x_0=\pi(\wt x_0)$. Allora esiste un unico $\wt p:E\to \wt X$ rivestimento tale che $p=\pi\circ \wt p$.
+\[\begin{tikzcd}
+	& {\wt X} \\
+	E & X
+	\arrow["p", from=2-1, to=2-2]
+	\arrow["\pi", from=1-2, to=2-2]
+	\arrow["{\wt p}", dashed, from=2-1, to=1-2]
+\end{tikzcd}\]
+\end{proposition}
+
+\begin{corollary}[Rivestimenti universali inducono omeomorfismo tra gli spazi totali]\label{RivestimentiUniversaliInduconoOmeomorfismoTraSpaziTotali}
+Se $p_1:E_1\to X$ e $p_2:E_2\to X$ sono rivestimenti universali allora esiste un omeomorfismo $\vp:E_1\to E_2$ tale che
+\[\begin{tikzcd}
+	{E_1} && {E_2} \\
+	& X
+	\arrow["\vp", from=1-1, to=1-3]
+	\arrow["{p_1}"', from=1-1, to=2-2]
+	\arrow["{p_2}", from=1-3, to=2-2]
+\end{tikzcd}\]
+\end{corollary}
+
+
+
+
+
+
+
+\begin{definition}[Morfismo di rivestimenti]
+Siano $p_1:E_1\to X$ e $p_2:E_2\to X$ rivestimenti. Un \textbf{morfismo} tra $p_1$ e $p_2$ \`e una mappa $\vp:E_1\to E_2$ continua tale che $p_2\circ \vp=p_1$.
+\[\begin{tikzcd}
+	{E_1} && {E_2} \\
+	& X
+	\arrow["{p_1}"', from=1-1, to=2-2]
+	\arrow["{p_2}", from=1-3, to=2-2]
+	\arrow["\vp", from=1-1, to=1-3]
+\end{tikzcd}\]
+Se esiste un morfismo $\psi:E_2\to E_1$ tale che $\psi\circ \vp=id_{E_1}$ e $\vp\circ \psi=id_{E_2}$ allora $\vp$ \`e un \textbf{isomorfismo} di rivestimenti.\\
+Se $E_1=E_2$ e $p_1=p_2$, un isomorfismo di rivestimenti \`e detto \textbf{automorfismo} di rivestimenti.
+\end{definition}
+\begin{remark}
+I morfismi di rivestimenti sono chiusi per composizione e l'identit\`a \`e un morfismo.
+\end{remark}
+
+
+\begin{definition}[Automorfismi di rivestimenti]
+L'insieme degli automorfismi di $p:E\to X$ \`e un gruppo, detto \textbf{gruppo degli automorfismi} di $p$, che indichiamo
+\[\Aut(p)=\Aut_X(E)=\Aut(E).\]
+Osserviamo che $\vp\in \Aut(p)$ se e solo se $\vp:E\to E$ \`e un omeomorfismo e $p\circ \vp=p$.
+\end{definition}
+\begin{remark}
+Un morfismo di rivestimenti manda fibre in fibre. In particolare gli automorfismi inducono permutazioni di una fibra in se stessa, infatti se $\wt x\in p\ii(x)$ allora $p(\vp(\wt x))=p(\wt x)=x$ implica $\vp(\wt x)\in p\ii(x)$.
+\end{remark}
+
+\begin{proposition}[Azione di $\Aut(p)$ e di monodromia commutano]\label{AzioneDiAutomorfismiEMonodromiaCommutano}
+L'azione di monodromia e quella di $\Aut(p)$ commutano, cio\`e per $F=p\ii(x_0)$, per ogni $\vp\in \Aut(p),\ \forall [\gamma]\in\gf X{x_0},\ \forall \wt x\in F$
+\[\vp(\wt x\cdot[\gamma])=(\vp(\wt x))\cdot [\gamma].\]
+\end{proposition}
+
+
+\subsubsection{Isomorfismi di rivestimenti}
+Data l'utilit\`a che avr\`a $\Aut(p)$ cerchiamo di capire quando due rivestimenti sono isomorfi.
+
+\begin{theorem}[Caratterizzazione di rivestimenti isomorfi fissato un punto]\label{CaratterizzazioneRivestimentiIsomorfiFissatoPunto}
+Siano $p_1:E_1\to X$ e $p_2:E_2\to X$ rivestimenti e fissiamo $\wt x_1\in E_1,\ \wt x_2\in E_2$ tali che $p_1(\wt x_1)=x_0=p_2(\wt x_2)$. Allora esiste un isomorfismo $\vp:E_1\to E_2$ con $\vp(\wt x_1)=\wt x_2$ se e solo se ${p_1}_\ast(\gf{E_1}{\wt x_1})={p_2}_\ast(\gf{E_2}{\wt x_2})$ in $\pi_1(X,x_0)$.
+\end{theorem}
+
+\begin{corollary}[Criterio di esistenza per automorfismi]\label{CriterioEsistenzaAutomorfismo}
+Sia $p:E\to X$ un rivestimento e consideriamo $x_0\in X,\ F=p\ii(x_0)$ e $\wt x_1,\wt x_2\in F$, allora esiste un automorfismo $\vp\in\Aut(p)$ tale che $\vp(\wt x_1)=\wt x_2$ se e solo se ${p}_\ast(\gf{E}{\wt x_1})={p}_\ast(\gf{E}{\wt x_2})$ in $\pi_1(X,x_0)$.
+\end{corollary}
+
+
+
+\begin{proposition}[Caratterizzazione di rivestimenti isomorfi]\label{CaratterizzazioneRivestimentiIsomorfi}
+Siano $p_1:E_1\to X$ e $p_2:E_2\to X$ rivestimenti e scegliamo $\wt x_j\in E_j$ con $p_1(\wt x_1)=x_0=p_2(\wt x_2)$. Allora esiste un isomorfismo $\vp:E_1\to E_2$ se e solo se ${p_1}_\ast(\gf{E_1}{\wt x_1})$ e ${p_2}_\ast(\gf{E_2}{\wt x_2})$ sono coniugati in $\gf X{x_0}$.
+\end{proposition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Rivestimenti regolari e corrispondenza di Galois}
+Da questo momento supponiamo sempre che gli spazi siano connessi per archi e localmente connessi per archi.
+\bigskip
+
+\noindent
+Studiamo ora in pi\`u dettaglio l'azione di $\Aut(p)$ e i quozienti che ne possono derivare.
+
+\begin{proposition}[Azione di $\Aut(p)$ \`e propriamente discontinua]\label{AzioneAutomorfismiRivestimentiEPropriamenteDiscontinua}
+$\Aut(p)$ agisce in modo propriamente discontinuo su $E$.
+\end{proposition}
+
+\begin{theorem}[Per rivestimento da azione propriamente discontinua gli automorfismi sono il gruppo]\label{PerRivestimentoAzionePropriamenteDiscontinuaAutomorfismiEGruppoCoincidono}
+Sia $G$ un gruppo che agisce su $Y$ in modo propriamente discontinuo. Se  $p:Y\to \quot YG$ \`e il rivestimento indotto dal quoziente (\ref{ProiezioneQuozienteAzionePropriamenteDiscontinuaERivestimento}) si ha che $\Aut(p)=G$\footnote{stiamo identificando $G$ con gli omeomorfismi che induce su $Y$, che possiamo fare perch\'e l'azione \`e propriamente discontinua, infatti $\ell_g\ii\circ \ell_h=id_Y$ se e solo se $g\ii h=1_G$}.
+\end{theorem}
+
+\noindent
+Potremmo chiederci se \textit{ogni} rivestimento si pu\`o scrivere come quoziente per azione propriamente discontinua di gruppo. Purtroppo non \`e vero perch\'e una scrittura del genere implicherebbe $\Aut(p)=G$ transitivo sulle fibre (per definizione di quoziente $p(x)=p(y)$ se e solo se esiste $g\in G$ tale che $x=g\cdot y$) ma non tutti i gruppi degli automorfismi sono transitivi sulle fibre.\\
+Definiamo allora la classe dei rivestimenti che hanno quest'ultima propriet\`a:
+\begin{definition}[Rivestimento regolare]
+Un rivestimento $p:E\to X$ \`e \textbf{regolare} (o \textbf{normale} o \textbf{di Galois}) se l'azione di $\Aut(p)$ \`e transitiva su ogni fibra rispetto a $p$.
+\end{definition}
+
+\begin{proposition}[I rivestimenti universali sono regolari]\label{RivestimentiUniversaliSonoRegolari}
+I rivestimenti universali sono regolari.
+\end{proposition}
+
+\begin{lemma}\label{LemmaConiugioImmaginiTramiteRivestimentoDiGruppiFondamentali}
+Siano $p:E\to X$ un rivestimento, $x_0,\ x_1\in X$ e $\wt x_0\in p\ii(x_0),\ \wt x_1\in p\ii(x_1)$. Allora dato $\wt\gamma \in \Omega(E,\wt x_0,\wt x_1)$ e posto $\gamma=p\circ \wt \gamma$ si ha che
+\[\Phi_\gamma:\funcDef{\gf X{x_0}}{\gf X{x_1}}{[\eta]}{[\ol \gamma\ast \eta\ast \gamma]}\]
+\`e un isomorfismo e induce l'isomorfismo
+\[\Phi_\gamma\res{p_\ast(\gf E{\wt x_0})}:p_\ast(\gf E{\wt x_0})\to p_\ast(\gf E{\wt x_1})\]
+\end{lemma}
+
+
+\begin{theorem}[Caratterizzazioni dei rivestimenti regolari]\label{CaratterizzazioniRivestimentiRegolari}
+Sia $p:E\to X$ un rivestimento e fissiamo $x_0\in X$ e $F=p\ii(x_0)$. Le seguenti affermazioni sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $\Aut(p)$ \`e transitivo su $F$
+\item Esiste $\wt x\in F$ tale che $p_\ast(\gf E{\wt x})\normal \gf X{x_0}$
+\item Per ogni $\wt x\in F$, $p_\ast(\gf E{\wt x})\normal \gf X{x_0}$
+\item $p$ \`e regolare.
+\end{enumerate}
+\end{theorem}
+\bigskip
+
+\noindent La caratterizzazione in termini di sottogruppi normali risulter\`a chiave per trovare la corrispondenza di Galois che cerchiamo. Infatti grazie al prossimo risultato potremo scrivere gli automorfismi di rivestimenti regolari come quoziente del gruppo fondamentale dello spazio base.
+
+
+\begin{theorem}[$\Aut(p)$ in termini del gruppo fondamentale]\label{AutomorfismiDiRivestimentiInTerminiDelGruppoFondamentale}
+Sia $p:E\to X$ un rivestimento e $\wt x_0\in E$. Allora
+\[\Aut(p)\cong \quot{N_{\gf X{x_0}}(p_\ast(\gf E{\wt x_0}))}{p_\ast(\gf E{\wt x_0})},\]
+dove $x_0=p(\wt x_0)$ e  $N_G(H)$ indica il \textbf{normalizzatore} di $H$ in $G$\footnote{Se $H\leq G$ allora $N_G(H)=\cpa{g\in G\sep g\ii Hg=H}$}.
+\end{theorem}
+
+\begin{proposition}[Automorfismi di rivestimenti regolari]\label{AutomorfismiRivestimentiRegolari}
+Se $p$ \`e regolare allora $\Aut(p)\cong \quot {\gf X{x_0}}{p_\ast(\gf E{\wt x_0})}$ con $x_0=p(\wt x_0)$
+\end{proposition}
+
+\begin{corollary}[Automorfismi del rivestimento universale sono il gruppo fondamentale]\label{AutomorfismiDelRivestimentoUniversaleSonoIlGruppoFondamentale}
+Se $p$ \`e un rivestimento universale allora $\Aut(p)\cong \gf X{x_0}$.
+\end{corollary}
+
+
+
+
+
+
+\begin{corollary}[Corrispondenza di Galois per rivestimenti regolari]\label{CorrispondenzaGaloisRivestimentiRegolari}
+Esiste una corrispondenza biunivoca tra i rivestimenti regolari di $X$ a meno di isomorfismo e sottogruppi normali di $\pi_1(X,x_0)$.
+Sotto questa corrispondenza il grado del rivestimento corrisponde all'indice del sottogruppo.
+\end{corollary}
+
+\subsection{Applicazioni della teoria dei rivestimenti}
+\begin{theorem}[Borsuk-Ulam]\label{TeoremaBorsukUlam}
+Non esistono funzioni $f:S^2\to S^1$ continue tali che $f(-x)=-f(x)$ per ogni $z\in S^2$.
+\end{theorem}
+
+\begin{theorem}
+Non esistono funzioni $f:S^2\to \R^2$ continue e iniettive.
+\end{theorem}
+
+\end{multicols*}

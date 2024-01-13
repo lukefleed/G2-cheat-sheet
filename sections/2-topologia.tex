@@ -1,0 +1,1905 @@
+\chapter{Topologia generale}
+\setlength{\parindent}{2pt}
+
+\begin{multicols*}{2}
+
+\section{Spazi Metrici}
+Gli spazi metrici, come suggerisce il nome, sono insiemi dotati di una distanza o metrica. In un certo senso sono gli spazi più vicini alla nostra intuizione (ma non sempre, per alcune metriche per esempio tutti i triangoli risultano isosceli!).
+\begin{definition}[Spazio metrico]
+Dato un insieme $X$, una \textbf{distanza} su $X$ è una funzione $d:X\times X\to[0,+\infty)$ tale che
+\begin{itemize}[noitemsep]
+\item $d(x,y)=0\coimplies x=y$
+\item $d(x,y)=d(y,x)$
+\item $d(x,z)\leq d(x,y)+d(y,z)$
+\end{itemize}
+L'ultima proprietà è detta \textbf{disuguaglianza triangolare}.\\
+La coppia $(X,d)$ con $d$ distanza è detta uno \textbf{spazio metrico}.
+\end{definition}
+
+\begin{definition}[Distanza punto-insieme]
+Se $(X,d)$ è uno spazio metrico e $A\subseteq X$ allora definiamo la distanza tra un punto $x\in X$ e $A$ come
+\[d_A(x)=\inf\{d(x,a)\mid a\in A\}.\]
+\end{definition}
+
+Un modo semplice di costruire spazi metrici è dotare spazi vettoriali di una
+\begin{definition}[Norma]
+Dato $V$ uno spazio vettoriale, una \textbf{norma} su $V$ è una funzione $\|\cdot\|:V\to[0,+\infty)$ tale che
+\begin{itemize}[noitemsep]
+\item $\|x\|=0\coimplies x=0$
+\item $\|\la x\|=|\la|\|x\|$
+\item $\|x+y\|\leq \|x\|+\|y\|$.
+\end{itemize}
+\end{definition}
+\begin{remark}
+la funzione $d(x,y)=\|x-y\|$ è una distanza, detta \textbf{distanza indotta} dalla norma $\|\cdot\|$.
+\end{remark}
+\vspace{0.5cm}
+
+\noindent Definiamo delle distanze ricorrenti:
+\begin{definition}[Distanza discreta]
+Dato un qualsiasi insieme $X$, la \textbf{distanza discreta} su $X$ è data da
+\[d(x,y)=\begin{cases}
+0& se\ x=y\\
+1& se\ x\neq y
+\end{cases}.\]
+Vediamo che effettivamente è una distanza: le prime due proprietà sono chiaramente rispettate e la disuguaglianza triangolare vale perché $d(x,y)+d(y,z)\geq1$ eccetto il caso dove $x=y=z$, dove la disuguaglianza triangolare coincide con affermare $0+0\geq0$.
+\end{definition}
+\begin{definition}[Distanze $p$]
+Sia $p\geq1$ e consideriamo le seguenti norme su $\R^n$:
+\[\|x\|_p=\pa{\sum_{i=1}^n|x_i|^p}^{1/p}.\]
+Definiamo $d_p$ come le distanze indotte da queste norme. Si può verificare che prendendo il limite $p\to\infty$ si definisce un'ulteriore norma:
+\[\|x\|_\infty=\max_i|x_i|\]
+che induce la distanza $d_\infty$.\\
+Chiamiamo $\|\cdot\|_2=|\cdot|$ la \textbf{norma euclidea} e $d_2$ la \textbf{distanza euclidea}.
+\end{definition}
+
+\begin{definition}[Distanze $p$ integrali]
+Consideriamo lo spazio $X=C^0([0,1])$ delle funzioni continue sull'intervallo chiuso $[0,1]$ e un reale $p\geq1$. Definiamo le seguenti norme:
+\[\|f\|_p=\pa{\int_0^1|f(t)|^p}^{1/p}\]
+\[\|f\|_\infty=\sup_{t\in[0,1]}|f(t)|\overset{Weierstrass}{=}\max_{t\in[0,1]}|f(t)|.\]
+In appendice è disponibile una dimostrazione che queste sono effettivamente norme, e quindi inducono distanze sullo spazio delle funzioni continue.
+\end{definition}
+
+\begin{definition}[Embedding isometrico]
+Dati $(X,d)$ e $(Y,d')$ spazi metrici, $f:X\to Y$ è un \textbf{embedding isometrico} se \[d'(f(x),f(y))=d(x,y).\]
+\end{definition}
+\begin{remark}
+Un embedding isometrico è sempre iniettivo, infatti
+\[f(x)=f(y)\implies d'(f(x),f(y))=0=d(x,y)\implies x=y.\]
+\end{remark}
+\begin{remark}
+La composizione di embedding isometrici è un embedding isometrico. L'identità $(X,d)\to(X,d)$ è un embedding isometrico.
+\end{remark}
+\begin{remark}
+Gli spazi metrici con gli embedding isometrici sono una categoria.
+\end{remark}
+
+\begin{definition}[Isometria]
+Una \textbf{isometria} è un embedding isometrico bigettivo.
+\end{definition}
+\begin{remark}
+L'inversa di una isometria è una isometria e la composizione di isometrie è una isometria.
+Banalmente l'identità è una isometria.
+\end{remark}
+
+\begin{notation}[Gruppo delle isometrie]
+Denotiamo il \textbf{gruppo delle isometrie} di $(X,d)$ con $Isom(X)$.
+\end{notation}
+\vspace{0.5cm}
+
+\noindent Diamo ora una delle definizioni che risulteranno essere tra le più importanti del corso:
+\begin{definition}[Palla aperta]
+Dato $(X,d)$ spazio metrico, $r\in\R,\ r>0$, e $x\in X$, definiamo \[B_r(x)=B_d(x,r)=B(x,r)=\{y\in X\mid d(x,y)<r\}\] la \textbf{palla aperta} di \textbf{raggio} $r$ e \textbf{centro} $x$.
+\end{definition}
+\noindent (Purtroppo la notazione che userò per le palle sarà estremamente variabile.)
+
+\begin{definition}[Continuità in un punto]
+Siano $(X,d)$ e $(Y,d')$ spazi metrici. Una funzione $f:X\to Y$ è \textbf{continua} in $x_0\in X$ se
+\[\forall \e>0,\ \exists \delta>0\ t.c.\ f(B_d(x_0,\delta))\subseteq B_{d'}(f(x_0),\e).\]
+La funzione è \textbf{continua} se è continua per ogni $x_0\in X$.
+\end{definition}
+
+\begin{definition}[Aperto metrico]
+Se $(X,d)$ è spazio metrico, $A\subseteq X$ è \textbf{aperto} (rispetto alla metrica $d$) se $\forall x\in A,\ \exists \e>0$ tale che $B_\e(x)\subseteq A$.
+\end{definition}
+
+\begin{lemma}
+Le palle aperte sono insiemi aperti nella metrica che le definisce.
+\end{lemma}
+
+\begin{theorem}[Caratterizzazione delle continue]
+Data una funzione $f:X\to Y$ tra spazi metrici vediamo che essa è continua se e solo se la controimmagine di un aperto di $Y$ tramite $f$ è un aperto di $X$.
+\end{theorem}
+\begin{definition}[Mappa Lipschitziana]
+Se $(X,d)$ e $(Y,d')$ sono spazi metrici, dato $k\geq 0$, una funzione $f:X\to Y$ è \textbf{$k-$Lipschitziana} se
+\[d'(f(p),f(q))\leq k\ d(p,q),\ \forall p,q\in X.\]
+\end{definition}
+\begin{proposition}
+Una funzione lipschitziana è continua.
+\end{proposition}
+
+\vspace{0.5cm}
+
+\noindent Verifichiamo ora che le palle aperte degli spazi metrici rispettano le seguenti fondamentali proprietà
+\begin{proposition}
+Sia $(X,d)$ uno spazio metrico, allora
+\begin{enumerate}[noitemsep]
+\item $\emptyset$ e $X$ sono aperti.
+\item Se $A,B$ sono aperti allora $A\cap B$ è aperto.
+\item Se $A_i$ con $i\in I$ è una famiglia di aperti allora $\displaystyle \bigcup_{i\in I}A_i$ è aperto.
+\end{enumerate}
+\end{proposition}
+\begin{remark}
+L'intersezione arbitraria di aperti può non essere aperta, per esempio l'intersezione della famiglia data da $B_{1/n}(0)$ in $\R$.
+\end{remark}
+\section{Spazi topologici}
+Le proprietà date sopra hanno in realtà una validità generale e ci permettono di definire gli oggetti principali che tratteremo in questo capitolo:
+\begin{definition}[Spazio topologico]
+Uno \textbf{spazio topologico} è una coppia $(X,\tau)$ dove $X$ è un insieme e $\tau\subseteq \powerset(X)$ per il quale valgono le seguenti proprietà:
+\begin{enumerate}[noitemsep]
+\item $\emptyset,X\in\tau$
+\item $A,B\in\tau\implies A\cap B\in \tau$
+\item $\Phi\subseteq \tau\implies \bigcup_{A\in\Phi}A\in \tau$.
+\end{enumerate}
+L'insieme $\tau$ è detta una \textbf{topologia} su $X$ e i suoi elementi sono detti insiemi \textbf{aperti} di $(X,\tau)$.
+\end{definition}
+\begin{remark}
+Ogni distanza su $X$ induce una topologia su $X$.
+\end{remark}
+
+\begin{definition}[Topologie discreta e indiscreta]
+Gli insiemi $\powerset(X)$ e $\{\emptyset,X\}$ sono delle topologie su $X$ e sono chiamate \textbf{topologia discreta} e \textbf{topologia indiscreta} rispettivamente.
+\end{definition}
+\begin{definition}[Topologia cofinita]
+Dato l'insieme $X$, l'insieme $\tau=\{\emptyset\}\cup\{A\subseteq X\mid |X\bs A|\in \N\}$ è una topologia su $X$ ed è detta la \textbf{topologia cofinita}. Essa ha come chiusi gli insiemi finiti e tutto lo spazio.\\
+In modo analogo si pu\`o definire la topologia \textbf{conumerabile}.
+\end{definition}
+\begin{remark}
+Non tutte le topologie sono indotte da metriche, per esempio la topologia indiscreta non può essere descritta come topologia indotta da metrica se $|X|\geq2$. Questo deriva dal fatto che presi $x_1,x_2\in X$ distinti, $B(x_1,d(x_1,x_2)/2)$ e $B(x_2,d(x_1,x_2)/2)$ sono disgiunte e non vuote.
+\end{remark}
+
+\begin{definition}[Chiuso]
+Dato $(X,\tau)$ uno spazio topologico, $C\subseteq X$ è \textbf{chiuso} se $X\bs C\in \tau$.
+\end{definition}
+\begin{remark}
+Una topologia può essere descritta anche dai chiusi. Tramite le leggi di De Morgan troviamo la seguente caratterizzazione equivalente di una topologia: Sia $\chi=\{X\bs A\mid A\in \tau\}$ allora $\tau$ è una topologia su $X$ se e solo se
+\begin{enumerate}[noitemsep]
+\item $\emptyset,X\in\chi$
+\item $A,B\in\chi\implies A\cup B\in \chi$
+\item $\Phi\subseteq \chi\implies \bigcap_{C\in\Phi}C\in \chi$.
+\end{enumerate}
+\end{remark}
+
+
+\begin{definition}[Finezza]
+Siano $\tau_1,\tau_2$ topologie su $X$. $\tau_1$ è \textbf{meno fine} di $\tau_2$ se $\tau_1\subseteq \tau_2$.
+\end{definition}
+\begin{remark}
+La finezza descrive un ordinamento parziale sulle topologie con massimo (la topologia discreta) e minimo (l'indiscreta).
+\end{remark}
+\noindent Intuitivamente una topologia è più fine se ha più aperti o più chiusi, cioè ci permette di distinguere meglio i punti.
+
+\subsection{Equivalenza topologica di distanze e limitatezza} Consideriamo nuovamente le topologie indotte da metriche:\begin{definition}[Metriche topologicamente equivalenti]
+Date due distanze $d_1,d_2$ su $X$, esse sono \textbf{topologicamente equivalenti} se inducono la stessa topologia su $X$.
+\end{definition}
+
+\begin{proposition}\label{ConfrontoTraDistanze}
+Siano $d_1,d_2$ distanze su $X$ con topologie indotte $\tau_1$ e $\tau_2$ rispettivamente. Se $\exists k>0$ tale che $d_1(x,y)\leq k d_2(x,y)$ allora $\tau_2$ è più fine di $\tau_1$.
+\end{proposition}
+\begin{corollary}[Criterio per equivalenza topologica]\label{CriterioEquivalenzaDistanze}
+Siano $d_1,d_2$ distanze su $X$ tali che $\exists k>0,h>0$ tali che
+\[d_1(x,y)\leq kd_2(x,y)\qquad d_2(x,y)\leq h d_1(x,y),\]
+allora $d_1$ e $d_2$ sono topologicamente equivalenti.
+\end{corollary}
+\begin{notation}
+Distanze come nel corollario precedente si dicono \textbf{bilipschitziane} tra loro.
+\end{notation}
+\begin{corollary}\label{Norme12inftySonoEquivalenti}
+Le distanze indotte da da $\|\cdot\|_1,\|\cdot\|_2$ e $\|\cdot\|_\infty$ sono topologicamente equivalenti su $\R^n$
+\end{corollary}
+
+\begin{remark}
+Non tutte le metriche sullo stesso spazio sono topologicamente equivalenti (\ref{DistanzeNonTopEquivalenti})
+\end{remark}
+
+\begin{definition}[Limitatezza]
+Se $(X,d)$ è uno spazio metrico, $Y\subseteq X$ è \textbf{limitato} se esistono $x\in X$ e $R\in \R$ tali che
+\[Y\subseteq B_R(x).\]
+\end{definition}
+\begin{proposition}[Ogni spazio metrico ``è limitato"]\label{OgniMetricoETopologicamenteEquivalenteALimitato}
+Se $(X,d)$ è uno spazio metrico allora esiste una metrica $d'$ su $X$ tale $d$ e $d'$ sono topologicamente equivalenti e $d'(x,y)\leq 1$ per ogni $x,y\in X$, in particolare $X$ è limitato in $(X,d')$.
+\end{proposition}
+
+\subsection{La categoria Top}
+
+\begin{definition}[Funzione continua]
+Una funzione $f:X\to Y$ con $(X,\tau_X),(Y,\tau_Y)$ spazi topologici è \textbf{continua} se $A\in \tau_Y\implies f\ii(A)\in \tau_X$.
+\end{definition}
+\begin{remark}
+La definizione funziona anche chiedendo che la controimmagine di chiusi sia chiusa dato che prendere la controimmagine commuta con prendere il complementare.
+\[f\ii(Y\bs A)=X\bs f\ii(A).\]
+\end{remark}
+\begin{definition}[Omeomorfismo]
+Una funzione continua tra spazi topologici $f:X\to Y$ è un \textbf{omeomorfismo} se è biunivoca e $f\ii$ è continua.
+\end{definition}
+
+\begin{remark}
+L'identità $id:(X,\tau)\to (X,\tau)$ è un omeomorfismo.
+\end{remark}
+\begin{remark}
+Se $f:X\to Y$ e $g:Y\to Z$ sono continue allora anche $g\circ f: X\to Z$ è continua. Segue che la composizione di omeomorfismi è un omeomorfismo.
+\end{remark}
+\begin{remark}
+Quanto detto ci permette di definire la categoria $Top$, i cui oggetti sono spazi topologici e i cui morfismi sono funzioni continue. Gli isomorfismi corrispondono agli omeomorfismi.
+\end{remark}
+
+\begin{remark}
+Omeomorfismi e funzioni continue bigettive non coincidono.
+\end{remark}
+
+\subsection{Chiusura e Parte interna}
+\begin{definition}[Chiusura]
+Dato $X$ spazio topologico con topologia $\tau$ e un suo sottoinsieme $Y\subseteq X$, la \textbf{chiusura} di $Y$ in $X$ è il più piccolo chiuso che contiene $Y$, ovvero
+\[\ol Y=\bigcap_{C\text{ chiuso, }C\supseteq Y}C.\]
+Dato che l'intersezione di chiusi è chiusa e $X$ è chiuso, la chiusura è ben definita.
+\end{definition}
+\begin{definition}[Parte interna]
+Dato $X$ spazio topologico con topologia $\tau$ e un suo sottoinsieme $Y\subseteq X$, la \textbf{parte interna} di $Y$ in $X$ è il più grande aperto contenuto in $Y$, ovvero
+\[\rg Y=int(Y)=\bigcup_{A\in\tau,\ A\subseteq Y}A.\]
+Dato che l'unione di aperti è aperta e $\emptyset$ è aperto, la parte interna è ben definita.
+\end{definition}
+
+\begin{remark}
+Un aperto $A$ in $X$ è contenuto in $Z$ se e solo se $X\bs A$ è un chiuso che contiene $X\bs Z$, segue quindi che
+\[int(Z)=X\bs\ol{(X\bs Z)}.\]
+Analogamente
+\[\ol Z=X\bs int(X\bs Z).\]
+\end{remark}
+\begin{remark}
+$\rg Z=Z\coimplies Z$ aperto e $\ol Z=Z\coimplies Z$ chiuso.
+\end{remark}
+\begin{definition}[Frontiera]
+La \textbf{frontiera (topologica)} o \textbf{bordo} di $Z\subseteq X$ è definita come
+\[\partial Z=\ol Z\bs \rg Z\]
+\end{definition}
+\begin{definition}[Punti aderenti e di accumulazione]
+Un punto $P\in X$ con $Z\subseteq X$ è
+\begin{itemize}[noitemsep]
+\item \textbf{aderente} a $Z$ se $P\in \ol Z$;
+\item \textbf{di accumulazione} per $Z$ se $P\in \ol{Z\bs \{P\}}$.
+\end{itemize}
+\end{definition}
+\begin{remark}
+Se $Z\subseteq Y\subseteq X$ allora $\ol Z\subseteq \ol Y$ e $\rg Z\subseteq \rg Y$. In particolare i punti di accumulazione sono anche aderenti.
+\end{remark}
+\begin{remark}
+Esistono punti aderenti che non sono di accumulazione (\ref{AderenteNonAccumulazione})
+\end{remark}
+\noindent
+Diamo ora un criterio utile per capire se un punto è aderente. L'idea è che ogni aperto che lo contiene dovrà essere così vicino all'insieme che almeno una parte deve intersecarlo.
+\begin{proposition}[Caratterizzazione della chiusura]\label{CaratterizzazioneChiusura}
+Sia $X$ uno spazio topologico e $Z\subseteq X$. Allora $P\in \ol Z$ se e solo se $\forall A\subseteq X$ aperto tale che $P\in A$ abbiamo che $A\cap Z\neq \emptyset$.
+\end{proposition}
+
+\begin{proposition}
+Se $P\notin Z$ e $P$ è aderente allora $P$ è di accumulazione.
+\end{proposition}
+
+\begin{remark}
+$\ol{Z_1\cap Z_2}\neq \ol Z_1\cap \ol Z_2$, per esempio $\ol{\Q\cap (\R\bs \Q)}=\ol\emptyset=\emptyset$ ma $\ol \Q=\ol{\R\bs \Q}=\R$.
+\end{remark}
+
+\begin{definition}[Insieme denso]
+Un sottoinsieme $Z\subseteq X$ è \textbf{denso} se $\ol Z= X$.
+\end{definition}
+
+\begin{remark}
+$Z$ è denso in $X$ se e solo se $\forall A\subseteq X$ aperto non vuoto si ha $A\cap Z\neq\emptyset$.
+\end{remark}
+
+\subsection{Basi e Prebasi}
+Se $X$ è un insieme e $S\subseteq \powerset(X)$ voglio trovare ``la topologia generata da $S$", cioè la più piccola topologia che contiene $S$.
+\begin{lemma}
+Siano $\tau_i$ delle topologie su $X$. Allora $\tau=\bigcap \tau_i\subseteq\powerset(X)$ è una topologia su $X$.
+\end{lemma}
+\begin{definition}[Topologia generata]
+La \textbf{topologia generata} da $S\subseteq\powerset(X)$ è
+\[\tau_S=\bigcap_{\tau\text{ topologia, }S\subseteq \tau}\tau.\]
+Osservo che la definizione è ben posta per il lemma e perché l'intersezione non è vuota in quanto $\powerset(X)\supseteq S$.
+\end{definition}
+
+\begin{definition}[Base topologica]
+Se $(X,\tau)$ è uno spazio topologico, una \textbf{base} di $\tau$ è un sottoinsieme $\Bc\subseteq \tau$ tale che \[\forall A\in \tau,\ \exists \Bc'\subseteq\Bc\ t.c.\ A=\bigcup_{B\in \Bc'}B.\]
+\end{definition}
+
+\begin{proposition}[Caratterizzazione delle basi]
+L'insieme $\Bc\subseteq\powerset(X)$ è una base di qualche topologia se e solo se $X=\bigcup_{B\in \Bc}B$ e $\forall B_1,B_2\in \Bc,$ esiste $ \Bc'\subseteq\Bc$ tale che \[B_1\cap B_2=\bigcup_{B\in \Bc'}B.\]
+\end{proposition}
+\begin{remark}
+In generale $S$ non è una base della topologia generata da $S$ perché può non rispettare le condizioni sopra.
+\end{remark}
+
+\begin{definition}[Prebase topologica]
+Una \textbf{prebase} di una topologia $\tau$ su $X$ è un sottoinsieme $U\subseteq\powerset(X)$ tale che
+\[\left\{\bigcap_{i=1}^k U_i\mid k\in\N,\ U_i\in U\right\}\]
+è una base di $\tau$. Per evitare di riscrivere questo insieme troppe volte lo chiameremo ``le intersezioni finite di $U$".
+\end{definition}
+
+\begin{remark}
+Ogni base è una prebase ma non è garantito il viceversa.
+\end{remark}
+
+\begin{theorem}[Caratterizzazione della topologia generata]
+Se $X$ è un insieme e $S\subseteq\powerset(X)$ allora $\tau$ è la topologia generata da $S$ se e solo se $S\cup\{X\}$ è una prebase di $\tau$.
+\end{theorem}
+
+\begin{remark}
+La topologia generata da $S$ sono le unioni arbitrarie delle intersezioni finite di $S$ a cui aggiungo $X$.
+\end{remark}
+
+\begin{proposition}[Criterio per continuità]
+Se $X$ e $Y$ sono spazi topologici e $f:X\to Y$ è una funzione allora le seguenti affermazioni sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $f$ è continua.
+\item $\exists \Bc\subseteq \powerset(Y)$ base per $Y$ tale che $\forall B\in \Bc$, $f\ii(B)$ è aperto in $X$.
+\item $\exists U\subseteq \powerset(Y)$ prebase per $Y$ tale che $\forall U'\in U$, $f\ii(U')$ è aperto in $X$.
+\end{enumerate}
+\end{proposition}
+
+\section{Assiomi di Numerabilità e Intorni}
+Siamo pronti a definire il concetto di intorno e a dare gli assiomi di numerabilità. Questi concetti ci danno un modo per misurare quanto e come i punti del nostro spazio topologico sono vicini.
+
+
+\subsection{Intorni}
+\begin{definition}[Intorno]
+Dato $X$ spazio topologico, un \textbf{intorno} di $x_0\in X$ è un sottoinsieme $U$ di $X$ tale che $\exists A$ aperto in $X$ tale che $x_0\in A\subseteq U$.
+\end{definition}
+\begin{remark}
+Un intorno può non essere aperto.
+\end{remark}
+\begin{notation}
+Indicheremo, se non altrimenti specificato, l'insieme degli intorni di un dato punto $x_0$ come $I(x_0)$ o $I_X(x_0)$ nel caso sia necessario specificare lo spazio.
+\end{notation}
+
+
+\begin{remark}
+Per gli intorni valgono le seguenti proprietà:
+\begin{enumerate}[noitemsep]
+\item $U$ è un intorno di $x_0$ se e solo se $x_0\in \rg U$.
+\item Se $U$ intorno di $x_0$ e $U\subseteq V$ allora anche $V$ è un intorno di $x_0$.
+\item Se $U$ e $V$ sono intorni di $x_0$ allora anche $U\cap V$ è un intorno di $x_0$. Questo deriva dal fatto che $x_0\in \rg U\cap \rg V$ che essendo intersezione di aperti è ancora aperto e dunque $x_0\in \rg U\cap \rg V\subseteq int(U\cap V)$.
+\end{enumerate}
+\end{remark}
+
+\begin{proposition}[Caratterizzazione di aperti/chiusi con intorni]\label{CaratterizzazioneApertiEChiusuraConIntorni}
+Valgono le seguenti proposizioni:
+\begin{enumerate}[noitemsep]
+\item $A$ è aperto se e solo se $A$ è intorno di ogni suo punto
+\item Se $Z\subseteq X$ allora la chiusura di $Z$ sono i punti $x$ tali che ogni $U$ intorno di $x$, $U\cap Z\neq\emptyset$.
+\item $Z$ è chiuso se e solo se $(x\in X,\ U\in I(x),\ U\cap Z\neq\emptyset)\implies x\in Z$.
+\end{enumerate}
+\end{proposition}
+
+\noindent Possiamo ora dare la caratterizzazione di continuità familiare dal contesto dell'analisi:
+\begin{definition}[Continuità in un punto]
+Una funzione $f:X\to Y$ è \textbf{continua in} $x_0\in X$ se $\forall U\in I(f(x_0))$ esiste $V\in I(x_0)$ tale che $f(V)\subseteq U$ (Equivalentemente se $\forall U\in I(f(x_0)),\ f\ii(U)\in I(x_0)$).
+\end{definition}
+\begin{proposition}[Continua equivale a continua in ogni punto]\label{ContinuaEquivaleContinuaInOgniPunto}
+Una funzione $f:X\to Y$ è continua se e solo se è continua in $x_0$ per ogni $x_0$ in $X$.
+\end{proposition}
+
+\subsection{Sistemi fondamentali di intorni e I-numerabilità}
+\begin{definition}[Sistema fondamentale di intorni]
+Un \textbf{sistema fondamentale di intorni} (SFI) di $x_0\in X$ è un sottoinsieme $J\subseteq I(x_0)$ tale che $\forall U\in I(x_0)$ esiste $V\in J$ tale che $V\subseteq U$
+\end{definition}
+
+\begin{definition}[I-numerabilità]
+Uno spazio $X$ è \textbf{primo numerabile} (I-numerabile) o soddisfa il \textbf{primo assioma di numerabilità} se per ogni $x_0\in X$ posso trovare un SFI al più numerabile.
+\end{definition}
+
+\begin{proposition}[Gli spazi metrici sono I-numerabili]\label{MetricoEINumerabile}
+Se $X$ è uno spazio metrico allora $X$ è I-numerabile.
+\end{proposition}
+
+\begin{lemma}\label{LemmaINumerabile}
+Se $X$ è I-numerabile e $U=\{U_i\}_{i\in \N}$ è un SFI di $x\in X$ allora posso supporre senza perdita di generalità che $U_{i+1}\subseteq U_i$ per ogni $i$.
+\end{lemma}
+
+\subsection{II-numerabilità e Separabilità}
+\begin{definition}[II-numerabilità]
+Uno spazio topologico è \textbf{II-numerabile} (letto ``secondo numerabile") o soddisfa il \textbf{secondo assioma di numerabilità} se esiste una base (al più) numerabile per la topologia.
+\end{definition}
+\begin{remark}
+L'uso di ``al più" nella definizione sopra non è necessario. Nel caso di spazi finiti basta ripetere frequentemente dei termini. Preferiamo specificarlo però in quanto alcune definizioni successive richiederanno la specifica ``al più numerabile" in un contesto dove ``numerabile" da solo sarebbe scorretto.
+\end{remark}
+\begin{definition}[Separabilità]
+Uno spazio topologico è \textbf{separabile} se contiene un sottoinsieme al più numerabile denso.
+\end{definition}
+\begin{theorem}[II-numerabile è separabile e in metrico coincidono]\label{IINumerabileESeparabileEInMetricoCoincidono}
+Se $X$ è II-numerabile allora $X$ è separabile. Se $X$ è metrizzabile allora vale anche l'altra implicazione.
+\end{theorem}
+\begin{corollary}
+$\R^n$ è II-numerabile.
+\end{corollary}
+
+\begin{proposition}[II-numerabile implica I-numerabile]\label{IINumerabileImplicaINumerabile}
+Se $X$ è II-numerabile allora è anche I-numerabile.
+\end{proposition}
+
+\begin{remark}
+I-numerabile e II-numerabile NON sono equivalenti (\ref{INumerabileNonIINumerabile}).
+\end{remark}
+
+\subsection{Successioni}
+\begin{definition}[Successione]
+Sia $X$ uno spazio topologico. Una \textbf{successione a valori in $X$} è una funzione $x:\N\to X$ (dove indichiamo tradizionalmente $x(n)$ con $x_n$).\\
+Una \textbf{sottosuccessione} di $x_n$ è successione data da $x_{n_k}$, dove $n:\N\to \N$ è strettamente crescente.
+\end{definition}
+\begin{definition}[Definitivamente e Frequentemente]
+Una successione $x_n$ rispetta una proprietà $P$ \textbf{definitivamente} se $\exists k_0$ tale che $\forall k\geq k_0$, $x_k$ rispetta $P$, mentre $x_n$ rispetta $P$ \textbf{frequentemente} se $\forall k_0,\ \exists k\geq k_0$ tale che $x_k$ rispetta $P$.
+\end{definition}
+\begin{definition}[Limite]
+Affermiamo che la successione $x_n$ \textbf{tende} a $\ol x\in X$ (o che $\ol x$ è un \textbf{limite} di $x_n$) e scriviamo $x_n\to\ol x$ o $\displaystyle \lim_{n\to+\infty}x_n=\ol x$ se
+\[\forall U\text{ intorno di }\ol x,\ x_n\in U\ \text{definitivamente}.\]
+\end{definition}
+\begin{remark}
+Osserviamo che
+\begin{itemize}[noitemsep]
+\item i limiti possono non esistere.
+\item i limiti di una data successione possono non essere unici. Per esempio nella topologia indiscreta ogni punto è limite di ogni successione.
+\item se $x_n$ è una successione (definitivamente) costante allora quella costante è un limite di $x_n$.
+\item Se $x_n\to\ol x$ allora ogni sottosuccessione $x_{n_k}$ è tale che $x_{n_k}\to \ol x$.
+\end{itemize}
+\end{remark}
+
+\begin{definition}[Chiuso per successioni]
+Un insieme $Y\subseteq X$ è \textbf{chiuso per successioni} se per ogni $x_n$ successione a valori in $Y$, se $x_n\to \ol x$ allora $\ol x\in Y$.
+\end{definition}
+
+\begin{proposition}[Chiusura e Chiusura per successioni]
+Sia $Y\subseteq X$ e poniamo
+\[\hat Y=\{\ol x\in X\mid \exists x_n\text{ successione }t.c.\ x_n\in Y\text{ e }x_n\to\ol x\}.\]
+Allora $\hat Y\subseteq \ol Y$ e se $X$ è I-numerabile allora $\hat Y=\ol Y$.
+\end{proposition}
+
+\begin{definition}[Aperto per successioni]
+Se $Y\subseteq X$ allora $Y$ è \textbf{aperto per successioni}\footnote{In realtà non ho mai visto questo termine usato, ho voluto dare questa definizione solo per aiutare i lettori ad afferrare la simmetria degli argomenti presentati in questa sezione.} se, per ogni $\ol x\in Y$, se $x_n$ è una successione in $X$ tale che $x_n\to \ol x$, allora $x_n\in Y$ definitivamente.
+\end{definition}
+
+\begin{proposition}[Parte interna e Parte interna per successioni]
+Sia $Y\subseteq X$. Se
+$\ol x\in\rg Y$, allora per ogni successione tale che $x_n\to \ol x$ si ha $x_n\in Y$ definitivamente.\\
+Se $X$ è I-numerabile vale anche il viceversa.
+\end{proposition}
+
+\begin{definition}[Continuità per successioni]
+Una funzione $f:X\to Y$ è \textbf{continua per successioni} se $\forall x_n$ tale che $x_n\to \ol x$ allora $f(x_n)\to f(\ol x)$.
+\end{definition}
+\begin{proposition}[Continuità e Continuità per successioni]
+Sia $f:X\to Y$ tra spazi topologici. Allora se $f$ è continua è continua per successioni. Se $X$ è I-numerabile allora continuità e continuità per successioni sono equivalenti.
+\end{proposition}
+
+\noindent Possiamo riassumere questi risultati nella seguente
+\begin{proposition}\label{ChiusiApertiContinuePerSuccessioni}
+Se $Y\subseteq X$ e $f:X\to Z$ allora
+\begin{itemize}[noitemsep]
+\item se $Y$ è chiuso, è chiuso per successioni
+\item se $Y$ è aperto, è aperto per successioni
+\item se $f$ è continua allora è continua per successioni.
+\end{itemize}
+Se $X$ è I-numerabile allora le implicazioni sopra sono equivalenze.
+\end{proposition}
+
+\section{Topologia di sottospazio}
+\begin{definition}[Topologia di sottospazio]
+Sia $X$ uno spazio topologico e $Y\subseteq X$. La \textbf{topologia di sottospazio} di $Y$ è la topologia meno fine che rende l'inclusione $i:Y\to X$ continua.\\
+La definizione è ben posta in quanto la topologia discreta rende l'inclusione continua e l'intersezione di topologie è sempre una topologia.
+\end{definition}
+\begin{proposition}[Caratterizzazione della topologia di sottospazio]
+La topologia di sottospazio di $Y$ è $\tau\res Y=\{B\subseteq Y\mid \exists A\in \tau_X\ t.c.\ B=Y\cap A\}$, cioè sono le intersezioni di aperti globali con l'insieme.
+\end{proposition}
+
+\noindent
+Se non specifichiamo altrimenti considereremo ogni sottospazio dotato della topologia di sottospazio.
+
+\begin{remark}
+Dalla definizione segue che i chiusi della topologia di sottospazio sono della forma $Y\cap C$ con $C$ chiuso in $X$.
+\end{remark}
+\begin{remark}
+Se $\Bc$ è una base di $\tau$, $\Bc'=\{A\cap Y\mid A\in \Bc\}$ è una base di $\tau\res Y$.
+\end{remark}
+\begin{proposition}[Aperto di un aperto e Chiuso di un chiuso]
+$Y$ è aperto in $X$ se e solo se tutti gli aperti in $Y$ sono aperti in $X$. $Y$ è chiuso in $X$ se e solo se ogni chiuso in $Y$ è chiuso in $X$.
+\end{proposition}
+
+\begin{proposition}[Proprietà universale della topologia di sottospazio]
+Siano $X,Z$ spazi topologici e sia $Y\subseteq Z$. Data una mappa $f:X\to Y$ e chiamando $i:Y\to Z$, $f$ è continua se e solo se  $i\circ f:X\to Z$ è continua.
+\end{proposition}
+
+\begin{proposition}[Restrizione di continua è continua]
+Sia $f:X\to Y$ continua, $Z\subseteq X$. Allora $f\res Z:Z\to Y$ è continua
+\end{proposition}
+
+\begin{lemma}[Chiusura in sottospazi]\label{ChiusuraInSottospazi}
+Siano $X$ uno spazio topologico e $A\subseteq Z\subseteq X$. Allora la chiusura di $A$ in $Z$ (che indicheremo con $\ol{A}^Z$) coincide con $\ol A\cap Z$, dove $\ol A$ è la chiusura di $A$ in $X$.
+\end{lemma}
+\begin{remark}
+Questo è falsissimo per le parti interne, per esempio $\{0\}\subseteq \{0\}\subseteq \R$. Chiaramente $int_{\{0\}}(\{0\})=\{0\}$ ma $int_\R(\{0\})\cap \{0\}=\emptyset\cap \{0\}=\emptyset$.
+\end{remark}
+\vspace{0.5cm}
+
+\noindent
+Vediamo quali proprietà di numerabilità passano a sottospazi:
+\begin{proposition}
+Sia $X$ uno spazio topologico e $Y\subseteq X$.
+\begin{enumerate}[noitemsep]
+\item Se $X$ è II-numerabile allora $Y$ è II-numerabile
+\item Se $X$ è I-numerabile allora $Y$ è I-numerabile
+\item Se $X$ è separabile NON sempre $Y$ è separabile
+\item Se $X$ è metrizzabile allora $Y$ è metrizzabile e la topologia di sottospazio è la topologia indotta dalla metrica di $X$ ristretta a $Y$
+\item Se $X$ è metrizzabile e separabile allora $Y$ è separabile
+\end{enumerate}
+\end{proposition}
+
+
+\section{Mappe aperte e chiuse}
+\begin{definition}[Mappe aperte e chiuse]
+Sia $f:X\to Y$ tra spazi topologici. $f$ è \textbf{aperta} se $f(A)$ è aperto in $Y$ per ogni $A$ aperto in $X$. Analogamente $f$ è \textbf{chiusa} se per ogni chiuso $C$ di $X$, $f(C)$ è chiuso in $Y$.
+\end{definition}
+
+\begin{lemma}[Funzione aperta se e solo se aperta su base]\label{FunzioneAPertaSSEApertaSuBase}
+Data $f:X\to Y$ e $\Bc$ una base di $X$, $f$ è aperta se e solo se $f(B)$ è aperto in $Y$ per ogni $B\in \Bc$.
+\end{lemma}
+
+
+\begin{definition}[Immersione topologica]
+Una funzione continua $f:X\to Y$ è una \textbf{immersione topologica} se è un omeomorfismo tra $X$ e $f(X)$.
+\end{definition}
+
+\begin{remark}
+Ricordiamo che se $f:X\to Y$ è continua e bigettiva, $f$ non è sempre un omeomorfismo.
+\end{remark}
+\begin{remark}
+Se $f\ii$ è continua allora per $A$ aperto in $X$, $(f\ii)\ii(A)=f(A)$ è aperto in $Y$. Analogamente per i chiusi.
+\end{remark}
+
+\begin{proposition}[Caratterizzazione delle immersioni topologiche in aperti / chiusi]\label{CaratterizzazioneImmersioniTopologicheInApertiOChiusi}
+Se $f:X\to Y$ è continua e iniettiva allora
+\begin{itemize}[noitemsep]
+\item $f$ chiusa $\coimplies$ $f$ immersione topologica in un chiuso di $Y$
+\item $f$ aperta $\coimplies$ $f$ immersione topologica in un aperto di $Y$
+\end{itemize}
+\end{proposition}
+\begin{remark}
+Esistono immersioni topologiche né aperte né chiuse, per esempio $i:[0,1)\to \R$.
+\end{remark}
+
+
+\section{Prodotti}
+Consideriamo ora un modo per costruire spazi a partire da altri spazi.
+\begin{definition}[Prodotto cartesiano]
+Data $\{X_i\}_{i\in I}$ una famiglia di insiemi, il loro \textbf{prodotto (cartesiano)} è dato da
+\[\prod_{i\in I}X_i=\left\{f:I\to\bigcup_{i\in I}X_i\mid \forall i\in I,\ f(i)\in X_i\right\}.\]
+L'elemento $f\in \prod_{i\in I}X_i$ viene spesso denotato con $(f(i))_{i\in I}$, cioè una stringa di elementi $(x_i)_{i\in I}$ con $x_i\in X_i$ per ogni $i\in I$.\\
+Chiamiamo $x_i=f(i)$ la \textbf{coordinata $i$-esima} di $f=(x_i)_{i\in I}$.\\
+Sul prodotto $\prod_{i\in I}X_i$ è definita la \textbf{proiezione $i$-esima} per ogni $i\in I$, ovvero è definita la mappa
+\[\pi_i:\funcDef{\displaystyle \prod_{j\in I}X_j}{X_i}{f}{f(i)}\]
+o equivalentemente $\pi_i((x_j)_{j\in I})=x_i$.
+\end{definition}
+
+\begin{definition}[Diagonale]
+La \textbf{diagonale} di $X$ è il seguente sottoinsieme di $X\times X$
+\[\Delta_X=\{(x,x)\mid x\in X\}.\]
+\end{definition}
+
+Se gli $X_i$ sono spazi topologici, vorremmo definire una topologia sul prodotto:
+\begin{definition}[Topologia prodotto]
+Siano $(X_i,\tau_i)$ spazi topologici per ogni $i\in I$. La \textbf{topologia prodotto} su $\prod_{i\in I}X_i$ è la topologia meno fine che rende ogni proiezione I-esima continua.
+\end{definition}
+\begin{proposition}[Caratterizzazione della topologia prodotto]
+La topologia prodotto $\tau$ di $\prod_{i\in I}X_i$ è ben definita ed ammette come prebase l'insieme
+\[\{\pi_i\ii(A)\mid A\in \tau_i,i\in I\}=\{\{(x_j)_{j\in I}\mid x_i\in A\}\mid A\in \tau_i,i\in I\}\]
+\end{proposition}
+\begin{corollary}
+Una base della topologia prodotto $\tau$ è data da
+\[\left\{\bigcap_{j=1}^k\pi_{i_j}\ii(A_j)\mid k\in \N,\ i_1,\cdots,i_k\in I,\ A_j\in \tau_{i_j}\ \forall j\in I\right\}.\]
+Inoltre se $\Bc_j$ è una base di $\tau_j$ allora una base di $\tau$ è data da
+\[\left\{\bigcap_{j=1}^k\pi_{i_j}\ii(A_j)\mid k\in \N,\ i_1,\cdots,i_k\in I,\ A_j\in \Bc_j\ \forall j\in I\right\}.\]
+\end{corollary}
+
+\begin{remark}
+Se $I$ è finito possiamo semplificare la scrittura della base di $\tau$ in
+\[\Bc=\{A_1\times \cdots\times A_{\#I}\mid A_i\in \tau_i\}\]
+Infatti $\bigcap_{i=1}^{\#I}\pi_{i}\ii(A_i)=A_1\times \cdots \times A_{\# I}$.\smallskip
+
+\noindent
+Se invece $I$ è infinito vediamo che un generico aperto nella base di $\tau$ standard descritta sopra è dato da $\prod_{i\in I}A_i$ con $A_i\in \tau_i$ ma $A_i=X_i$ eccetto che per un numero finito di entrate.
+\end{remark}
+
+\begin{definition}[Box topology]
+La topologia su $\prod_{i\in I}X_i$ data da $\{\prod_{i\in I}A_i\mid A_i\in \tau_i\}$ è detta \textbf{box topology} sul prodotto. Se $I$ è finito la box topology e la topologia prodotto coincidono.
+\end{definition}
+
+\begin{proposition}[Prodotto di chiusi è chiuso]\label{ProdottoDiChiusiEChiuso}
+Se $C_i\subseteq X_i$ sono chiusi allora $\prod_{i\in I}C_i$ è chiuso in $\prod_{i\in I}X_i$.
+\end{proposition}
+
+\begin{proposition}[Prodotto finito di metrici è metrico]
+Dati $(X,d_X),\ (Y,d_Y)$ spazi metrici con topologie indotte $\tau_X,\tau_Y$, la topologia prodotto su $X\times Y$ (che denotiamo $\tau_X\times \tau_Y$) coincide con la topologia indotta su $X\times Y$ da
+\[d_\infty((x,y),(x',y'))=\max\{d_X(x,x'),d_Y(y,y')\}.\]
+In particolare il prodotto finito di spazi metrizzabili è metrizzabile.
+\end{proposition}
+\begin{remark}
+Essendo le metriche $p$ equivalenti su $\R^n$\footnote{Lo mostreremo nel capitolo sulla compattezza. (\ref{EquivalenzaNormeRn})} (e in particolare $\R^2$) il risultato vale anche per $d_2$ e $d_1$. Segue immediatamente, per esempio, che $\R^n\times \R^m\cong \R^{n+m}$
+\end{remark}
+
+\begin{proposition}[Prodotto numerabile di metrici è metrico]\label{ProdottoNumerabileDiMetriciEMetrico}
+Sia $\{X_i\}_{i\in \N}$ una famiglia numerabile di spazi metrici, allora
+\[X=\prod_{i\in\N}X_i\]
+è metrico.
+\end{proposition}
+
+
+
+\begin{remark}
+Il prodotto più che numerabile di spazi metrici può non essere metrico (\ref{ProdottoDiINumerabileNonINumerabile}).
+\end{remark}
+
+\subsection{Proiezioni da un prodotto in un fattore}
+
+\begin{theorem}[Proprietà universale del prodotto]
+Se $X_i$ sono spazi topologici per ogni $i\in I$ e $Y$ è un altro spazio topologico, data $f:Y\to \prod_{i\in I}X_i$ si ha che
+\[f\ \text{continua}\coimplies \pi_i\circ f:Y\to X_i\text{ è continua }\forall i\in I.\]
+\end{theorem}
+
+\begin{theorem}[Le proiezioni sono aperte]\label{ProiezioniSonoAperte}
+Se $X_i$ sono spazi topologici per ogni $i\in I$, le proiezioni $\pi_i$ sono aperte per ogni $i\in I$.
+\end{theorem}
+\begin{remark}
+Le proiezioni non sono sempre chiuse (\ref{ProiezioniNonSempreChiuse}).
+\end{remark}
+
+\subsection{Immersioni dei fattori nel prodotto}
+\begin{proposition}[Immersioni dei fattori nei prodotti]\label{ImmersioniFattoriInProdottiSonoImmersioneTopologica}
+Fissiamo $k\in I$ un indice e $x_i\in X_i$ per ogni $i\neq k$. Allora la funzione
+\[j:\funcDef{X_k}{\displaystyle \prod_{i\in I}X_i}{x}{(y_i)_{i\in I}},\quad y_i=
+\begin{cases}
+x_i & se\ i\neq k\\
+x & se\ i=k
+\end{cases}\]
+è una immersione topologica.
+\end{proposition}
+
+Con la stessa dimostrazione troviamo il seguente fatto più generale
+\begin{proposition}
+Se $I'\subseteq I$ e fissiamo $x_i\in X_i$ per $i\notin I'$ allora
+\[j:\funcDef{\displaystyle \prod_{i\in I'}X_i}{\displaystyle \prod_{i\in I}X_i}{(x_h)_{h\in I'}}{(y_i)_{i\in I}},\quad y_i=\begin{cases}
+x_i &se\ i\notin I'\\
+x_h & se\ i=h\in I'
+\end{cases}\]
+è un'immersione topologica.
+\end{proposition}
+
+\subsection{Topologia della convergenza puntuale}
+\begin{definition}
+Sia $Y$ uno spazio topologico e $X$ un insieme. Definiamo
+\[\{f:X\to Y\}=\prod_{x\in X}Y=Y^X\]
+e la topologia prodotto su questo spazio è detta \textbf{topologia della convergenza puntuale}.
+\end{definition}
+\begin{proposition}
+Sia $\{f_n\}_{n\in\N}$ una successione di funzioni in $Y^X$, allora $f_n\to f$ in questa topologia se e solo se per ogni $x\in X$ si ha $f_n(x)\to f(x)$ in $Y$.
+\end{proposition}
+
+\section{Assiomi di separazione}
+Consideriamo adesso diversi modi in cui i punti del nostro spazio possono essere distinti gli uni dagli altri. Più assiomi di separazione vengono rispettati, più modi abbiamo per scegliere intorni dei nostri punti. Se non vengono rispettati degli assiomi di separazione lo spazio ha un aspetto più spigoloso o appiccicoso (ci sono punti vicini a tanti altri), mentre più assiomi di separazione vengono rispettati, più lo spazio topologico comincia a diventare simile agli spazi ai quali siamo comunemente abituati (per esempio, tutti gli spazi metrici sono almeno spazi di Hausdorff).
+\begin{definition}[Assiomi di separazione]
+Sia $X$ uno spazio topologico. Affermiamo che $X$ soddisfa l'assioma
+\begin{itemize}[noitemsep]
+\item $T_0$ se $\forall x\neq y\in X$ esiste $U$ aperto in $X$ tale che $x\in U$ e $y\notin U$ o viceversa.
+\item $T_1$ se $\forall x\neq y\in X$ esistono $U,V$ aperti in $X$ tali che $x\in U$, $y\notin U$ e $x\notin V$, $y\in V$.
+\item $T_2$ se $\forall x\neq y\in X$ esistono $U,V$ aperti in $X$ tali che $x\in U,\ y\in V$ e $U\cap V=\emptyset$.
+\end{itemize}
+Se $X$ soddisfa $T_2$ viene detto \textbf{spazio di Hausdorff}.
+\end{definition}
+\begin{remark}
+Definizioni analoghe ed equivalenti si ottengono considerando intorni al posto di aperti.
+\end{remark}
+\begin{remark}
+$T_2\implies T_1\implies T_0$ e queste sono implicazioni strette (\ref{T1NonT2-T0NonT1}).
+\end{remark}
+\begin{remark}
+Non tutti gli spazi topologici sono $T_0$, per esempio se $\#X\geq 2$ allora la topologia indiscreta su $X$ non è $T_0$.
+\end{remark}
+
+\begin{proposition}[Gli spazi metrici sono Hausdorff]\label{MetriciSonoHausdorff}
+Se $(X,d)$ è uno spazio metrico allora la topologia indotta da $d$ su $X$ è $T_2$.
+\end{proposition}
+\begin{proposition}[Caratterizzazione degli spazi $T_1$]\label{CaratterizzazioneT1}
+Uno spazio topologico $X$ è $T_1$ se e solo se i punti sono chiusi, che succede se e solo se la topologia di $X$ è più fine della topologia cofinita.
+\end{proposition}
+
+\begin{proposition}[Caratterizzazione degli spazi $T_2$]\label{CaratterizzazioneT2}
+$X$ è di Hausdorff se e solo se la diagonale $\Delta_X=\{(x,x)\mid x\in X\}$ è un chiuso di $X\times X$.
+\end{proposition}
+\begin{corollary}
+Sia $f:X\to Y$ continua con $Y$ di Hausdorff, allora il grafico di $f$ ($\Gamma_f=\{(x,f(x))\mid x\in X\}\subseteq X\times Y$) è un chiuso.
+\end{corollary}
+\begin{corollary}
+Siano $f,g:X\to Y$ continue e $Y$ di Hausdorff, allora $\{x\in X\mid f(x)=g(x)\}\subseteq X$ è un chiuso.
+\end{corollary}
+\begin{corollary}[Funzioni continue concordanti su un denso in $T_2$ coincidono]
+Siano $f,g:X\to Y$ continue e $Y$ di Hausdorff, allora se $f=g$ su un denso di $X$, $f=g$ come funzioni da $X\to Y$, infatti un chiuso che contiene un denso è tutto lo spazio.
+\end{corollary}
+\begin{corollary}
+Se $f:X\to X$ è continua e $X$ è $T_2$ allora $Fix(f)$ è un chiuso di $X$.
+\end{corollary}
+
+\begin{theorem}[Unicità del limite per Hausdorff]\label{LimiteUnicoSeHausdorff}
+Se $X$ è $T_2$, $x_n$ è una successione a valori in $X$ e $x_n\to x$, $x_n\to y$ con $x,y\in X$, allora $x=y$.
+\end{theorem}
+\begin{proposition}[Primi assiomi di separazione sono stabili per sottospazi, prodotti e raffinamenti]
+Per $i=0,1,2$ vediamo che
+\begin{enumerate}[noitemsep]
+\item Sottospazi di spazi $T_i$ sono $T_i$
+\item Prodotti di spazi $T_i$ sono $T_i$
+\item Raffinamenti di topologie $T_i$ sono $T_i$.
+\end{enumerate}
+\end{proposition}
+\noindent Le proprietà sopra ci informano che $T_0,\ T_1$ e $T_2$ sono in un certo concetti di separazione fondamentali e stabili. Questi assiomi ci permettono di distinguere punti, ma non dicono niente sugli insiemi, è quindi possibile per esempio non trovare aperti che separano punti da chiusi disgiunti. Seguono allora i seguenti
+
+\begin{definition}[Assiomi di separazione 3 e 4]
+Uno spazio topologico $X$ si dice
+\begin{itemize}[noitemsep]
+\item $T_3$ se $\forall x\in X$ e per ogni $C$ chiuso in $X$ tale che $x\notin C$ esistono $U,V$ aperti in $X$ tali che $x\in U,\ C\subseteq V$ e $U\cap V=\emptyset$.
+\item $T_4$ se per ogni $C,D$ chiusi in $X$ tali che $C\cap D=\emptyset$ esistono $U,V$ aperti in $X$ tali che $C\subseteq U,\ D\subseteq V$ e $U\cap V=\emptyset$.
+\end{itemize}
+\end{definition}
+\begin{remark}
+Se $X$ è $T_1$ allora $T_4\implies T_3\implies T_2$.
+\end{remark}
+\begin{remark}
+Se $X$ non è $T_1$ allora è possibile che $X$ sia $T_4$ o $T_3$ senza essere $T_2,\ T_1$ o $T_0$ (\ref{SpazioT4NonT0}).
+\end{remark}
+
+\begin{definition}[Regolari e Normali]
+Affermiamo che uno spazio è \textbf{regolare} se è $T_1$ e $T_3$. Affermiamo che uno spazio è \textbf{normale} se è $T_1$ e $T_4$.
+\end{definition}
+\begin{remark}
+Normale $\implies$ Regolare $\implies$ Hausdorff e le implicazioni sono strette (per esempio il piano di Sorgenfrey (\ref{PianoDiSorgenfrey}) è regolare ma non normale e l'esempio (\ref{EsempioT2NonRegolare}) mostra uno spazio Hausdorff non regolare).
+\end{remark}
+
+\noindent Mostriamo che gli spazi metrici sono normali. Per fare ciò abbiamo bisogno di un paio di lemmi:
+\begin{lemma}
+La distanza punto-insieme è $1-$Lipschitziana, in particolare è continua.
+\end{lemma}
+\begin{lemma}[La chiusura in un metrico sono i punti a distanza nulla]
+Se $X$ è uno spazio metrico e $A\subseteq X$ allora $d_A\ii(0)=\ol A$. In particolare se $C$ è un chiuso allora $C=d_C\ii(0)$.
+\end{lemma}
+
+\begin{proposition}[Spazi metrici sono normali]
+Se $(X,d)$ è uno spazio metrico allora $X$ con la topologia indotta da $d$ è normale.
+\end{proposition}
+\noindent Nella dimostrazione sopra abbiamo ricavato il seguente risultato nel caso di spazi metrici
+\begin{proposition}[Lemma di Urysohn]
+Se $X$ è $T_4$, dati $C,D$ chiusi disgiunti esiste $f:X\to[0,1]$ continua tale che
+\[f\ii(0)=D,\qquad f\ii(1)=C.\]
+\end{proposition}
+\vspace{0.5cm}
+
+\noindent Consideriamo ora alcune proprietà degli spazi $T_3$ e $T_4$
+%\noindent L'ereditarietà che avevamo di $T_0,T_1,T_2$ per sottospazi, prodotti e raffinamenti non vale per $T_3$ e $T_4$ in generale (il piano di Sorgenfrey \ref{PianoDiSorgenfrey} mostra in un colpo solo che il prodotto di $T_4$ non è $T_4$, il prodotto di normali non è normale e raffinamenti di $T_4$ non sono $T_4$). Abbiamo però le seguenti proprietà:
+\begin{proposition}[Ereditarietà per sottospazi di $T_3$ e $T_4$]
+Valgono le seguenti proprietà:
+\begin{enumerate}[noitemsep]
+\item Sottospazi di spazi $T_3$ sono $T_3$
+\item Sottospazi chiusi di spazi $T_4$ sono $T_4$
+\end{enumerate}
+\end{proposition}
+\begin{remark}
+Sottospazi non chiusi di uno spazio $T_4$ possono non essere $T_4$.
+\end{remark}
+
+\begin{proposition}[Caratterizzazione di $T_3$ con intorni]\label{CaratterizzazioneT3ConIntorni}
+Uno spazio topologico $X$ è $T_3$ se e solo se gli intorni chiusi dei punti formano sistemi fondamentali di intorni.
+\end{proposition}
+
+\begin{proposition}[Prodotti di $T_3$ sono $T_3$]
+Dato un insieme di indici $I$, se $X_i$ è uno spazio $T_3$ per ogni $i\in I$ allora
+\[\prod_{i\in I}X_i\text{ è uno spazio }T_3.\]
+\end{proposition}
+\begin{corollary}
+Il prodotto di spazi regolari è regolare.
+\end{corollary}
+
+\begin{remark}
+Prodotti di spazi $T_4$ non sono sempre $T_4$ (\ref{PianoDiSorgenfrey}). Lo stesso esempio mostra che prodotto di spazi normali non sempre è normale.
+\end{remark}
+
+\begin{remark}
+Raffinamenti di topologie $T_3$ o $T_4$ possono non essere $T_3$ o $T_4$ (un esempio con $T_4$ è il piano di Sorgenfrey (\ref{PianoDiSorgenfrey})). Anche se aggiungere nuovi aperti non influisce su come potevamo distinguere i punti e i chiusi già presenti, raffinare introduce nuovi chiusi nella topologia e non è detto che si presentino gli aperti necessari per separarli.
+\end{remark}
+
+
+
+\section{Ricoprimenti fondamentali}
+Cominciamo ora ad approfondire i ricoprimenti. Spesso vogliamo studiare proprietà di uno spazio ricostruendole a partire da proprietà locali e i ricoprimenti, specialmente i ricoprimenti aperti, sono uno dei modi più versatili di farlo. In questa sezione introduciamo i tipi di ricoprimenti più utili.
+\begin{definition}[Ricoprimento]
+Sia $X$ uno spazio topologico, un \textbf{ricoprimento} di $X$ è una famiglia $\{B_i\}_{i\in I}$ di sottoinsiemi di $X$ tale che \[X=\bigcup_{i\in I}B_i.\]
+Un ricoprimento è \textbf{aperto} (rispettivamente \textbf{chiuso}) se ogni $B_i$ è aperto (rispettivamente chiuso).
+\end{definition}
+\begin{definition}[Ricoprimento fondamentale]
+Un ricoprimento $\{B_i\}_{i\in I}$ di $X$ è \textbf{fondamentale} se $\forall A\subseteq X$, $A$ è aperto se e solo se $A\cap B_i$ è aperto in $B_i$ per ogni $i\in I$ (o equivalentemente $A$ è chiuso se e solo se $A\cap B_i$ è chiuso in $B_i$ per ogni $i\in I$).
+\end{definition}
+\begin{remark}
+Osserviamo che se $A$ è aperto/chiuso allora $A\cap B_i$ è aperto/chiuso in $B_i$ per definizione di topologia di sottospazio, quindi l'unica implicazione rilevante è l'altra.
+\end{remark}
+
+\begin{theorem}[I ricoprimenti aperti sono fondamentali]\label{RicoprimentiApertiSonoFondamentali}
+Ogni ricoprimento aperto è fondamentale.
+\end{theorem}
+
+\begin{remark}
+I ricoprimenti chiusi non sono sempre fondamentali (\ref{RicoprimentoChiusoNonFondamentale})
+\end{remark}
+
+\begin{theorem}[Incollamento delle funzioni]\label{IncollamentoDelleFunzioniRicoprimentoFondamentale}
+Sia $\{B_i\}_{i\in I}$ un ricoprimento fondamentale di $X$ e sia $f:X\to Y$ una funzione, allora
+\[f\text{ continua }\coimplies f\res {B_i}:B_i\to Y \text{ continua }\forall i\in I\]
+\end{theorem}
+
+\begin{remark}[Funzioni definite a tratti]
+Sia $X=A\cup B$ e definiamo $f:X\to Y$ come
+\[f(x)=\begin{cases}
+g(x) &se\ x\in A\\
+h(x) &se\ x\in B
+\end{cases},\quad \text{con }g:A\to Y,\ h:B\to Y.\]
+Se $X=A\sqcup B$ ci sono poche speranze che il ricoprimento sia fondamentale (se lo fosse vedremo che questo implica che lo spazio è sconnesso), quindi per garantire una buona definizione poniamo che $g\res{A\cap B}=h\res{A\cap B}$. Vediamo che in questo caso, $g,h$ continue e $\{A,B\}$ fondamentale ci permette di concludere che $f$ è continua.
+\end{remark}
+\begin{remark}
+Il metodo appena illustrato per definire funzioni continue definite a tratti è molto più efficiente e stabile rispetto al confrontare i limiti direzionali come si era abituati a fare dai corsi di analisi. In spazi topologici astratti quei limiti perdono quasi ogni significato (ricordiamo per esempio che il limite in spazi non $T_2$ può non essere unico (\ref{LimiteUnicoSeHausdorff})).
+\end{remark}
+\vspace{0.5cm}
+
+\noindent
+Usare solo aperti è un po' restrittivo, proviamo a costruire ricoprimenti fondamentali anche a partire da ricoprimenti chiusi. Vedremo che i ricoprimenti chiusi sono fondamentali se rispettano una particolare ipotesi di finitezza.
+
+\begin{definition}[Famiglia localmente finita]
+Sia $X$ uno spazio topologico e sia $\{B_i\}_{i\in I}$ una famiglia di suoi sottoinsiemi. Essa è \textbf{localmente finita} se $\forall x\in X$ esiste $U$ intorno di $x\in X$ tale che \[|\{i\in I\mid U\cap B_i\neq\emptyset\}|\in \N.\]
+\end{definition}
+
+\begin{lemma}[Chiusura e unione finita commutano]
+Sia $X$ uno spazio topologico e siano $C_1,\cdots, C_k$ sottoinsiemi di $X$, allora
+\[\ol{\bigcup_{i=1}^kC_i}=\bigcup_{i=1}^k\ol {C_i}.\]
+\end{lemma}
+\begin{remark}
+Osserviamo che $\bigcup_{j\in I}\ol{C_j}\subseteq \ol{\bigcup_{i\in I}C_i}$ vale per unioni arbitrarie.
+\end{remark}
+
+\begin{lemma}[Chiusura e unione localmente finita commutano]\label{ChiusuraEUnioneLocalmenteFinitaCommutano}
+Sia $\{C_i\}_{i\in I}$ una famiglia localmente finita di sottoinsiemi di $X$, allora
+\[\ol{\bigcup_{i\in I}C_i}=\bigcup_{i\in I}\ol {C_i}.\]
+\end{lemma}
+
+\begin{corollary}
+Un'unione localmente finita di chiusi è chiusa.
+\end{corollary}
+
+\begin{theorem}\label{RicoprimentoChiusoLocalmenteFinitoEFondamentale}
+Un ricoprimento chiuso localmente finito è fondamentale.
+\end{theorem}
+\begin{corollary}
+Un ricoprimento chiuso finito è fondamentale.
+\end{corollary}
+
+\section{Spazi connessi}
+
+\begin{definition}[Connessione]
+Uno spazio topologico è \textbf{connesso} se vale una delle seguenti condizioni equivalenti:
+\begin{enumerate}[noitemsep]
+\item $X$ non ammette partizione in aperti non banali, ovvero se $X=A\cup B,\ A\cap B=\emptyset$ con $A,B$ aperti allora $A=\emptyset$ o $B=\emptyset$.
+\item $X$ non ammette partizione in chiusi non banali.
+\item Se $A\subseteq X$ è sia aperto che chiuso allora $A=\emptyset$ o $A=X$.
+\end{enumerate}
+Uno spazio $X$ è \textbf{sconnesso} se non è connesso, ovvero ammette partizione aperta/chiusa non banale.
+\end{definition}
+\begin{remark}
+Chiaramente $1$ e $2$ sono equivalenti dato che $A$ e $B$ sono complementari. Inoltre $1$ e $3$ sono equivalenti in quanto se $A$ è sia aperto che chiuso, $X\bs A$ è sia chiuso che aperto.
+\end{remark}
+
+\begin{theorem}
+L'intervallo $[0,1]$ è connesso.
+\end{theorem}
+
+\noindent Mostreremo tra poco che le funzioni continue mandano spazi connessi in spazi connessi. Siamo quindi giustificati dall'intuizione visiva a dare la seguente definizione:
+\begin{definition}[Cammino]
+Sia $X$ uno spazio topologico. Un \textbf{cammino} in $X$ è una funzione continua $\gamma:[0,1]\to X$\footnote{Alcuni definiscono un cammino come una continua $\gamma:I\to X$ dove $I$ è un qualsiasi intervallo chiuso di $\R$}.
+\end{definition}
+
+\begin{definition}[Giunzione]
+Siano $\gamma_1,\gamma_2:[0,1]\to X$ due cammini tali che $\gamma_1(1)=\gamma_2(0)$. Definiamo la loro \textbf{giunzione} come la mappa
+\[\gamma:[0,1]\to X,\quad \gamma(t)=\begin{cases}
+\gamma_1(2t) &se\ t\in [0,1/2]\\
+\gamma_2(2t-1) &se\ t\in [1/2,1]
+\end{cases}.\]
+Di solito indichiamo la giunzione di $\gamma_1$ e $\gamma_2$ con $\gamma_1\ast \gamma_2$.
+\end{definition}
+\begin{remark}
+$\gamma_1\ast \gamma_2$ è un cammino, infatti $\gamma_1(2\cdot 1/2)=\gamma_1(1)=\gamma_2(0)=\gamma_2((2\cdot 1/2) -1)$, $\{[0,1/2],[1/2,1]\}$ è un ricoprimento fondamentale di $[0,1]$ e $\gamma_1(2t):[0,1/2]\to X,\ \gamma_2(2t-1):[1/2,1]\to X$ sono continue in quanto composizioni di continue.
+\end{remark}
+\begin{remark}
+Se non avessimo avuto i ricoprimenti fondamentali a disposizione, giustificare la continuità di $\gamma_1\ast \gamma_2$ in $1/2$ sarebbe stato quasi impossibile con i limiti $t\to 1/2^+,\ t\to 1/2^-$ in quanto $X$ potrebbe non essere $T_2$ (no unicità del limite (\ref{LimiteUnicoSeHausdorff})) o potrebbe non essere I-numerabile (continuità e continuità per successioni potrebbero non coincidere (\ref{ChiusiApertiContinuePerSuccessioni})).
+\end{remark}
+
+\begin{definition}[Connessione per archi]
+Uno spazio topologico $X$ è \textbf{connesso per archi} se $\forall x_0,x_1\in X$ esiste un cammino $\gamma:[0,1]\to X$ tale che $\gamma(0)=x_0$ e $\gamma(1)=x_1$.
+\end{definition}
+
+\begin{theorem}[Spazio connesso per archi è connesso]\label{ConnessoPerArchiImplicaConnesso}
+Se $X$ è connesso per archi allora $X$ è connesso
+\end{theorem}
+
+\begin{remark}
+La definizione di connessione per archi è subordinata al fatto che $[0,1]$ è connesso e in questa dimostrazione lo abbiamo usato. Un ragionamento del tipo ``$[0,1]$ è connesso perché è connesso per archi" sarebbe insensato.
+\end{remark}
+
+\begin{definition}[Insieme convesso]
+Un sottoinsieme $C$ di $\R^n$ è \textbf{convesso} se $\forall p,q\in C$, il segmento che li congiunge è tutto contenuto in $C$, ovvero
+\[\{tp+(1-t)q\mid t\in [0,1]\}\subseteq C\quad \forall p,q\in C.\]
+L'espressione $tp+(1-t)q$ con $t\in [0,1]$ è detta una \textbf{combinazione convessa} di $p$ e $q$.
+\end{definition}
+\begin{remark}
+Uno spazio convesso è connesso per archi. Basta prendere come cammino il segmento che congiunge i punti.
+\end{remark}
+
+\begin{definition}[Intervallo]
+Gli \textbf{intervalli} sono i convessi di $\R$.
+\end{definition}
+
+\begin{theorem}[Connessi su $\R$]\label{ConnessoConnessoPerArchiEConvessoCoincidonoSuR}
+Sia $C\subseteq \R$. Le seguenti affermazioni sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $C$ è connesso.
+\item $C$ è connesso per archi.
+\item $C$ è convesso.
+\end{enumerate}
+\end{theorem}
+
+\begin{proposition}[Se un denso è connesso, lo spazio è connesso]\label{SeDensoConnessoSpazioConnesso}
+Siano $Z,Y$ sottospazi di $X$ tali che $Z\subseteq Y\subseteq \ol Z$. Se $Z$ è connesso allora anche $Y$ è connesso.
+\end{proposition}
+\begin{corollary}
+Se $Z$ è connesso, $\ol Z$ è connesso.
+\end{corollary}
+
+\begin{proposition}[Continue preservano connessione]\label{ContinuePreservanoConnessione}
+Sia $f:X\to Y$ continua. Allora abbiamo che $f$ manda connessi in connessi e connessi per archi in connessi per archi.
+\end{proposition}
+
+\begin{remark}
+Uno spazio connesso non è necessariamente connesso per archi (\ref{ConnessoNonConnessoPerArchi}).
+\end{remark}
+
+\begin{theorem}[Prodotto finito di connessi è connesso]\label{ProdottoFinitoDiConnessiEConnesso}
+Se $X$ e $Y$ sono connessi allora $X\times Y$ è connesso.
+\end{theorem}
+
+\begin{theorem}[Prodotto finito di connessi per archi è connesso per archi]\label{ProdottoFinitoDiConnessiPerArchiEConnessoPerArchi}
+Se $X$ e $Y$ sono connessi per archi allora $X\times Y$ è connesso per archi.
+\end{theorem}
+
+
+\subsection{Componenti connesse}
+\begin{proposition}[Unione di connessi che si intersecano è connessa]\label{UnioneDiConnessiCheSiIntersecanoEConnessa}
+Dati $Y_i$ connessi tali che $\emptyset\neq \bigcap Y_i$, si ha che $Y=\bigcup_{i\in I}Y_i$ è connesso.
+\end{proposition}
+
+\begin{definition}[Componente connessa]
+Sia $x_0\in X$, definiamo la \textbf{componente connessa} di $x_0$ ($C(x_0)$) come il più grande sottoinsieme connesso di $X$ che contiene $x_0$, cioè
+\[C(x_0)=\bigcup_{x_0\in C,\ C\text{ conn.}}C.\]
+La buona definizione segue dal fatto che $\{x_0\}$ è connesso e dalla proposizione precedente.
+\end{definition}
+
+\begin{proposition}\label{LeComponentiConnesseSonoChiuse}
+Ogni componente connessa è chiusa
+\end{proposition}
+
+\begin{proposition}
+Le componenti connesse danno una partizione di $X$.
+\end{proposition}
+\begin{corollary}
+Se $X$ ha un numero finito di componenti connesse allora ognuna di queste è sia aperta che chiusa.
+\end{corollary}
+
+\begin{remark}
+In generale le componenti connesse non sono aperte. (\ref{PartiConnesseAperte})
+\end{remark}
+
+\begin{definition}[Componenti connesse per archi]
+Consideriamo la seguente relazione di equivalenza su $X$:
+\[x_0\sim x_1\coimplies \text{ esiste un cammino da $x_0$ a $x_1$}.\]
+La \textbf{componente connessa per archi} di $x_0$ (che denotiamo $A(x_0)$) è la classe di equivalenza di $x_0$ rispetto alla relazione.
+\end{definition}
+
+\begin{proposition}[Caratterizzazione delle componenti connesse per archi]\label{CaratterizzazioneDelleComponentiConnessePerArchi}
+$A(x_0)$ è il più grande connesso per archi che contiene $x_0$.
+\end{proposition}
+
+\begin{remark}
+Le componenti connesse per archi in generale non sono né aperte né chiuse. (\ref{PartiConnessePerArchiNeAperteNeChiuse})
+\end{remark}
+
+\begin{remark}
+Poiché connesso per archi implica connesso, si ha che $A(x_0)\subseteq C(x_0)$.
+\end{remark}
+
+\begin{definition}[Zero-esimo gruppo di omotopia]
+Dato $X$ spazio topologico definiamo lo \textbf{$0-$esimo gruppo di omotopia} come
+\[\pi_0(X)=\{\text{componenti connesse per archi di }X\}.\]
+\end{definition}
+
+\begin{remark}
+Se $f:X\to Y$ è continua, $f$ induce una funzione di insiemi tra $\pi_0(X)$ e $\pi_0(Y)$ (se $x$ e $y$ sono connessi da un cammino $\gamma$, $f(x)$ e $f(y)$ sono connessi dal cammino $f\circ \gamma$).
+\end{remark}
+\begin{remark}
+$\pi_0(id_X)=id_{\pi_0(X)}$
+e le mappe indotte preservano la composizione di funzioni continue.
+\end{remark}
+
+Possiamo riassumere quanto detto in
+\begin{fact}\label{Pi0EFuntoreDaTopASet}
+$\pi_0$ è un funtore covariante da $Top$ a $Set$
+\end{fact}
+\begin{remark}
+Se $f:X\to Y$ è un omeomorfismo allora $\pi_0(f):\pi_0(X)\to\pi_0(Y)$ è una mappa biunivoca.
+\end{remark}
+
+\subsubsection{Locale connessione per archi}
+\begin{definition}
+$X$ è \textbf{localmente connesso (connesso per archi)} se ogni punto di $X$ ha un sistema fondamentale di intorni connessi  (connessi per archi).
+\end{definition}
+\begin{remark}
+Esistono spazi connessi per archi che non sono localmente connessi per archi (\ref{PettineInfinito}).
+\end{remark}
+
+\begin{proposition}[Componenti connesse per archi in localmente connesso per archi sono aperte e chiuse]\label{ComponentiConnessePerArchiInLocalmenteConnessoPerArchiSonoAperteEChiuse}
+Se $X$ è localmente connesso per archi allora le componenti connesse per archi sono sia aperte che chiuse.
+\end{proposition}
+
+\begin{theorem}[Connesso localmente connesso per archi è connesso per archi]\label{ConnessoLocalmenteConnessoPerArchiEConnessoPerArchi}
+Se $X$ è connesso e  localmente connesso per archi allora è connesso per archi.
+\end{theorem}
+
+\begin{proposition}[Aperto in localmente connesso per archi è localmente connesso per archi]\label{ApertoInLocalmenteConnessoPerArchiEConnessoPerArchi}
+Se $X$ è localmente connesso per archi allora ogni suo aperto è localmente connesso per archi.
+\end{proposition}
+\begin{corollary}[Aperto connesso in localmente connesso per archi è connesso per archi]
+Se $X$ è localmente connesso per archi e $A\subseteq X$ è un aperto connesso allora $A$ è connesso per archi.
+\end{corollary}
+
+\begin{proposition}[Componenti connesse per archi di aperto in localmente connesso per archi sono aperte]\label{ComponentiConnessePerArchiDiApertoInLocalmenteConnessoPerArchiSonoAperte}
+Le componenti connesse per archi di un aperto in uno spazio localmente connesso per archi sono aperte.
+\end{proposition}
+\begin{remark}
+Se $X$ è localmente connesso per archi e $A\subseteq X$ è un aperto allora $A$ è connesso se e solo se è connesso per archi.
+\end{remark}
+
+\begin{remark}
+Se $X$ è $Y$ sono omeomorfi allora hanno lo stesso numero di componenti connesse/connesse per archi.
+\end{remark}
+
+
+\section{Compattezza}
+\begin{definition}[Spazio compatto]
+Uno spazio topologico $X$ si dice \textbf{compatto} se ogni ricoprimento aperto di $X$ ammette un sottoricoprimento finito.
+\end{definition}
+
+\begin{theorem}[Alexander debole]
+Se $\Bc$ è una base della topologia di $Z$ e da ogni ricoprimento di $Z$ costituito da aperti di base è possibile estrarre un sottoricoprimento finito allora $Z$ è compatto.
+\end{theorem}
+
+\begin{theorem}[Alexander]\label{TeoremaDiAlexander}
+Se $X$ è uno spazio topologico e $\Dc$ è una sua prebase si ha che se da ogni ricoprimento di aperti in $\Dc$ si può estrarre un sottoricoprimento finito allora $X$ è compatto.
+\end{theorem}
+
+\begin{remark}
+Se $X$ è finito allora è compatto dato che ammette un numero finito di aperti.
+\end{remark}
+
+\begin{remark}
+Insiemi non compatti esistono (\ref{RnNonECompatto}).
+\end{remark}
+
+\begin{theorem}[Continue mandano compatti in compatti]\label{ContinuePreservanoCompattezza}
+Sia $f:X\to Y$ continua. Se $X$ è compatto allora $f(X)$ è compatto.
+\end{theorem}
+\begin{corollary}
+Se $X$ e $Y$ sono omeomorfi allora $X$ è compatto se e solo se $Y$ è compatto.
+\end{corollary}
+
+\begin{definition}[Proprietà dell'intersezione finita]
+Una famiglia di sottoinsiemi $\{Y_i\}_{i\in I}$ di un insieme $X$ ha la \textbf{proprietà dell'intersezione finita} se per ogni $J\subseteq I$ finito si ha $\bigcap_{i\in J}Y_i\neq \emptyset$.
+\end{definition}
+
+\begin{remark}
+Esistono famiglie di sottoinsiemi che godono della proprietà dell'intersezione finita (\ref{EsempioIntersezioneFinita})
+\end{remark}
+
+\begin{proposition}[Formulazione di compattezza con i chiusi]
+Sia $X$ uno spazio topologico. Si ha che $X$ è compatto se e solo se per ogni famiglia $\{C_i\}_{i\in I}$ di chiusi che gode della proprietà dell'intersezione finita si ha che $\bigcap_{i\in I} C_i\neq \emptyset$.
+\end{proposition}
+\begin{corollary}\label{IntersezioneDiChiusiInscatolatiInCompatto}
+Se $X$ è compatto e $C_n$ è una successione di chiusi non vuoti tali che $C_{n+1}\subseteq C_n$ allora $\bigcap_{n\in \N}C_n\neq \emptyset$.
+\end{corollary}
+
+\begin{remark}
+Sia la compattezza dello spazio che la chiusura dei termini sono condizioni necessarie (\ref{EsempioIntersezioneFinita}).
+\end{remark}
+
+\subsection{Sottoinsiemi compatti}
+\begin{remark}
+$Y\subseteq X$ è compatto se e solo se per ogni $\{U_i\}_{i\in I}$ famiglia di aperti di $X$ tale che $Y\subseteq \bigcup_{i\in I}U_i$ esiste $J\subseteq I$ finito tale che $Y\subseteq \bigcup_{i\in J}U_i$.
+\end{remark}
+
+\begin{theorem}[Un chiuso di un compatto è compatto]\label{ChiusoInCompattoECompatto}
+Se $X$ è compatto e $C\subseteq X$ è chiuso allora $C$ è compatto.
+\end{theorem}
+
+\begin{remark}
+Sottoinsiemi compatti di uno spazio topologico non sono necessariamente chiusi (\ref{SottoinsiemeCompattoNonChiuso}), ma con il prossimo teorema vediamo che aggiungendo l'ipotesi \emph{Hausdorff} all'ipotesi di compattezza allora sottoinsiemi chiusi e sottoinsiemi compatti coincidono.
+\end{remark}
+
+\begin{theorem}[Compatti in Hausdorff sono chiusi]\label{CompattoInT2EChiuso}
+Se $X$ è $T_2$ e $Y\subseteq X$ è compatto allora $Y$ è chiuso.
+\end{theorem}
+\noindent I compatti Hausdorff sono spazi molto interessanti, per esempio:
+
+\begin{proposition}[Compatto Hausdorff è regolare]
+Se $X$ è compatto e $T_2$ allora è regolare.
+\end{proposition}
+
+In realtà vale la condizione più forte
+
+\begin{theorem}[Compatto Hausdorff è normale]\label{CompattoT2ENormale}
+Se $X$ è compatto e $T_2$ allora $X$ è normale.
+\end{theorem}
+
+\begin{remark}
+Per spazi compatti vale
+\[\text{Normale $\coimplies$ Regolare $\coimplies$ Hausdorff},\]
+mentre ricordiamo che per spazi generali le frecce vanno verso destra e sono implicazioni strette.
+\end{remark}
+
+\noindent L'assioma $T_2$ gioca bene anche con le mappe a dominio in un compatto. I seguenti risultati finiscono per essere tra i modi più comuni per costruire omeomorfismi a partire da spazi compatti:
+
+\begin{theorem}[Continue da compatto a $T_2$ sono chiuse]\label{ContinueDaCompattoInT2SonoChiuse}
+Se $X$ è compatto, $Y$ è $T_2$ e $f:X\to Y$ è continua allora $f$ è chiusa.
+\end{theorem}
+\begin{corollary}
+Se $X$ è compatto, $Y$ è $T_2$ e $f:X\to Y$ è continua e bigettiva allora $f$ è un omeomorfismo.
+\end{corollary}
+
+\begin{definition}[Funzione propria]
+Una funzione continua $f:X\to Y$ \`e \textbf{propria} se per ogni $K\subseteq Y$ compatto $f\ii(K)$ \`e compatto.
+\end{definition}
+
+\begin{proposition}[Proprie a immagine in loc.cpt $T_2$ sono chiuse]\label{ProprieInT2LocalmenteCompattoSonoChiuse}
+Sia $f:X\to Y$ continua propria e supponiamo che $Y$ sia localmente compatto e Hausdorff. Allora $f$ \`e una mappa chiusa.
+\end{proposition}
+
+\subsection{Compattezza per prodotti}
+\begin{theorem}[Tychonoff debole]
+$X$ e $Y$ sono compatti se e solo se $X\times Y$ è compatto.
+\end{theorem}
+
+\begin{theorem}[Tychonoff]\label{TeoremaDiTychonoff}
+Sia $I\neq \emptyset$ e sia $X_i$ uno spazio topologico per ogni $i\in I$, allora $\prod_{i\in I}X_i$ è compatto se e solo se $X_i$ è compatto per ogni $i\in I$.
+\end{theorem}
+\begin{corollary}
+Per ogni insieme $X$, lo spazio $\{f:X\to [0,1]\}=[0,1]^X$ è compatto con la topologia della convergenza puntuale.
+\end{corollary}
+
+\begin{theorem}[Wallace]\label{TeoremaWallace}
+Siano $X$ e $Y$ spazi topologici e siano $A\subseteq X,\ B\subseteq Y$ sottoinsiemi compatti. Se $N\subseteq X\times Y$ \`e un aperto tale che $A\times B\subseteq N$ allora esistono $U\subseteq X$ e $V\subseteq Y$ aperti tali che
+\[A\times B\subseteq U\times V\subseteq N.\]
+\end{theorem}
+
+
+\subsection{Compattificazione di Alexandroff}
+Visto quante proprietà hanno gli spazi compatti, ci domandiamo se esiste un modo per trasformare uno spazio dato in uno spazio compatto senza cambiarlo troppo. Questo tipo di metodo si chiama ``compattificazione" e in questa sezione studiamo in particolare il metodo di Alexandroff, il quale restituisce uno spazio compatto aggiungendo un solo punto.
+\begin{definition}[Compattificazione]
+Dato uno spazio topologico $X$, una \textbf{compattificazione} di $X$ è data da uno spazio $\hat X$ e una mappa continua $i:X\to \hat X$ tale che:
+\begin{enumerate}[noitemsep]
+\item $i:X\hookrightarrow \hat X$ è una immersione topologica
+\item $i(X)$ è denso in $\hat X$
+\item $\hat X$ è compatto.
+\end{enumerate}
+Se $|\hat X\bs i(X)|=1$ si dice $\hat X$ è una \textbf{compattificazione ad un punto} di $X$.
+\end{definition}
+\begin{remark}
+Intuitivamente, la definizione dice che $\hat X$ è una compattificazione di $X$ se ha un sottospazio omeomorfo a $X$, questo sottospazio è quasi tutto $\hat X$ e $\hat X$ stesso è compatto.
+\end{remark}
+\noindent
+Definiamo un procedimento per trovare una compattificazione ad un punto:
+
+\begin{definition}[Compattificazione di Alexandroff]
+Dato uno spazio topologico $X$ consideriamo $\hat X=X\cup\{\infty\}$, dove $\infty$ è un generico elemento non contenuto in $X$. L'insieme $\hat X$ dotato della seguente topologia è detto la \textbf{compattificazione di Alexandroff} di $X$:\\
+$A\subseteq \hat X$ è aperto se
+\begin{itemize}[noitemsep]
+\item $\infty\notin A$ e  $A$ aperto in $X$, oppure
+\item $\infty \in A$ e $X\bs A$ è chiuso \emph{compatto} di $X$.
+\end{itemize}
+\end{definition}
+\begin{theorem}[La compattificazione di Alexandroff \`e una compattificazione]
+La compattificazione di Alexandroff di uno spazio non compatto è una compattificazione ad un punto.
+\end{theorem}
+\begin{remark}
+Se $X$ è uno spazio compatto e provassimo a costruirne la compattificazione di Alexandroff vedremmo che continua a valere tutto eccetto la condizione ``$X$ denso in $\hat X$", infatti in tal caso $\{\infty\}$ sarebbe un valido aperto di $\hat X$ e quindi $\infty\notin\ol X$ per la caratterizzazione (\ref{CaratterizzazioneChiusura}).
+\end{remark}
+
+\begin{theorem}[Unicità della compattificazione di Alexandroff]\label{UnicitaCompattificazioneAlexandroff}
+Se $Y$ è uno spazio compatto $T_2$ e $P\in Y$ è tale che $Y\bs\{P\}$ non è compatto allora $Y$ è omeomorfo alla compattificazione di Alexandroff di $Y\bs\{P\}$.
+\end{theorem}
+
+\subsubsection{Proiezione stereografica}
+Sappiamo che $\R^n$ non è compatto (\ref{RnNonECompatto}), possiamo quindi provare a studiarne la compattificazione di Alexandroff. Sarà il caso che una particolare mappa, detta ``proiezione stereografica" ci permetterà di vedere che la compattificazione è $S^n$.
+\begin{definition}[Proiezione stereografica]
+Data una dimensione $n$, la \textbf{proiezione stereografica} è la mappa $\pi:S^n\bs\{N\}\to\R^n$ che associa ad ogni punto $P$ della sfera (escluso appunto $N$ in polo nord) il punto di intersezione tra la retta passante per $N$ e $P$ con l'iperpiano $\R^n\times \{0\}$ identificato con $\R^n$.\\
+Esplicitamente si ha che se $P=(x_1,\cdots,x_n,x_{n+1})=(x,x_{n+1})$ allora il punto corrisponde alla soluzione di
+\[t(x,x_{n+1})+(1-t)(0,1)=(\pi(P),0)\implies t=\frac1{(1-x_{n+1})}\]
+cioè
+\[\pi(x_1,\cdots,x_{n+1})=\pa{\frac{x_1}{1-x_{n+1}},\cdots, \frac{x_n}{1-x_{n+1}}}.\]
+\end{definition}
+\begin{remark}
+La proiezione stereografica è continua.
+\end{remark}
+
+\begin{theorem}
+La proiezione stereografica è un omeomorfismo tra $S^n\bs\{N\}$ e $\R^n$.
+\end{theorem}
+\begin{corollary}
+Per ogni $P\in S^{n}$, $S^n\bs\{P\}\cong \R^n$.
+\end{corollary}
+
+\begin{remark}
+Sappiamo che $\R^n$ non è compatto, ma $S^n$ è compatto e per quanto appena detto aggiungere un punto ci porta da $\R^n$ a $S^n$, quindi $S^n$ è la compattificazione di Alexandroff di $\R^n$ (teorema \ref{UnicitaCompattificazioneAlexandroff}) dove l'immersione topologica può essere data dall'inversa della proiezione stereografica.
+\end{remark}
+
+\begin{remark}[Sfera di Riemann]
+Osserviamo che topologicamente $\C$ è una copia di $\R^2$, quindi facendo questo stesso ragionamento su $\R^2$ e vedendolo come $\C$ troviamo una compattificazione dei complessi. Questa è la famosa \textbf{sfera di Riemann}.
+\end{remark}
+
+
+
+
+\subsection{Compattezza in spazi metrici}
+Date le belle proprietà dei compatti e le belle proprietà degli spazi metrici, unire i due concetti non può che restituire una ricca teoria (per esempio vedremo che in spazzi metrici compattezza, compattezza per successione e totale limitatezza unita a completezza sono concetti equivalenti (\ref{CaratterizzazioneCompattiInMetrico})). L'approfondimento di questo tema è dominio dell'analisi ma in questa sede riportiamo i principali risultati e un breve studio sugli spazi completi e $\R^n$.
+
+\subsubsection{Compattezza e assiomi di numerabilità}
+Sappiamo che gli spazi metrici sono I-numerabili (\ref{MetricoEINumerabile}) e gli spazi metrici separabili sono II-numerabili (\ref{IINumerabileESeparabileEInMetricoCoincidono}). Studiamo dunque come si comportano le nozioni di compattezza con gli assiomi di numerabilità e le successioni.
+\begin{definition}[Compattezza sequenziale]
+Uno spazio topologico $X$ è \textbf{sequenzialmente compatto} o \textbf{compatto per successioni} se ogni successione a valori in $X$ ammette una sottosuccessione convergente.
+\end{definition}
+
+\begin{remark}
+In generale compattezza e compattezza per successioni sono nozioni completamente distinte (esempi (\ref{CompattoNonCompattoPerSuccessioni}) e (\ref{CompattoPerSuccessioniNonCompatto})).
+\end{remark}
+
+\begin{definition}[Spazio Lindel\"of]
+Uno spazio $X$ si dice di \textbf{Lindel\"of} se ogni ricoprimento aperto ammette un sottoricoprimento al più numerabile.
+\end{definition}
+\begin{remark}
+Essere Lindel\"of è una condizione simile e più debole della compattezza.
+\end{remark}
+
+\begin{proposition}[I-numerabile compatto è sequenzialmente compatto]\label{INumerabileCompattoESequenzialmenteCompatto}
+Se $X$ è I-numerabile ed è compatto allora è sequenzialmente compatto.
+\end{proposition}
+\begin{fact}
+Il viceversa non è vero.
+\end{fact}
+
+\begin{proposition}[II-numerabile implica Lindel\"of]\label{IINumerabileImplicaLindelof}
+Se uno spazio $X$ è II-numerabile allora è Lindel\"of.
+\end{proposition}
+
+\begin{proposition}[Compatto e sequenzialmente compatto coincidono in II-numerabile]\label{CompattoESequenzialmenteCompattoCoincidonoInIINumerabile}
+Se $X$ è II-numerabile allora $X$ è compatto se e solo se $X$ è sequenzialmente compatto.
+\end{proposition}
+
+Possiamo riassumere quanto detto nella seguente
+\begin{proposition}[Compattezza e Numerabilità]\label{CompattezzaEAssiomiDiNumerabilita}
+In generale compatto e sequenzialmente compatto sono concetti distinti.\\
+Se lo spazio è I-numerabile allora compatto implica sequenzialmente compatto.\\
+Se lo spazio è II-numerabile allora compatto e sequenzialmente compatto coincidono.
+\end{proposition}
+
+\subsubsection{Limitatezza e Completezza}
+\begin{proposition}[Compatti in metrico sono limitati]\label{CompattoInMetricoELimitato}
+Se $(X,d)$ è metrico allora visto con la topologia indotta si ha che se $X$ è compatto allora $d$ è limitata.
+\end{proposition}
+\begin{remark}
+Non vale il viceversa, infatti come sappiamo ogni topologia indotta da una metrica si può esprimere come indotta da una metrica limitata (\ref{OgniMetricoETopologicamenteEquivalenteALimitato}).
+\end{remark}
+
+\begin{definition}[Successione di Cauchy]
+Una successione a valori in uno spazio metrico $X$ è \textbf{di Cauchy} se per ogni $\e>0$ esiste $n\in \N$ tale che $d(x_n,x_m)<\e$ per ogni $n,m>N$.
+\end{definition}
+\begin{remark}
+Le successioni convergenti sono di Cauchy (si vede applicando la disuguaglianza triangolare a $x_n,\ x_m$ e il limite).
+\end{remark}
+\begin{definition}[Spazio completo]
+Uno spazio metrico si dice \textbf{completo} se ogni successione di Cauchy converge.
+\end{definition}
+\begin{proposition}[Cauchy con sottosuccessione convergente è convergente]\label{CauchyConSottosuccessioneConvergenteEConvergente}
+Se da una successione di Cauchy possiamo estrarre una sottosuccessione convergente allora la successione di partenza converge allo stesso limite.
+\end{proposition}
+\begin{corollary}[Metrico compatto per successioni è completo]\label{MetricoSequenzialmenteCompattoECompleto}
+Se uno spazio metrico è sequenzialmente compatto allora è completo.
+\end{corollary}
+\begin{remark}
+Uno spazio completo non è necessariamente sequenzialmente compatto (per esempio $\R^n$).
+\end{remark}
+
+\begin{remark}
+Uno spazio (metrico) limitato e completo può comunque non essere compatto (\ref{LimiatoCompletoNonCompatto}).
+\end{remark}
+
+
+Cerchiamo di modificare leggermente la definizione di limitatezza in modo che, unita con la condizione di completezza, garantisca compattezza.
+
+\begin{definition}[Spazio totalmente limitato]
+Uno spazio metrico $X$ è \textbf{totalmente limitato} se per ogni $\e>0$ esiste un ricoprimento finito di $X$ costituito da palle aperte di raggio $\e$.
+\end{definition}
+
+\begin{proposition}[Totalmente limitato implica limitato]\label{TotalmenteLimitatoImplicaLimitato}
+Se $X$ è totalmente limitato allora è limitato.
+\end{proposition}
+\begin{remark}
+Non vale il viceversa.
+\end{remark}
+
+\begin{proposition}[Totalmente limitato implica II-numerabile]\label{TotalmenteLimitatoImplicaIINumerabile}
+Se $X$ è totalmente limitato allora è II-numerabile.
+\end{proposition}
+
+\begin{theorem}[Caratterizzazione di compattezza per metrici]\label{CaratterizzazioneCompattiInMetrico}
+Se $X$ è uno spazio metrico allora i seguenti sono fatti equivalenti:
+\begin{enumerate}[noitemsep]
+\item $X$ è compatto.
+\item $X$ è sequenzialmente compatto.
+\item $X$ è completo e totalmente limitato.
+\end{enumerate}
+\end{theorem}
+
+% \noindent
+% Possiamo riassumere le implicazioni che abbiamo usato in questa sezione con il seguente diagramma:
+
+% \begin{scalebox}{0.8}{ % 0.8 is the scaling factor, adjust as needed
+% \begin{tikzcd}
+% 	&& {\begin{matrix}\text{succ. ammette}\\\text{sottosucc. di Cauchy}\end{matrix}} \\
+% 	{\text{Compatto}} & {\text{Compatto per successioni}} & {\text{Completo}} \\
+% 	&& {\text{Totalmente limitato}} \\
+% 	& {\text{II-num.}}
+% 	\arrow[from=2-2, to=2-3]
+% 	\arrow[from=2-2, to=3-3]
+% 	\arrow["{\text{I-num.}}", curve={height=-18pt}, from=2-1, to=2-2]
+% 	\arrow[""{name=0, anchor=center, inner sep=0}, "{\text{Lindel\"of}}", curve={height=-18pt}, from=2-2, to=2-1]
+% 	\arrow[shift right=5, curve={height=24pt}, from=3-3, to=1-3]
+% 	\arrow[""{name=1, anchor=center, inner sep=0}, from=1-3, to=2-2]
+% 	\arrow[from=3-3, to=4-2]
+% 	\arrow["{+}"{description}, draw=none, from=2-3, to=3-3]
+% 	\arrow[shorten >=3pt, from=2-3, to=1]
+% 	\arrow[shorten >=11pt, from=4-2, to=0]
+% \end{tikzcd}
+% \end{scalebox}
+
+\subsubsection{Numero di Lebesgue e Uniforme continuità}
+\begin{definition}[Numero di Lebesgue]
+Dato $X$ spazio metrico e $\Omega$ un suo ricoprimento si dice che $\Omega$ \textbf{ammette numero di Lebesgue} $\e>0$ se per ogni $x\in X$ esiste $U\in\Omega$ tale che $B(x,\e)\subseteq U$.
+\end{definition}
+
+\begin{remark}
+Non tutti i ricoprimenti ammettono numero di Lebesgue (\ref{RicoprimentoSenzaNumeroDiLebesgue})
+\end{remark}
+
+
+\begin{theorem}[Ogni ricoprimento aperto in compatto ammette numero di Lebesgue]\label{InCompattoOgniRicoprimentoAmmetteNumeroDiLebesgue}
+Se $X$ è uno spazio metrico compatto allora ogni ricoprimento aperto ammette un numero di Lebesgue.
+\end{theorem}
+
+\begin{definition}[Funzione uniformemente continua]
+Una funzione $f:X\to Y$ è \textbf{uniformemente continua} se per ogni $\e>0$ esiste $\delta>0$ tale che \[d(x,y)<\delta\implies d(f(x),f(y))<\e.\]
+\end{definition}
+\begin{remark}
+Le funzioni uniformemente continue sono continue.
+\end{remark}
+\begin{remark}
+Non tutte le funzioni continue sono uniformemente continue (\ref{ContinuaNonUniformementeContinua})
+\end{remark}
+
+\begin{remark}
+Le funzioni Lipschitziane sono uniformemente continue.
+\end{remark}
+
+\begin{theorem}[Heine-Cantor]\label{TeoremaHeineCantor}
+Siano $X,Y$ spazi metrici con $X$ compatto. Se $f:X\to Y$ è continua allora è uniformemente continua.
+\end{theorem}
+
+\begin{remark}
+Una funzione uniformemente continua porta successioni di Cauchy in successioni di Cauchy.
+\end{remark}
+\vspace{0.5cm}
+
+\noindent Concludiamo studiando la seguente domanda (argomento trattato in anni accademici precedenti al 22/23):\\
+siano $X,Y$ spazi metrici e siano $A\subseteq X$ e $f:A\to Y$ continua. Quando è possibile estendere $f$ a $f:\ol A\to Y$ in modo continuo?
+
+\begin{remark}
+Non è sempre possibile (\ref{ContinuaNonEstendibileAllaChiusura}).
+\end{remark}
+
+\begin{theorem}[Estensione di uniformemente continua alla chiusura del dominio]\label{UniformementeContinuaSiEstendeAllaChiusuraDelDominio}
+Siano $X,Y$ metrici con $Y$ completo e $A\subseteq X$. Se $f:A\to Y$ è uniformemente continua allora $f$ si estende in modo unico a $\ol f:\ol A\to Y$ continua.
+\end{theorem}
+
+
+\subsubsection{Compattezza in $\R^n$}
+Vediamo ora come si comportano gli insiemi compatti sullo spazio metrico più naturale per la nostra intuizione spaziale, $\R^n$.
+\begin{theorem}\label{IntervalloChiusoECompatto}
+L'intervallo $[0,1]$ è compatto.
+\end{theorem}
+
+\begin{application}[Compattezza degli intervalli]
+$[a,b]$ è compatto mentre $(a,b),\ [a,b)$ e $(a,b]$ non sono compatti.
+\end{application}
+
+\begin{theorem}[Heine-Borel]\label{TeoremaHeineBorel}
+Se $Y\subseteq \R^n$ allora $Y$ è compatto se e solo se $Y$ è chiuso e limitato.
+\end{theorem}
+\begin{application}\label{RnECompleto}
+$\R^n$ è completo.
+\end{application}
+
+\begin{theorem}[Weierstrass]\label{TeoremaWeierstrass}
+Se $X$ è compatto e $f:X\to \R$ è continua allora $f$ ammette massimo e minimo.
+\end{theorem}
+
+\begin{theorem}[Equivalenza delle norme su $\R^n$]\label{EquivalenzaNormeRn}
+Tutte le norme su uno spazio vettoriale su $\R$ di dimensione finita inducono la stessa topologia.
+\end{theorem}
+\begin{remark}
+Potevamo evitare di usare il fatto che le norme $1$ e $2$ sono equivalenti ragionando con le sfere rispetto alla norma $1$.
+\end{remark}
+
+
+\section{Topologia Quoziente}
+
+\noindent Definiamo una topologia sui quozienti di spazi topologici
+
+\begin{definition}[Spazio quoziente]
+Sia $X$ uno spazio topologico e sia $\sim$ una relazione di equivalenza su $X$. Uno \textbf{spazio quoziente} $Y$ di $X$ rispetto alla relazione $\sim$ \`e uno spazio topologico tale che esiste una mappa continua $f:X\to Y$ che rispetta $\sim$ ($x_1\sim x_2\implies f(x_1)=f(x_2)$) e tale che per ogni $Z$ spazio topologico dotato di mappa continua $g:X\to Z$ che rispetta $\sim$ esiste un'unica mappa $h:Y\to Z$ continua che fa commutare il diagramma
+\[\begin{tikzcd}
+	X & Y \\
+	Z
+	\arrow["g"', from=1-1, to=2-1]
+	\arrow["f", from=1-1, to=1-2]
+	\arrow["h", from=1-2, to=2-1]
+\end{tikzcd}\]
+\end{definition}
+\begin{remark}
+$f$ è necessariamente surgettiva, altrimenti $h$ non potrebbe essere unica.
+\end{remark}
+
+\begin{proposition}[Esistenza e unicit\`a dello spazio quoziente]\label{EsistenzaUnicitaSpazioQuoziente}
+Sia $X$ uno spazio topologico e sia $\sim$ una relazione di equivalenza su $X$, allora esiste uno spazio quoziente unico a meno di omeomorfismo canonico.
+\end{proposition}
+
+\noindent Riportiamo nuovamente la definizione del modello di spazio quoziente che abbiamo trovato:
+
+\begin{definition}[Topologia quoziente]
+Sia $X$ uno spazio topologico e sia $\sim$ una relazione di equivalenza su $X$. Se $\quot X\sim$ è l'insieme quoziente e $\pi:X\to \quot X\sim$ è la proiezione al quoziente allora la \textbf{topologia quoziente} su $\quot X\sim$ è data come segue:
+\[A\subseteq \quot X\sim\text{ è aperto }\coimplies \ \pi\ii(A)\text{ è aperto in }X.\]
+\end{definition}
+
+\begin{theorem}[Caratterizzazione della topologia quoziente]\label{CaratterizzazioneTopologiaQuoziente}
+La topologia quoziente su $\quot X\sim$ è la più fine che rende $\pi:X\to\quot X\sim$ continua.
+\end{theorem}
+
+
+
+
+
+\subsection{Passaggio a quoziente e Identificazioni}
+\begin{definition}[Funzioni ottenute per passaggio a quoziente]
+Se $f:X\to Y$ è una funzione continua e $x_1\sim x_2\implies f(x_1)=f(x_2)$ allora è ben definita
+\[\ol f:\funcDef{\quot X\sim}{Y}{[x]}{f(x)},\]
+la quale è continua per quanto detto sopra. Si dice che  $\ol f$ è stata ottenuta \textbf{per passaggio al quoziente} di $f$.
+\end{definition}
+
+\begin{proposition}\label{MappeIndotteAlQuozienteIniettiveSurgettive}
+Se $\ol f$ è ottenuta per passaggio al quoziente come sopra si ha che
+\begin{itemize}[noitemsep]
+\item $\ol f$ è iniettiva se e solo se $f(x_1)=f(x_2)\coimplies x_1\sim x_2$
+\item $\ol f$ è surgettiva se e solo se $f$ è surgettiva.
+\end{itemize}
+\end{proposition}
+\begin{remark}
+Se $f$ è surgettiva e $x_1\sim x_2\coimplies f(x_1)=f(x_2)$ allora $\ol f$ è una bigezione continua.
+\end{remark}
+\noindent In generale non esistono criteri semplici per verificare quando $\ol f$ è un omeomorfismo. Definiamo allora un tipo di funzione che induce un omeomorfismo se come relazione imponiamo $x_1\sim x_2\coimplies f(x_1)=f(x_2)$:
+
+\begin{definition}[Identificazione]
+Una funzione $f:X\to Y$ continua è detta \textbf{identificazione} se valgono le seguenti condizioni:
+\begin{enumerate}[noitemsep]
+\item $f$ è surgettiva
+\item $A\subseteq Y$ è aperto se e solo se $f\ii(A)$ è aperto in $X$ \\(equivalentemente $C$ chiuso in $Y$ se e solo se $f\ii(C)$ chiuso in $X$).
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Identificazione induce omeomorfismo per quoziente]\label{IdentificazioniInduconoOmeomorfismiSulQuoziente}
+Siano $f:X\to Y$ una identificazione e $\sim $ una relazione di equivalenza su $X$ data da $x_1\sim x_2\coimplies f(x_1)=f(x_2)$. Allora la mappa $\ol f:\quot X\sim \to Y$ ottenuta da $f$ passando al quoziente è un omeomorfismo
+\end{theorem}
+\begin{remark}
+In realtà $\ol f$ definita come sopra è un omeomorfismo se e solo se $f$ \`e una identificazione.
+\end{remark}
+
+\begin{proposition}[Criterio sufficiente per definire identificazioni]\label{CriterioSufficientePerIdentificazioni}
+Sia $f:X\to Y$ continua e surgettiva. Si ha che se $f$ è aperta o chiusa allora è una identificazione.
+\end{proposition}
+\begin{remark}
+Esistono identificazioni che non sono né aperte né chiuse (\ref{IdentificazioneNeApertaNeChiusa})
+\end{remark}
+
+
+\subsection{Insiemi saturi}
+\begin{definition}[Insieme saturo]
+Data una funzione $f:X\to Y$, un insieme $A\subseteq X$ si dice \textbf{$f-$saturo} (o \textbf{saturo} se $f$ è chiara dal contesto
+) se
+\[f\ii(f(A))=A,\]
+cioè se $x\in A$ e $f(x')=f(x)$ allora $x'\in A$.
+\end{definition}
+\begin{proposition}[Gli $f-$saturi sono le preimmagini tramite $f$]\label{CaratterizzazioneSaturi}
+Data una funzione $f:X\to Y$ si ha che
+\[A\subseteq X\text{ è saturo}\coimplies \exists B\subseteq Y\ t.c.\ A=f\ii(B)\]
+\end{proposition}
+
+\begin{remark}
+Se $\pi:X\to \quot X\sim$ è la proiezione allora gli insiemi $\pi-$saturi di $X$ sono le unioni di classi di equivalenza.
+\end{remark}
+\begin{proposition}[Caratterizzazione di aperti e chiusi saturi]\label{CaratterizzazioneDiApertiEChiusiSaturi}
+Gli aperti / chiusi saturi sono identificati dalle seguenti proprietà:
+\begin{enumerate}[noitemsep]
+\item $A\subseteq \quot X\sim$ è aperto se e solo se $A=\pi(B)$ con $B$ aperto saturo di $X$.
+\item $C\subseteq \quot X\sim$ è chiuso se e solo se $C=\pi(D)$ con $D$ chiuso saturo di $X$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+In generale abbiamo la seguente corrispondenza biunivoca:
+\[\{\text{aperti di }\quot X\sim\}\overset{\pi}{\longleftrightarrow}\{\text{aperti saturi di }X\}\]
+\end{remark}
+
+\begin{remark}
+Dato che $\pi:X\to \quot X\sim$ è continua e surgettiva si ha che quozienti di compatti sono compatti e quozienti di connessi sono connessi.
+\end{remark}
+
+\subsection{Collassamento, Unione disgiunta e Bouquet}
+\begin{definition}[Collassamento]
+Sia $X$ uno spazio topologico e sia $A\subseteq X$. Definiamo il \textbf{collassamento di $X$ su $A$} come lo spazio quoziente $\quot X\sim$ ottenuto definendo la seguente relazione di equivalenza:
+\[x\sim y\coimplies x=y\text{ oppure }x,y\in A.\]
+Come notazione scriviamo $\quot X\sim=\quot XA$. Si dice che $\quot XA$ è ottenuto da $X$ \textbf{collassando $A$ ad un punto}.
+\end{definition}
+
+\begin{application}
+Detti $D^n=\{P\in \R^n\mid |P|\leq 1\}$ e $S^n=\{P\in\R^{n+1}\mid |P|=1\}$ si ha che
+\[\quot{D^n}{S^{n-1}}\cong S^n.\]
+\end{application}
+\vspace{0.5cm}
+
+\noindent Vediamo ora come possiamo ``attaccare" due spazi topologici tra loro. L'idea \`e considerarli come un unico spazio topologico formato dai due separati e poi imporre una relazione che collassa un insieme di due punti, uno per spazio.
+
+\begin{definition}[Unione disgiunta]
+Siano $X$ e $Y$ due spazi topologici. Su $X\sqcup Y$ imponiamo la seguente topologia:
+\[A\subseteq X\sqcup Y\text{ aperto}\coimplies A\cap X\text{ aperto e }A\cap Y\text{ aperto}.\]
+\end{definition}
+\begin{remark}
+$X$ e $Y$ sono aperti in $X\sqcup Y$, quindi $X\sqcup Y$ \`e sconnesso.
+\end{remark}
+
+\begin{definition}[Bouquet]
+Siano $X$ e $Y$ spazi topologici e fissiamo $x_0\in X$ e $y_0\in Y$. Il \textbf{bouquet} o \textbf{wedge}\footnote{Il simbolo usato per wedge dai professori \`e ``$\vee$", che in \LaTeX~ si scrive con \texttt{\textbackslash vee}, non \texttt{\textbackslash wedge} come uno potrebbe sperare.} di $(X,x_0)$ e $(Y,y_0)$ \`e il quoziente
+\[(X,x_0)\vee (Y,y_0)=\quot{X\sqcup Y}{\{x_0,y_0\}}.\]
+\end{definition}
+\begin{remark}
+Cambiare i punti $x_0$ e $y_0$ pu\`o cambiare lo spazio bouquet che otteniamo. Ci\`o nonostante, se abbiamo fissato $x_0$ e $y_0$, $x_0$ e $y_0$ sono chiari da contesto oppure se $x_0$ e $y_0$ sono irrilevanti scriveremo
+\[X\vee Y.\]
+\end{remark}
+
+\begin{proposition}[I fattori si immergono nel bouquet]\label{FattoriSiImmergonoInBouquetWedge}
+Le mappe
+\[i:X\to X\vee Y,\qquad j:Y\to X\vee Y\]
+indotte dalle inclusioni di $X$ e $Y$ in $X\sqcup Y$ sono immersioni topologiche.
+\end{proposition}
+
+\begin{proposition}[$T_1$ passa al bouquet e immersioni sono chiuse]\label{T1PassaAlBouquetWedgeEImmersioniChiuse}
+Se $X$ e $Y$ sono $T_1$ allora anche $X\vee Y$ \`e $T_1$ e le mappe $i:X\to X\vee Y,\ j:Y\to X\vee Y$ sono chiuse.
+\end{proposition}
+
+\begin{proposition}[$T_2$ passa al bouquet]\label{T2PassaAlBouquetWedge}
+Se $X$ e $Y$ sono $T_2$, anche $X\vee Y$ \`e $T_2$.
+\end{proposition}
+
+\begin{proposition}[Bouquet \`e compatto se e solo se lo sono i fattori]\label{BouquetWedgeECompattoSeESoloSeFattoriCompatti}
+$X\vee Y$ \`e compatto se e solo se $X$ e $Y$ sono compatti.
+\end{proposition}
+
+\begin{proposition}[Bouquet \`e connesso se e solo se lo sono i fattori]\label{BouquetEConnessoSeESoloSeLoSonoIFattori}
+$X\vee Y$ \`e connesso se e solo se $X$ e $Y$ sono connessi.
+\end{proposition}
+
+
+
+
+\section{Quozienti per azioni di gruppi}
+Ricordiamo le seguenti definizioni
+\begin{definition}[Azione]
+Dato un gruppo $G$ e un insieme $X$, una \textbf{azione} di $G$ su $X$ \`e un omomorfismo $G\to S(X)$, dove $S(X)$ sono le permutazioni di $X$. Come notazione scriviamo \[G\acts X\] e indichiamo l'immagine di $x\in X$ tramite la permutazione data da $g\in G$ come \[g\cdot x=gx=g(x)=\ell_g(x).\]
+\end{definition}
+\begin{definition}[Orbita e stabilizzatore]
+Data una azione $G\acts X$ e fissato $x_0\in X$ definiamo l'\textbf{orbita} e lo \textbf{stabilizzatore} di $x_0$ rispettivamente come
+\begin{align*}
+&\orb_G(x_0)=G\cdot x_0=\{y\in X\mid \exists g\in G\ t.c.\ gx_0=y\}\\
+&\stab_G(x_0)=\{g\in G\mid gx_0=x_0\}.
+\end{align*}
+\end{definition}
+\begin{definition}
+Una azione $G\acts X$ si dice
+\begin{itemize}[noitemsep]
+\item \textbf{fedele} se $\ell_g=id\coimplies g=1_G$,
+\item \textbf{libera} se $\stab(x_0)=\{1_G\}$ per ogni $x_0\in X$,
+\item \textbf{transitiva} se per ogni $x,y\in X$ esiste $g\in G$ tale che $gx=y$, cio\`e $G\cdot x_0=X$ per ogni $x_0\in X$.
+\end{itemize}
+\end{definition}
+\begin{remark}
+Data una azione $G\acts X$, la relazione
+\[x\sim y\coimplies G\cdot x=G\cdot y\coimplies \exists g\in G\ t.c.\ gx=y\]
+\`e di equivalenza. Chiamiamo questa la \textbf{relazione indotta} dall'azione.
+\end{remark}
+\vspace{0.5cm}
+
+\noindent
+Le azioni che riguardano il corso saranno solo le
+\begin{definition}[Azione continua]
+Dato un gruppo $G$ e uno spazio topologico $X$, una azione $G\acts X$ \`e detta \textbf{continua} se le mappe
+\[\ell_g:\funcDef{X}{X}{x}{gx}\]
+sono continue per ogni $g\in G$.
+\end{definition}
+\begin{remark}
+Dato che $\ell_g\ii=\ell_{g\ii}$, si ha che in realt\`a le $\ell_g$ sono omeomorfismi di $X$ in s\'e.
+\end{remark}
+\noindent Da ora in poi assumeremo che tutte le azioni di un gruppo su uno spazio topologico siano continue.
+\begin{notation}
+Data una azione $G\acts X$ con $X$ spazio topologico poniamo
+\[\quot XG=\quot X\sim,\]
+dove $\sim$ \`e la relazione indotta dall'azione.
+\end{notation}
+\begin{remark}
+Pi\`u propriamente dovremmo scrivere $G\backslash X$ perch\'e stiamo considerando una azione sinistra.
+\end{remark}
+\begin{remark}
+Se $G\subseteq X$ (per esempio $X=\R$ e $G=\Z$) si presenta una ambiguit\`a rispetto a quale spazio intendiamo con
+\[\quot XG,\]
+pi\`u precisamente la relazione per la quale stiamo quozientando potrebbe essere quella indotta dall'azione di $G$ su $X$, ma anche ``$x=y$ oppure $x,y\in G$". Se non specifichiamo altrimenti o se non chiaro da contesto intenderemo il quoziente per azione.
+\end{remark}
+
+\begin{remark}[Caratterizzazione dei saturi per azione]\label{CaratterizzazioneSaturiPerAzione}
+Dato $A\subseteq X$ si ha che se $\pi:X\to\quot XG$ \`e la proiezione allora
+\[\pi\ii(\pi(A))=\bigcup_{g\in G}\{ga\mid a\in A\}=\bigcup_{g\in G}g\cdot A=G\cdot A.\]
+Segue che $A$ \`e saturo se e solo se \`e $G-$invariante (dato che le classi sono le orbite).
+\end{remark}
+
+\begin{proposition}[Proiezioni per quozienti per azione]\label{ProiezioniSonoApertePerQuozientePerAzioneEAncheChiuseGruppoFinito}
+Data una azione $G\acts X$, la proiezione $\pi:X\to\quot XG$ \`e una mappa aperta.
+Inoltre, se $G$ \`e finito, allora $\pi$ \`e anche una mappa chiusa.
+\end{proposition}
+\begin{remark}
+La proiezione non \`e sempre chiusa (\ref{ProiezioneQuozienteAzioneNonChiusa})
+\end{remark}
+
+\subsection{Assiomi di Separazione e Azioni}
+Osserviamo che se $X$ gode di assiomi di separazione, $\quot XG$ pu\`o perderli quasi senza restrizione (presentiamo due esempi di quozienti di $\R^n$ non $T_1$: (\ref{RQuozienteQ}) (\ref{Matrici2x2QuozienteSimilitudine})).\\
+Cerchiamo di capire quando $\quot XG$ \`e $T_2$.
+\begin{definition}[Azioni vaganti, propriamente discontinue e proprie]
+Data una azione $G\acts X$ con $X$ spazio topologico, affermiamo che questa \`e
+\begin{itemize}[noitemsep]
+\item \textbf{vagante} se per ogni $x\in X$ esiste $U$ intorno di $x$ tale che
+\[\{g\in G\mid gU\cap U\neq \emptyset\}\text{ \`e finito.}\]
+\item \textbf{propriamente discontinua} se per ogni $x\in X$ esiste $U$ intorno di $x$ tale che
+\[\{g\in G\mid gU\cap U\neq \emptyset\}=\{1_G\}.\]
+\item \textbf{propria} se per ogni compatto $K\subseteq X$ abbiamo che
+\[\{g\in G\mid gK\cap K\neq \emptyset\}\text{ \`e finito.}\]
+\end{itemize}
+\end{definition}
+\begin{remark}
+Una azione propriamente discontinua \`e anche vagante.
+\end{remark}
+\begin{remark}
+Osserviamo che
+\[\stab_G(x)\subseteq \{g\in G\mid gU\cap U\neq \emptyset\},\]
+dunque in particolare:
+\begin{itemize}[noitemsep]
+\item Se una azione \`e vagante allora gli stabilizzatori sono finiti.
+\item Se una azione \`e propriamente discontinua allora \`e libera.
+\end{itemize}
+\end{remark}
+
+\begin{theorem}[Caratterizzazione di azioni propriamente discontinue su $T_2$]\label{SuT2AzionePropriamenteDiscontinuaSeESoloSeLiberaEVagante}
+Sia $X$ uno spazio $T_2$. Si ha che una azione $G\acts X$ \`e propriamente discontinua se e solo se \`e libera e vagante.
+\end{theorem}
+
+\begin{theorem}[Caratterizzazione azioni proprie su localmente compatti]\label{CaratterizzazioneAzionePropiasuLocalmenteCompatto}
+Sia $X$ uno spazio localmente compatto. Si ha che $G\acts X$ \`e una azione propria se e solo se per ogni $x,y\in X$ esistono intorni $U$ e $V$ di $x$ e $y$ rispettivamente tali che
+\[\{g\in G\mid gU\cap V\neq \emptyset\}\text{ \`e finito.}\]
+\end{theorem}
+
+\begin{remark}
+Nel teorema l'implicazione $\impliedby$ non usa la locale compattezza.
+\end{remark}
+
+\noindent Siamo pronti per dare un criterio che garantisce che un quoziente di azione sia $T_2$:
+\begin{theorem}[Criterio sufficiente per quoziente per azione $T_2$]\label{CriterioSufficientePerQuozientePerAzioneT2}
+Sia $X$ localmente compatto e $T_2$. Si ha che se $G\acts X$ \`e propria allora $\quot XG$ \`e $T_2$.
+\end{theorem}
+
+\begin{remark}
+L'unico motivo per cui abbiamo supposto localmente compatto e azione propria \`e per sfruttare la caratterizzazione data dal teorema (\ref{CaratterizzazioneAzionePropiasuLocalmenteCompatto}).
+\end{remark}
+
+\subsection{Domini fondamentali}
+Proviamo a trovare dei sottoinsiemi di uno spazio che si proietti a quoziente come lo spazio intero.
+
+\begin{definition}[Dominio fondamentale]
+Fissiamo una azione $G\acts X$. Affermiamo che $D\subseteq X$ \`e un \textbf{dominio fondamentale} di $X$ per l'azione se
+\begin{enumerate}[noitemsep]
+\item $D$ \`e chiuso
+\item $G\cdot D=\bigcup_{g\in G}gD=X$ ($\pi\res D$ \`e surgettiva)
+\item la famiglia $\{gD\}_{g\in G}$ \`e localmente finita
+\item Per ogni $g\in G\bs\{1_G\}$ abbiamo $g\rg D\cap \rg D=\emptyset$ ($\pi\res{\rg D}$ \`e iniettiva).
+\end{enumerate}
+\end{definition}
+\begin{remark}
+L'ultima propriet\`a viene inserita pi\`u che altro per ragioni storiche, nei teoremi successivi non viene usata molto.\\
+La terza propriet\`a \`e molto forte, infatti vedremo che non tutte le azioni ammettono dominio fondamentale.
+\end{remark}
+\begin{remark}
+In molti casi non solo si ha $D$ chiuso, ma $\ol{\rg D}=D$. Questo ci permette di pensare ai domini fondamentali come uno spazio la cui parte interna viene lasciata a s\'e e vengono effettuate delle identificazioni sul bordo.
+\end{remark}
+
+\begin{lemma}[Famiglie localmente finite incontrano compatti finite volte]\label{FamiglieLocalmenteFiniteIncontranoCompattiFiniteVolte}
+Se $\{A_i\}_{i\in I}$ \`e una famiglia localmente finita e $K$ \`e compatto allora
+\[\{i\in I\mid A_i\cap K\neq \emptyset\}\text{ \`e finito.}\]
+\end{lemma}
+
+\begin{lemma}[Azione con dominio fondamentale \`e propria]\label{AzioneConDominioFondamentaleEPropria}
+Se una azione ammette dominio fondamentale allora \`e propria.
+\end{lemma}
+
+
+\begin{theorem}[Localmente compatto con dominio fondamentale]\label{LocalmenteCompattoConDominioFondamentale}
+Sia $X$ localmente compatto e sia $D$ un dominio fondamentale per $G\acts X$. Valgono le seguenti:
+\begin{itemize}[noitemsep]
+\item se $X$ \`e $T_2$ allora $\quot XG$ \`e $T_2$
+\item $\displaystyle \quot XG\cong \quot D\sim$, dove $\sim$ \`e la relazione indotta da $G\acts X$ ristretta a $D$.
+\end{itemize}
+\end{theorem}
+\begin{remark}
+Non ha senso dire che la relazione su $D$ che abbiamo considerato \`e la relazione indotta da $G\acts D$, perch\'e in generale $G$ non agisce su $D$, in quanto \`e possibile che $gD\not\subseteq D$.
+\end{remark}
+
+\begin{remark}
+Trovare domini fondamentali compatti rende la vita pi\`u semplice, per esempio garantisce che il quoziente $\quot D\sim$ sia compatto, dunque una condizione sufficiente per trovare un omeomorfismo dal quoziente a un candidato spazio $Z$ \`e mostrare che la mappa \`e continua, bigettiva e che $Z$ \`e $T_2$ (vorremmo applicare (\ref{ContinueDaCompattoInT2SonoChiuse})).
+\end{remark}
+
+\section{Topologia dei Proiettivi}
+Ricordiamo che
+\[\Pj^n\K=\quot{\K^{n+1}\nz}\sim,\]
+che possiamo interpretare come quoziente per la seguente azione:
+\[\K^\times\acts \K^{n+1}\nz,\quad \la\cdot v=\la v.\]
+Cerchiamo allora di dotare $\Pj^n\K$ di una topologia quoziente a partire dalla topologia di $\K^{n+1}\nz$. Gli unici campi che considereremo in questo capitolo sono $\R$ e $\C$ dato che conosciamo bene $\R^n$ e possiamo interpretare topologicamente $\C^n$ come $\R^{2n}$.
+\subsection{Caso Reale}
+Osserviamo che l'azione in esame non \`e propria, per esempio perch\'e $1+\e$ \`e arbitrariamente vicino all'identit\`a del gruppo, quindi non posso sperare di separare le orbite. Questo ci leva ogni speranza di trovare un dominio fondamentale (\ref{AzioneConDominioFondamentaleEPropria}).
+
+Possiamo comunque cercare di restringere la nostra attenzione ad un opportuno sottoinsieme di $\R^{n+1}\nz$, che vedremo essere $S^n$.
+
+\begin{remark}
+$S^n$ contiene un rappresentante per ogni orbita dell'azione, infatti $v\sim \frac1{|v|}v\in S^n$.
+\end{remark}
+\begin{remark}
+La proiezione ristretta alla sfera non \`e iniettiva, ma non \`e lontana: \`e $2$ a $1$.
+\end{remark}
+\noindent Date queste propriet\`a della sfera rispetto alla relazione in esame sospettiamo quanto segue:
+
+\begin{theorem}[Proiettivi reali come identificazione antipodale di una sfera]\label{TopologiaProiettivoRealeDaSfera}
+Consideriamo l'azione di $\znz2$ su $S^n$ data da $0\cdot p=p,\ 1\cdot p=-p$. Si ha che
+\[\Pj^n\R\cong \quot{S^n}{\znz2}.\]
+\end{theorem}
+\begin{corollary}
+I proiettivi reali sono compatti, connessi per archi e Hausdorff.
+\end{corollary}
+
+\begin{theorem}[Proiettivi reali come identificazione sul bordo di disco]\label{TopologiaProiettivoRealeDaDisco}
+Poniamo su $D^n$ la relazione \[v\sim v'\coimplies v=v'\text{ oppure }|v|=|v'|=1\text{ e }v=-v'.\]
+Si ha che $\quot {D^n}\sim\cong \Pj^n\R$.
+\end{theorem}
+
+\begin{remark}
+Dal teorema (\ref{TopologiaProiettivoRealeDaDisco}) segue immediatamente che $\Pj^1\R\cong S^1$ (e NON nel modo che ci aspetteremmo pensando allo spazio delle direzioni di $\R^2$).\\
+Dalla seguente successione di trasformazioni possiamo vedere che $\Pj^2\R$ \`e omeomorfo ad un nastro di M\"obius sul cui bordo \`e incollato un disco:
+\begin{itemize}[noitemsep]
+\item Consideriamo il disco $D^2$ con la relazione del teorema (\ref{TopologiaProiettivoRealeDaDisco})
+\item Tagliamo un disco pi\`u piccolo in modo da ottenere un disco (questo) e una corona.
+\item Tagliamo la corona secondo quello che sarebbe stato un diametro del disco originale
+\item Raddrizziamo i due pezzi ricavati dalla corona in due rettangoli
+\item Identifichiamo i due rettangoli lungo il lato che proveniva dal bordo del disco originale
+\item Identifichiamo i lati del rettangolo ottenuto al passo precedente corrispondenti ai bordi creati quando abbiamo fatto il taglio lungo il diametro.
+\end{itemize}
+Avendo seguito questi passi dovremmo aver ottenuto un nastro di M\"obius (dal rettangolo) e un disco (quello tagliato da quello originale) che deve essere attaccato lungo il bordo del nastro di M\"obius. Vi chiedo sinceramente scusa perch\'e seguire questi passi anche con un disegno sotto non \`e semplicissimo, non oso immaginare a parole.
+\end{remark}
+
+\subsection{Caso Complesso}
+Osserviamo nuovamente che l'azione che determina $\Pj^n\C$ non \`e propria, ma anche in questo caso si ha che
+\[S^{2n+1}=\{v\in\C^{n+1}=\R^{2n+2}\mid |v|=1\}\]
+incontra tutte le classi di equivalenza per la relazione su $\C^{n+1}\nz$ (per trovare un rappresentante sulla sfera basta dividere ogni vettore per la propria norma).
+
+\begin{remark}
+Per quanto appena detto, la mappa $\pi:\C^{n+1}\nz\to\Pj^n\C$ ristretta a $S^{2n+2}$ \`e surgettiva (e continua per definizione di topologia quoziente). Osserviamo quindi che $\Pj^n\C$ \`e compatto e connesso per archi.
+\end{remark}
+
+\noindent
+Per studiare meglio i proiettivi osserviamo che grandi pezzi di $\Pj^n\K$ sono essenzialmente $\K^n$:
+\begin{proposition}[Le carte affini sono omeomorfismi]\label{CarteAffiniSonoOmeomorfismi}
+Se $\K$ \`e un campo dotato di una topologia (per quanto ci riguarda $\K=\R$ o $\K=\C$) allora le carte affini
+\[J_i:\K^n\to U_i\]
+sono omeomorfismi tra $\K^n$ e particolari aperti di $\Pj^n\K$.
+\end{proposition}
+
+\begin{proposition}
+$\Pj^n\C$ \`e Hausdorff con la topologia quoziente.
+\end{proposition}
+
+
+\begin{corollary}
+$\Pj^1\C\cong S^2$.
+\end{corollary}
+
+\subsection{Variet\`a topologiche}
+\begin{definition}[Variet\`a topologica]
+Una \textbf{variet\`a topologica} di dimensione $n$ \`e uno spazio topologico $X$ tale che
+\begin{itemize}[noitemsep]
+\item Per ogni $P\in X$ esiste un intorno aperto $U$ di $P$ omeomorfo ad un aperto di $\R^n$
+\item $X$ \`e $T_2$
+\item $X$ \`e II-numerabile.
+\end{itemize}
+\end{definition}
+\begin{remark}
+Se $X$ rispetta la prima propriet\`a si dice che $X$ \`e \textbf{localmente euclidea}. L'ultima condizione \`e omessa da alcuni autori.
+\end{remark}
+
+\begin{remark}
+I proiettivi sono variet\`a topologiche, $\Pj^n\R$ di dimensione $n$ e $\Pj^n\C$ di dimensione $2n$.
+\end{remark}
+
+\begin{proposition}
+Dato $X$ e dato $P\in X$ le seguenti condizioni su $U$ intorno aperto di $P$ sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $U$ omeomorfo ad un aperto di $\R^n$
+\item $U$ omeomorfo a $\R^n$
+\item $U$ omeomorfo a $B(0,\e)\subseteq \R^n$ per qualche $\e>0$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remark}
+Uno spazio localmente euclideo non \`e necessariamente $T_2$ (\ref{LocalmenteEuclideoNonT2})
+\end{remark}
+
+
+\end{multicols*}

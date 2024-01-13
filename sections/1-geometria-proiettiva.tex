@@ -1,0 +1,964 @@
+%--------------------------------------------------------------------
+\chapter{Geometria proiettiva}
+\setlength{\parindent}{2pt}
+
+\begin{multicols*}{2}
+    \section{Spazi proiettivi e nozioni introduttive}
+    \subsection{Spazio proiettivo}
+    Definiamo l'oggetto centrale dei nostri studi.
+    \begin{definition}[Spazio Proiettivo]
+    Dato $V$ spazio vettoriale su $\K$, definiamo il suo \textbf{spazio proiettivo associato} come
+    \[\PV=\quot{V\nz}{\sim},\]
+    dove $v\sim w\coimplies \exists \la\in\K\nz$ t.c. $w=\la v$.
+    \end{definition}
+    \noindent
+    Intuitivamente la relazione collassa tutti i vettori appartenenti alla stessa retta in un elemento. Possiamo quindi pensare allo spazio proiettivo come l'insieme delle rette o direzioni in $V$.
+
+    Troviamo in effetti la seguente bigezione naturale:
+    \begin{center}
+    \begin{tabular}{ccc}
+        $\PV$ & $\longleftrightarrow$ & rette di $V$ \\
+        $[v]$ & $\longmapsto$ & $\Span(v)$\\
+        $[v_r]$ & $\longmapsfrom$ & $r$
+    \end{tabular}
+    \end{center}
+    dove $v_r$ \`e un qualsiasi vettore in $r\nz$.
+
+    \begin{example}[Proiettivi dello spazio banale e di una retta]
+    Osserviamo che $\Pj(\{0\})=\quot{\emptyset}{\sim}=\emptyset$, mentre per $v\neq0$
+    \[\Pj(\Span(v))=\quot{\{\la v\mid \la\in\K\nz\}}{\sim}=\{[v]\},\]
+    ovvero lo spazio proiettivo associato ad una retta contiene un solo elemento.
+    \end{example}
+
+    \begin{definition}[Dimensione di uno spazio proiettivo]
+        Definiamo la \textbf{dimensione} dello spazio proiettivo $\PV$ come
+        \[\dim_\K\PV=\dim_\K V -1.\]
+    \end{definition}
+
+    \begin{remark}
+    Gli spazi proiettivi non sono spazi vettoriali. Come vedremo sono in un certo senso una estensione degli spazi affini.
+    \end{remark}
+
+    \begin{definition}[Punti, Rette e piani proiettivi]
+    Definiamo i seguenti termini:
+    \begin{itemize}[noitemsep]
+    \item un \textbf{punto proiettivo} \`e uno spazio proiettivo di dimensione $0$,
+    \item una \textbf{retta proiettiva} \`e uno spazio proiettivo di dimensione $1$,
+    \item un \textbf{piano proiettivo} \`e uno spazio proiettivo di dimensione $2$.
+    \end{itemize}
+    \end{definition}
+
+    \begin{definition}[Spazio proiettivo standard]
+    Definiamo $\Pj(\K^{n+1})=\Pj^{n}(\K)=\K\Pj^{n}$ lo \textbf{spazio proiettivo standard} di dimensione $n$. Se il campo risulta chiaro da contesto scriveremo solo $\Pj^n$.
+    \end{definition}
+
+    \subsection{Trasformazioni Proiettive}
+
+    Studiamo ora quali mappe preservano la struttura di spazio proiettivo.
+    \begin{definition}[Trasformazione proiettiva]
+    Una funzione $f:\PV\to\PW$ \`e una \textbf{trasformazione proiettiva} se $\exists \vp: V\to W$ lineare tale che
+    \[f([v])=[\vp(v)].\]
+    In questa notazione affermiamo che $f$ \`e \textbf{indotta} da $\vp$.
+    \end{definition}
+    \begin{notation}
+    Se $f$ \`e la trasformazione proiettiva indotta da $\vp$ scriviamo $f=[\vp]$.
+    \end{notation}
+
+    \begin{remark}
+    Se $f$ \`e una trasformazione proiettiva ben definita indotta da $\vp$ allora $\vp$ \`e iniettiva.
+    \end{remark}
+
+    \begin{remark}
+    Ogni mappa lineare iniettiva $\vp:V\to W$ induce una trasformazione proiettiva $f:\PV\to\PW$ tramite $[v]\mapsto[\vp(v)]$.
+    \end{remark}
+    \begin{remark}
+        Tutte le trasformazioni proiettive sono iniettive.
+    \end{remark}
+
+    \begin{remark}
+        $id_\PV$ \`e proiettiva ed \`e indotta da $id_V$.
+    \end{remark}
+    \begin{proposition}
+        Date $f:\PV\to\PW$ e $g:\PW\to\Pj(Z)$ proiettive abbiamo che $g\circ f:\PV\to\Pj(Z)$ \`e proiettiva.
+    \end{proposition}
+
+    \noindent Caratterizziamo ora gli isomorfismi di spazi proiettivi
+    \begin{definition}[Isomorfismo proiettivo]
+    Una trasformazione proiettiva surgettiva \`e chiamata \textbf{isomorfismo proiettivo}.
+    \end{definition}
+    La seguente proposizione ci permette di giustificare la definizione
+    \begin{proposition}[Caratterizzazione degli isomorfismi proiettivi]
+    Sia $f:\PV\to\PW$ proiettiva. Le affermazioni seguenti sono equivalenti
+    \begin{enumerate}
+    \item $f$ surgettiva,
+    \item $f$ bigettiva,
+    \item $\dim\PV=\dim\PW$,
+    \item $f$ invertibile e $f\ii:\PW\to\PV$ \`e proiettiva.
+    \end{enumerate}
+    \end{proposition}
+
+    \begin{definition}[Proiettivit\`a]
+    Una trasformazione proiettiva $f:\PV\to\PV$ \`e definita \textbf{proiettivit\`a}. Denotiamo l'insieme delle proiettivit\`a con $\PGL V$.
+    \end{definition}
+    \begin{remark}
+    Ogni proiettivit\`a \`e un isomorfismo proiettivo.
+    \end{remark}
+    \begin{remark}
+    Le proiettivit\`a di $\PV$ munito della composizione \`e un gruppo.
+    \end{remark}
+
+    \begin{remark}[Punti fissi delle proiettivit\`a]\label{PuntiFissiProiettivita}
+    Possiamo caratterizzare i punti fissi delle proiettivit\`a. Sia $f$ una proiettivit\`a indotta da $\vp$ e $[v]$ un punto fisso:
+    \[[v]=f([v])=[\vp(v)],\]
+    da cui $\la v=\vp(v)$, cio\`e $v$ \`e un autovettore di $\vp$. Similmente se $v$ \`e un autovettore di $\vp$ abbiamo che $[v]$ \`e un punto fisso per le stesse relazioni.
+    \end{remark}
+
+    \subsection{Sottospazi proiettivi}
+
+    Poniamo per semplicit\`a notazionale $\pi:V\nz\to\PV$ la proiezione per la relazione definita all'inizio del capitolo.
+
+    % \begin{definition}[Grassmanniana (NON DATA DURANTE IL CORSO)]
+    % Sia $V$ uno spazio vettoriale di dimensione $n$ e sia $k\in \{0,\cdots, n\}$. La \textbf{grassmanniana} $k$ di $V$ sono l'insieme di tutti i sottospazi vettoriali di $V$ di dimensione $k$
+    % \[Gr_k(V)=\cpa{W\sep V\supseteq W\text{ ssp. vett.},\ \dim W=k}.\]
+    % Poniamo inoltre
+    % \[Gr(k,n)=Gr_k(\K^n).\]
+    % \end{definition}
+
+    \begin{definition}[Sottospazio proiettivo]
+        Un \textbf{sottospazio proiettivo} $S$ di $\PV$ \`e un sottoinsieme di $\PV$ tale che
+        \[S=\pi(H\nz),\text{ per }H\text{ sottospazio vettoriale di }V.\]
+    \end{definition}
+    \begin{remark}
+    Dalla definizione segue che un sottospazio proiettivo \`e uno spazio proiettivo. Pi\`u precisamente \[\pi(H\nz)=\Pj(H).\]
+    \end{remark}
+    \begin{definition}[Iperpiano proiettivo]
+    Un \textbf{iperpiano} di $\PV$ \`e un sottospazio proiettivo $S$ di $\PV$ tale che $\dim S=\dim \PV-1$.
+    \end{definition}
+
+    \begin{proposition}[Corrispondenza tra sottospazi proiettivi e vettoriali]
+    Se $S$ \`e un sottospazio proiettivo come sopra abbiamo che $\pi\ii(S)=H\nz$.
+    \bigskip
+
+    \noindent
+    In particolare abbiamo una bigezione tra i sottospazi vettoriali di $V$ e i sottospazi proiettivi di $\PV$
+    \begin{center}
+    \begin{tabular}{ccc}
+    $\{\text{ssp vett. di }V\}$ & $\longleftrightarrow$ & $\{\text{ssp prj. di }\PV\}$ \\
+    $H$ & $\longmapsto$ & $\pi(H\nz)$\\
+    $\pi\ii(S)\cup\{0\}$ & $\longmapsfrom$ & $S$
+    \end{tabular}
+    \end{center}
+    \end{proposition}
+    % \begin{remark}[Grassmaniane proiettive (NON DATA DURANTE IL CORSO)]
+    % La corrispondenza appena mostrata si comporta bene con le dimensioni, cio\`e $\dim \Pj(H)=\dim H-1$ e $\dim \pi(S)\ii \cup \{0\}=\dim S+1$. Questo ci dice che
+    % \[Gr_k(\PV)\cong Gr_{k+1}(V)\]
+    % dove $Gr_k(\PV)$ \`e definito in modo analogo alle grassmanniane per spazi vettoriali ma considerando sottospazi proiettivi.
+    % \end{remark}
+
+
+    \noindent
+    Consideriamo adesso l'intersezione e la somma di sottospazi proiettivi.
+    \begin{proposition}[Sottospazi proiettivi sono stabili per intersezione]
+    Siano $S_i,\ i\in I$ sottospazi proiettivi di $\PV$. Si ha che
+    \[\bigcap_{i\in I}S_i\text{ \`e un sottospazio proiettivo di }\PV.\]
+    \end{proposition}
+    \begin{remark}
+    $\PV\cap\PW=\Pj(V\cap W).$
+    \end{remark}
+
+    \noindent
+    Come per gli spazi vettoriali, l'unione di sottospazi proiettivi non \`e in generale un sottospazio proiettivo. Definiamo allora una somma.
+
+    \begin{definition}[Sottospazio proiettivo generato]
+    Sia $A\subseteq\PV$ un sottoinsieme di $\PV$, il \textbf{sottospazio proiettivo di $\PV$ generato da $A$} \`e il pi\`u piccolo sottospazio proiettivo di $\PV$ contenente $A$ e viene indicato con $L(A)$.
+    \[L(A)=\bigcap_{\smat{S\text{ ssp.prj.}\\ A\subseteq S}}S.\]
+    L'intersezione non \`e vuota perch\'e $A\subseteq \PV$ e $\PV$ \`e un sottospazio proiettivo di se stesso.
+    \end{definition}
+
+    \begin{remark}
+    La definizione si estende ad una somma tra sottospazi proiettivi considerando il generato dell'unione
+    \[L(S_1,S_2)=L(S_1\cup S_2).\]
+    \end{remark}
+
+
+    \begin{proposition}[Traduzione tra somme di proiettivi e vettoriali]
+    Se $S_1=\Pj(H_1)$ e $S_2=\Pj(H_2)$ per $H_1,H_2$ sottospazi di $V$ abbiamo che
+    \[L(S_1,S_2)=\Pj(H_1+H_2).\]
+    \end{proposition}
+    \begin{proposition}[Trasformazioni proiettive rispettano i generati]
+    Dato $S\subseteq\PV$ e $f$ una trasformazione proiettiva abbiamo che
+    \[f(L(S))=L(f(S)).\]
+    \end{proposition}
+
+    \noindent
+    Vediamo ora come generalizzare la formula di Grassmann.
+
+    \begin{theorem}[Formula di Grassmann proiettiva]
+        Dati $S_1,S_2$ sottospazi proiettivi di $\PV$ abbiamo che
+        \[\dim L(S_1,S_2)=\dim S_1+\dim S_2-\dim S_1\cap S_2.\]
+    \end{theorem}
+    \begin{corollary}[Criterio per intersezione non vuota]
+    Se $S_1,S_2$ sono sottospazi proiettivi tali che $\dim S_1+\dim S_2\geq\dim \PV$ allora $S_1\cap S_2\neq\emptyset$.
+    \end{corollary}
+    \begin{remark}
+        Sui piani proiettivi non esistono ``rette parallele". Più precisamente, date $r_1,r_2$ sottospazi proiettivi di $\PV$ con $\dim \PV=2$ e $\dim r_1=\dim r_2=1$ abbiamo che $r_1=r_2$ o $r_1\cap r_2=\{P\}$ con $P$ punto proiettivo.
+    \end{remark}
+
+    \subsection{Riferimenti proiettivi}
+    Estendiamo i parallelismi con gli spazi vettoriali cercando un equivalente per indipendenza lineare e basi.
+
+    \begin{definition}[Punti indipendenti]
+    Siano $P_1,\cdots,P_k\in\PV$, essi sono \textbf{indipendenti} se scelti $v_1,\cdots,v_k\in V$ tali che $[v_i]=P_i$ allora $v_1,\cdots,v_k$ sono linearmente indipendenti.
+    \medskip
+
+    \noindent
+    La definizione \`e indipendente dai rappresentanti scelti, infatti per $\la_i\in\K\nz$ abbiamo che
+    \[v_1,\cdots,v_k\text{ lin. indipendenti}\coimplies \la_1v_1,\cdots,\la_kv_k\text{ lin. indipendenti}.\]
+    \end{definition}
+
+    \begin{definition}[Posizione generale]
+    Dati $P_1,\cdots,P_k$ essi sono in \textbf{posizione generale} se ogni sottoinsieme di essi costituito da $h$ punti distinti con $h\leq n+1$ \`e indipendente.
+    \end{definition}
+    \begin{remark}
+    Se $k\leq n+1$ allora la definizione coincide con l'indipendenza. Se $k>n+1$ la definizione \`e equivalente a richiedere l'indipendenza di tutte le $(n+1)-$uple di punti nell'insieme.
+    \end{remark}
+
+    \begin{definition}[Riferimento proiettivo]
+        Un \textbf{riferimento proiettivo} di $\PV$ con $\dim \PV=n$ \`e una $(n+2)-$upla di punti in posizione generale.\\
+        L'ultimo punto nel riferimento viene chiamato \textbf{punto unit\`a}, mentre gli altri sono detti \textbf{punti fondamentali}.
+    \end{definition}
+    \begin{definition}[Base normalizzata]
+    Dato $\Rc=(P_0,\cdots,P_{n+1})$ un riferimento proiettivo di $\PV$, una \textbf{base normalizzata di $V$ associata a $\Rc$} \`e una base $(v_0,\cdots,v_n)$ tali che \[\forall i\in\{0,\cdots,n\},\ [v_i]=P_i\text{ e }P_{n+1}=[v_0+\cdots+v_n].\]
+    \end{definition}
+
+    \begin{theorem}[Esistenza e unicit\`a della base normalizzata]
+    Dato $\Rc=(P_0,\cdots,P_{n+1})$ un riferimento proiettivo di $\PV$ abbiamo che $\exists \Bc=\{v_0,\cdots,v_n\}$ base normalizzata. Se $\Bc'=\{u_0,\cdots,u_n\}$ \`e una base normalizzata di $\Rc$ abbiamo inoltre che $\exists \la\in\K\nz$ tale che $u_i=\la v_i$.
+    \end{theorem}
+
+    \begin{remark}
+    Una differenza sostanziale tra la geometria proiettiva e l'algebra lineare \`e che non \`e possibile estendere riferimenti proiettivi di sottospazi proiettivi a riferimenti di sottospazi che li estendono. Se $\Rc=\{P_0,\cdots,P_{n+1}\}$ \`e un riferimento proiettivo di $S$ sottospazio proiettivo di $H$ osserviamo che $\Rc$ non sono punti in posizione generale letti come punti di $H$. Infatti se la dimensione aumenta anche solo di $1$ \`e necessario che le $(n+2)-$uple di punti siano indipendenti ma da come sappiamo dalla definizione di base normalizzata il punto unit\`a si scrive come somma dei punti fondamentali passando ad una base normalizzata.
+    \end{remark}
+
+
+    \begin{theorem}[Trasformazioni proiettive sono univocamente determinate dal valore su un riferimento]\label{TrasformazioniProiettiveSonoUnivocamenteDeterminateDalValoreSuUnRiferimento}
+    Siano $f,g:\PV\to\PW$ trasformazioni proiettive indotte da $\vp$ e $\psi$ rispettivamente. Sia $\Rc$ un riferimento proiettivo di $\PV$. Le seguenti condizioni sono equivalenti:
+    \begin{enumerate}
+    \item $\exists \la\in\K\nz$ tale che $\vp=\la\psi$;
+    \item $f=g$;
+    \item $\forall P\in \Rc,\ f(P)=g(P)$.
+    \end{enumerate}
+    \end{theorem}
+    \begin{corollary}
+        \[\PGL V\cong\quot{\GL V}{N}\] dove $N=\{\la id\mid \la\in \K\nz\}\triangleleft \GL V$
+    \end{corollary}
+
+    \begin{notation}[Proiettivit\`a standard]
+    Le proiettivit\`a di $\Pj^n(\K)$ formano un gruppo che denotiamo $\PGL{\K^{n+1}}=\Pj \GL[n+1]\K$.\\
+    L'ultimo $n+1$ corrisponde alla taglia delle matrici che rappresenteranno le proiettivit\`a, non la dimensione dello spazio su cui agiscono.
+    \end{notation}
+
+    \noindent
+    Concludiamo la sezione introducendo un teorema che ci permette di identificare trasformazioni proiettive definendole su un riferimento.
+    \begin{theorem}[Teorema fondamentale delle trasformazioni proiettive]\label{TeoremaFondamentaleTrasformazioniProiettive}
+    Siano $\PV$ e $\PW$ spazi proiettivi su $\K$ tali che $\dim \PV=\dim \PW=n$. Fissiamo $\Rc=(P_0,\cdots,P_{n+1})$ e $\Rc'=(P_0',\cdots,P_{n+1}')$ riferimenti proiettivi di $\PV$ e $\PW$ rispettivamente. Si ha che esiste un'unica trasformazione proiettiva $f:\PV\to\PW$ tale che $\forall i\in\{0,\cdots,n+1\},\ f(P_i)=P_i'$.
+    \end{theorem}
+
+
+
+    \subsection{Coordinate omogenee}
+    Come per il caso vettoriale, \`e spesso utile ricorrere a un sistema di coordinate. Per capire come definirle studiamo il caso di $\Pj^n(K)$. Per definizione abbiamo
+    \[\Pj^n(\K)=\quot{\K^{n+1}\nz}{\sim}=\{[(x_0,\cdots,x_n)],\ \text{con entrate non tutte nulle}\}.\]
+    \begin{definition}[Riferimento proiettivo canonico]
+    Il \textbf{riferimento standard (o canonico)} di $\Pj^n(\K)$ \`e il riferimento proiettivo che ha come base normalizzata la base canonica di $\K^{n+1}$.\medskip
+
+    \noindent
+    Affermiamo che $[(x_0,\cdots,x_n)]$ ha \textbf{coordinate omogenee} $[x_0,\cdots,x_n]$ o $[x_0:\cdots:x_n]$ rispetto al riferimento canonico di $\Pj^n(\K)$.
+    \end{definition}
+    \begin{remark}
+    Il riferimento proiettivo standard consiste dei punti con coordinate omogenee:
+    \[[1:0:\cdots:0],[0:1:0:\cdots:0],\cdots,[0:\cdots:0:1],[1:1:\cdots:1].\]
+    \end{remark}
+
+    \noindent
+    Cerchiamo ora di definire le coordinate omogenee per un qualsiasi spazio proiettivo.
+
+    \begin{definition}[Coordinate omogenee]
+        Fissiamo $\Rc=\{P_0,\cdots,P_{n+1}\}$ un riferimento proiettivo di $\PV$. Dato $P\in\PV$ le sue \textbf{coordinate omogenee} rispetto a $\Rc$ sono date da una delle seguenti equivalenti definizioni:
+        \begin{itemize}[noitemsep]
+            \item Se $f:\PV\to\Pj^n(\K)$ \`e l'unico isomorfismo proiettivo che porta $\Rc$ nel riferimento proiettivo canonico di $\Pj^n(\K)$ allora le coordinate omogenee di $P$ sono $f(P)$.
+            \item Se $\Bc=\{v_0,\cdots,v_n\}$ \`e una base normalizzata associata a $\Rc$ e $P=[v]$ consideriamo la combinazione lineare $v=\sum_{i=0}^na_iv_i$. Le coordinate omogenee di $P$ rispetto a $\Rc$ sono $[a_0:\cdots:a_n]$.
+        \end{itemize}
+    \end{definition}
+
+    Come per il caso vettoriale, possiamo rappresentare le trasformazioni proiettive con matrici e sottospazi proiettivi come luoghi di zeri di equazioni.
+    \begin{definition}[Matrice associata a isomorfismo proiettivo]
+    Sia $f:\PV\to\PW$ un isomorfismo proiettivo e siano $\Rc,\Rc'$ riferimenti proiettivi di $\PV$ e $\PW$ rispettivamente. Siano $\Bc,\Bc'$ le relative basi normalizzate. Se $\vp$ \`e una mappa lineare che induce $f$ allora $f$ \`e \textbf{rappresentata} da $M=M^\Bc_{\Bc'}(\vp)\in M(n+1,\K)$.
+    \end{definition}
+    \begin{remark}[Prodotto matrice-coordinate omogenee]
+    Dati $P=[v]\in \PV$, $f:\PV\to\PW$, $f=[\vp]$, $M$ una matrice che rappresenta $f$, $\Rc,\Rc'$ un riferimenti proiettivi di $\PV$ e $\PW$ rispettivamente con $\Bc$ e $\Bc'$ basi normalizzate, se indichiamo il passaggio a coordinate omogenee rispetto a $\Rc$ con $[\cdot]_\Rc$ e il passaggio a coordinate rispetto a $\Bc$ con $[\cdot]_\Bc$ (similmente per $\Rc'$ e $\Bc'$) si ha che
+    \begin{align*}
+    [f(P)]_{\Rc'}=&[[\vp(v)]]_{\Rc'}=[[[\cdot]_{\Bc'}\ii(M[v]_{\Bc})]]_{\Rc'}=\\
+    =&[[[\cdot]_{\Rc'}\ii([M[v]_{\Bc}])]]_{\Rc'}=\\
+    =& [M[v]_{\Bc}].
+    \end{align*}
+    \end{remark}
+    \begin{notation}
+    Se $M$ \`e una matrice, $P\in \PV$ con $P=[v]$, $\Rc$ \`e un riferimento proiettivo di $\PV$ e $\B$ \`e una sua base normalizzata poniamo
+    \[M[P]_\Rc= [M][P]_\Rc\doteqdot [M[v]_\Bc].\]
+    \end{notation}
+
+    \begin{definition}[Equazioni cartesiane proiettive]
+    Dato $S$ un sottospazio proiettivo di $\PV$ sia $W$ il sottospazio vettoriale di $V$ tale che $S=\PW$. Fissato un riferimento proiettivo su $\PV$ individuiamo univocamente una base normalizzata di $V$, quindi $W$ \`e esprimibile come luogo di zeri di $\dim V-\dim W$ equazioni. Chiamiamo queste le \textbf{equazioni cartesiane per $S$ rispetto a $\Rc$}.
+    \end{definition}
+    \begin{remark}
+    Con le notazioni appena usate, il numero di equazioni si esprime in termini di $S$ e $\PV$ come
+    \[\dim \PV-\dim S=\dim V-\dim W\]
+    \end{remark}
+
+    \section{Spazi proiettivi estendono gli spazi affini}
+    Approfondiamo la geometria di $\Pj^n(\K)$ come oggetto $n-$dimensionale che "contiene" $\K^n$.
+    \subsection{Carte affini}
+    Consideriamo cosa succede quando fissiamo una coordinata proiettiva a $0$
+
+    \begin{definition}[Iperpiano coordinato]
+    Dato $\Pj^n(\K)$ costruiamo per ogni indice $i\in\{0,\cdots,n\}$ il seguente sottoinsieme di $\Pj^n(\K)$
+    \[H_i=\{[x_0:\cdots:x_n]\in\Pj^n(\K)\mid x_i=0\}.\]
+    Chiamiamo $H_i$ \textbf{l'$i-$esimo iperpiano coordinato}.
+    \end{definition}
+    \begin{remark}
+    Considerati come spazi proiettivi
+    \[H_i\cong\Pj^{n-1}(\K).\]
+    \end{remark}
+
+    \begin{definition}[Carta affine]
+    Definiamo l'$i-$esima \textbf{carta affine} come
+    \[U_i=\Pj^n(\K)\bs H_i.\]
+    \end{definition}
+    \begin{proposition}[Le carte affini sono ``isomorfe" all'affine]
+    Esiste una bigezione naturale tra $U_i$ e $\K^n$ per ogni $i$.
+    \end{proposition}
+
+    \begin{definition}[Carta affine]
+    La bigezione $J_i:\K^n\to U_i$ si chiama $i-$esima \textbf{carta affine}
+    \end{definition}
+
+    \noindent
+    L'esistenza della carta affine ci permette di dividere gli spazi proiettivi in due parti
+    \[\begin{tikzcd}
+    {\mathbb{P}^n(\mathbb{K})} & {U_0} & {H_0} \\
+    & {\mathbb{K}^n} & {\mathbb{P}^{n-1}(\mathbb{K})}
+    \arrow["\bigsqcup", shift right=2, draw=none, from=1-2, to=1-3]
+    \arrow["\cong"', shift left=2, draw=none, from=1-2, to=2-2]
+    \arrow["\cong", shift right=3, draw=none, from=1-3, to=2-3]
+    \arrow["{=}", shift right=1, draw=none, from=1-1, to=1-2]
+    \end{tikzcd}\]
+    \begin{definition}[Punti propri e impropri]
+        I punti di $U_0\cong\K^n$ si chiamano \textbf{punti propri} o \textbf{affini}, mentre i punti di $H_0$ si chiamano \textbf{punti impropri} o \textbf{all'infinito}.
+    \end{definition}
+
+    \begin{proposition}[Parte affine]
+    Sia $K$ un sottospazio proiettivo di $\Pj^n(\K)$ non contenuto in $H_0$. Allora $J_0\ii(K\cap U_0)\subseteq \K^n$ \`e un sottospazio affine della stessa dimensione di $K$ che chiamiamo \textbf{parte affine} di $K$.
+    \end{proposition}
+
+    \begin{proposition}[Chiusura proiettiva]
+    Sia $Z\neq\emptyset$ un sottospazio affine di $\K^n$. Allora $Z$ \`e la parte affine di un unico sottospazio proiettivo $\ol Z$ di $\Pj^n(\K)$. Inoltre $\ol Z\nsubseteq H_0$ e ha la stessa dimensione di $Z$. Chiamiamo $\ol Z$ la \textbf{chiusura proiettiva} di $Z$.
+    \end{proposition}
+
+    Dalle due proposizioni precedenti vediamo che esiste una bigezione naturale tra i $k-$sottospazi affini di $\K^n$ e i $k-$sottospazi proiettivi di $\Pj^n(\K)$ non contenuti in $H_0$.
+
+    \begin{definition}[Polinomio omogeneo]
+    Un polinomio $p\in\K[x_0,\cdots,x_n]$ \`e \textbf{omogeneo} di grado $d$ se tutti i monomi a coefficienti non nulli di $p$ hanno grado $d$.
+    \end{definition}
+    \begin{remark}
+    La mappa
+    \[\funcDef{\K[x_1,\cdots,x_n]}{\K_{\deg p}[x_0,\cdots,x_1]}{p(x_1,\cdots,x_n)}{x_0^{\deg p}p(x_1/x_0,\cdots,x_n/x_0)}\]
+    \`e detta \textbf{omogenizzazione} e se $p$ ha grado $d$ allora il suo omogenizzato \`e un polinomio omogeneo di grado $d$. Questa operazione corrisponde a ``mettere tante $x_0$ quanto basta affinch\'e tutti i termini abbiano lo stesso grado".
+    \end{remark}
+    \begin{remark}
+    Se $Z$ \`e un iperpiano di $\K^n$ di equazione $a_1X_1+\cdots+a_n X_n=b$ allora la sua chiusura proiettiva $\ol Z\subset\Pj^n(\K)$ ha equazione $-bx_0+a_1x_1+\cdots+a_nx_n=0$. In generale se un sottospazio \`e dato da un sistema di equazioni, la sua chiusura \`e data dal sistema di queste stesse equazioni ma omogeneizzato.
+    \end{remark}
+
+    \begin{remark}
+    Solo gli zeri di polinomi omogenei descrivono luoghi in $\Pj^n(\K)$ dato che altrimenti quando scaliamo le indeterminate otterremmo una potenza diversa del fattore per monomi di grado diverso.
+    \end{remark}
+
+    \noindent Prendere la chiusura proiettiva di spazi affini in genere aggiunge dei punti allo spazio. Diamo un nome a questi punti:
+
+    \begin{definition}[Punti all'infinito di sottospazi vettoriali]
+    Se $Z$ \`e un sottospazio affine di $\K^n$ i \textbf{punti all'infinito} di $Z$ sono i punti di $\ol Z\cap H_0$.
+    \end{definition}
+
+
+    \begin{center}
+    Ma perch\'e li chiamiamo ``all'infinito"?
+    \end{center}
+    La proposizione seguente ci fornisce una intuizione.
+    \begin{proposition}[Rette si incontrano all'infinito se e solo se sono parallele]
+    Siano $r,s$ due rette affini in $\K^n$. Allora $r,s$ hanno lo stesso punto all'infinito se e solo se sono parallele.
+    \end{proposition}
+
+    Vediamo quindi che $H_0$ \`e in bigezione con le direzioni in $\K^n$, ovvero
+    \[\Pj^n(\K)=\K^n\cup\{\text{direzioni di }\K^n\}.\]
+
+
+    \section{Approfondimento sulle proiettivit\`a}
+    \subsection{Prospettivit\`a}
+    Andiamo ora a studiare ci\`o per cui la geometria proiettiva \`e nata, ovvero la prospettiva.
+
+    \begin{definition}[Prospettivit\`a]
+    Siano $r,s$ rette distinte di un piano proiettivo $\PV$. Sia $O\in\PV\bs(r\cup s)$ e definiamo
+    \[\pi_O:\funcDef{r}{s}{p}{L(O,p)\cap s}\]
+    $\pi_O$ \`e detta \textbf{prospettivit\`a} di centro $O$.
+    \end{definition}
+
+    \begin{proposition}[Le prospettivit\`a sono ben definite e sono trasformazioni proiettive]
+    La prospettivit\`a di centro $O$ \`e una trasformazione proiettiva ben definita.
+    \end{proposition}
+
+    \noindent
+    Proviamo a dare una caratterizzazione delle prospettivit\`a
+    \begin{theorem}[Caratterizzazione delle prospettivit\`a]\label{CaratterizzazioneProspettivita}
+    Siano $r,s$ rette distinte di un piano proiettivo $\PV$ e sia $A=r\cap s$. Data $f:r\to s$ trasformazione proiettiva abbiamo che $f$ \`e una prospettivit\`a se e solo se $f(A)=A$.
+    \end{theorem}
+
+    \subsection{Corrispondenza tra Affinit\`a e Proiettivit\`a}
+    \begin{proposition}[Affinit\`a come proiettivit\`a]\label{AffinitaComeProiettivita}
+    Il gruppo delle affinit\`a $Aff(\K^n)$ \`e isomorfo a $G<\PGL[n+1]\K$, dove \[G=\{f\in \PGL[n+1]\K\mid f(H_0)=H_0\}.\]
+    \end{proposition}
+    \subsection{Trasformazioni lineari fratte}
+    \begin{definition}[Infinito]
+    Per quanto detto sappiamo che $\Pj^1(\K)=U_0\cup H_0\cong \K\cup\{[0,1]\}$. Definiamo allora $\infty\doteqdot[0,1]$. Con questa identificazione
+    \[\Pj^1(\K)=\K\cup\{\infty\}.\]
+    \end{definition}
+    Consideriamo le proiettivit\`a su $\Pj^1(\K)$: esse sono rappresentate dalle matrici $\PGL[2]\K$.
+    \begin{definition}[Trasformazione lineare fratta]
+    Una mappa della forma
+    \[z\mapsto \frac{c+dz}{a+bz}\]
+    con $a,b,c,d\in \K$ e $ad-bc\neq0$ \`e detta \textbf{trasformazione lineare fratta}.\\
+    Nel caso in cui $\K=\C$ queste mappe si chiamano anche \textbf{trasformazioni di M\"obius}.
+    \end{definition}
+    \begin{remark}
+    Possiamo definire come una trasformazione lineare fratta agisce su $\infty$ o restituisce $\infty$ ponendo
+    \[-\frac ab\mapsto \infty,\qquad \infty\mapsto \frac db.\]
+    \end{remark}
+    \begin{proposition}
+    Identificando $\Pj^1(\K)$ con $\K\cup\{\infty\}$ le proiettivit\`a di $\Pj^1(\K)$ corrispondono a trasformazioni lineari fratte.
+    \end{proposition}
+
+
+    \section{Dualit\`a}
+    \begin{definition}[Spazio proiettivo duale]
+    Dato $V$ spazio vettoriale su $\K$ di dimensione finita, definiamo lo \textbf{spazio proiettivo duale} di $\PV$ come
+    \[\PV^*=\Pj(V^*)=\Pj(\Hom(V,\K))\]
+    \end{definition}
+    \begin{remark}
+        Dato che $V\cong V^*$ abbiamo che $\PV\cong \PV^*$.
+    \end{remark}
+    \begin{proposition}
+    La seguente mappa \`e una bigezione naturale tra il proiettivo duale e gli iperpiani del proiettivo
+    \[\phi:\funcDef{\PV^*}{\{\text{iperpiani in }\PV\}}{[f]}{\Pj(\ker f)}.\]
+    \end{proposition}
+
+    \begin{definition}[Riferimento duale]
+    Se $\Rc$ \`e un riferimento proiettivo di $\PV$ e $\Bc$ \`e una sua base normalizzata allora, definendo $\Bc^*$ la base duale di $\Bc$, troviamo un riferimento $\Rc^*$ che ha come base normalizzata $\Bc^*$. $\Rc^*$ \`e detto \textbf{riferimento duale} di $\Rc$ e fornisce delle $\textbf{coordinate omogenee duali}$ su $\PV^*$.
+    \end{definition}
+    \begin{remark}
+    Le coordinate duali del funzionale corrispondente all'iperpiano $a_0x_0+\cdots+a_nx_0=0$ sono $[a_0:\cdots:a_n]$.
+    \end{remark}
+
+    \noindent
+    Definiamo allora una mappa che dualizza tutti i sottospazi di $\PV$. Sia $S$ un sottospazio proiettivo di $\PV$ e sia $W$ tale che $S=\PW$. Poniamo $\dim S=k$ e $\dim \PV=n$. Allora per $-1\leq k\leq n$ definisco la mappa\footnote{Ricordiamo che $Ann(W)=\{f\in V^\ast\mid f(W)=0\}$ e che $\dim Ann(W)=n-\dim W$.}
+    \[\delta_k:\funcDef{\left\{\begin{matrix}
+    \text{ssp.prj. }S\subseteq\PV\\\dim S=k
+    \end{matrix}
+    \right\}}
+    {\left\{\begin{matrix}
+    \text{ssp.prj. }T\subseteq\PV^*\\\dim T=n-k-1
+    \end{matrix}
+    \right\}}
+    {S}{\Pj(Ann(W))}\]
+    \begin{proposition}
+    $\delta_k$ \`e biunivoca per ogni $k$.
+    \end{proposition}
+    \begin{remark}
+    Per $k=n-1$ vediamo che $\delta_{n-1}$ \`e l'inversa di
+    \[\phi:\funcDef{\PV^*}{\{\text{iperpiani in }\PV\}}{[f]}{\Pj(\ker f)},\]
+    invece per $k=0$ troviamo una corrispondenza tra punti di $\PV$ e iperpiani di $\PV^*$, che \`e la situazione inversa rispetto a prima. Questo fatto \`e legato all'isomorfismo naturale tra $V$ e $V^{**}$.
+    \end{remark}
+
+    \begin{definition}[Corrispondenza di dualit\`a]
+    Definiamo la \textbf{corrispondenza di dualit\`a}
+    \[\delta:\funcDef{\{\text{ssp.prj. di }\PV\}}{\{\text{ssp.prj. di }\PV^*\}}{S}{\delta_{\dim S}(S)}\]
+    \end{definition}
+
+    \begin{proposition}
+    Se $S_1,S_2$ sono sottospazi proiettivi di $\PV$ allora
+    \begin{enumerate}
+    \item $S_1\subseteq S_2\implies \delta(S_2)\subseteq \delta(S_1)$
+    \item $\delta(L(S_1,S_2))=\delta(S_1)\cap\delta(S_2)$
+    \item $\delta(S_1\cap S_2)=L(\delta(S_1),\delta(S_2))$.
+    \end{enumerate}
+    \end{proposition}
+
+    \begin{remark}
+    Fissando una base, $\PV\cong\PV^*$, quindi posso pensare a $\delta$ come funzione tra sottospazi di $\PV$.
+    \end{remark}
+
+    \noindent
+    Viste queste corrispondenze ci \`e permesso riformulare enunciati tramite il seguente
+
+    \begin{theorem}[Principio di dualit\`a]
+    Se $\mathcal{P}$ \`e una proposizione di oggetti di $\PV$ allora c'\`e una proposizione $\mathcal{P}^*$ con lo stesso valore di verit\`a ottenuta da $\mathcal{P}$ scambiando intersezioni con spazi generati e viceversa, invertendo i contenimenti e considerando oggetti della codimensione diminuita di $1$ (cio\`e spazi di dimensione $k$ diventano spazi di dimensione $n-k-1$).
+    \end{theorem}
+
+    \begin{proposition}
+    Tramite la bigezione tra $\PV^*$ e gli iperpiani di $\PV$ si ha che per $S$ sottospazio proiettivo di $\PV$
+    \[\delta(S)=\{H\subset \PV\text{ iperpiano t.c. }S\subseteq H\}\subseteq \PV^*\]
+    \end{proposition}
+
+    \begin{definition}[Sistema lineare di iperpiani]
+    Dato $S$ sottospazio proiettivo di $\PV$ chiamiamo $\delta(S)$ il \textbf{sistema lineare di iperpiani} di $\PV$ di \textbf{centro} $S$.
+    \end{definition}
+
+    \begin{remark}
+    Dato che $\delta$ \`e biunivoca ogni sottospazio proiettivo $T\subseteq \PV^*$ si scrive come sistema lineare di iperpiani il cui centro \`e $\delta\ii(T)$.
+    \end{remark}
+    \begin{definition}[Fascio di iperpiani]
+    Una retta proiettiva in $\PV^*$ \`e detta \textbf{fascio} di iperpiani.
+    \end{definition}
+
+    \begin{definition}[Proiettivit\`a duale]
+    Se $f:\PV\to\PW$ \`e un isomorfismo proiettivo e $f=[\vp]$ allora definiamo $f^*=[\vp^*]:\PW^*\to\PV^*$ la \textbf{proiettivit\`a duale} di $f$, dove $\vp^*:W^*\to V^*$ \`e la mappa lineare duale di $\vp$\footnote{Ricordiamo che data $\vp:V\to W$ lineare, la sua mappa duale \`e data da
+    \[\vp^\ast:\funcDef{W^\ast}{V^\ast}{g}{g\circ \vp}\]}.
+    \end{definition}
+
+    \begin{remark}
+    Osserviamo che $f^*(\delta(H))=\delta(f\ii(H))$ per $H$ iperpiano di $\PW$. Infatti posto $H=\Pj(Z)$ abbiamo
+    \begin{align*}
+    f^*(\delta(H))=&f^*(\Pj(Ann(Z)))=\{f^*([g])\mid g\in Ann(Z)\nz\}=\\
+    =&\{[\vp^*(g)]\mid g\in Ann(Z)\nz\}=\{[g\circ \vp]\mid g\in Ann(Z)\nz\}=\\
+    =&\{[g\circ \vp]\mid g\circ \vp\in Ann(\vp\ii(Z))\nz\}=\Pj(Ann(\vp\ii(Z)))=\\
+    =&\delta(\Pj(\vp\ii(Z)))=\delta(f\ii(\Pj(Z)))=\\
+    =&\delta(f\ii(H)).
+    \end{align*}
+    \end{remark}
+
+    \section{Birapporto}
+    Sappiamo che dati tre punti su una retta proiettiva ed altri tre punti allineati possiamo definire una proiettivit\`a che manda i primi nei secondi. Per le trasformazioni affini potevamo definire il rapporto semplice di tre punti allineati e questo forniva un invariante per affinit\`a. Purtroppo il rapporto semplice non \`e invariante per proiettivit\`a. Cerchiamo un tale invariante.
+    \begin{definition}[Birapporto]
+    Dati quattro punti $P_1,P_2,P_3,P_4\in\PV$ con $\dim \PV=1$ e $P_1,P_2,P_3$ distinti definiamo il loro \textbf{birapporto} come
+    \[\beta(P_1,P_2,P_3,P_4)=\frac{x_1}{x_0}\in\K\cup\{\infty\}\]
+    dove $[x_0,x_1]$ sono le coordinate omogenee di $P_4$ rispetto al riferimento proiettivo $(P_1,P_2,P_3)$.
+    \end{definition}
+    \begin{remark}
+    Possiamo interpretare il birapporto come la coordinata affine di $P_4$ nella carta $U_0$ rispetto al riferimento $(P_1,P_2,P_3)$.
+    \end{remark}
+    \begin{remark}
+    Se $P_4=P_1$ allora il birapporto \`e $0/1=0$, se $P_4=P_2$ abbiamo $1/0=\infty$ e per $P_4=P_3$ ricaviamo $1/1=1$. Pi\`u in generale la mappa
+    \[\beta(P_1,P_2,P_3,\cdot):\PV\to\K\cup\{\infty\}\]
+    \`e una bigezione (per definizione dato che $P_4$ \`e libero di avere qualsiasi coordinata omogenea rispetto a $(P_1,P_2,P_3)$).
+    \end{remark}
+    \newcommand{\lamudmat}[2]{\left|
+    \begin{matrix}
+    \lambda_{#1} & \lambda_{#2}\\
+    \mu_{#1} & \mu_{#2}
+    \end{matrix}
+    \right|}
+    \begin{proposition}[Calcolo del birapporto]
+    Se in un riferimento proiettivo fissato abbiamo $P_i=[\la_i,\mu_i]$ per $i\in\{1,2,3,4\}$ allora
+    \small{\[\beta(P_1,P_2,P_3,P_4)=\frac{\lamudmat14\lamudmat32}{\lamudmat42\lamudmat13}=\frac{(\la_1\mu_4-\la_4\mu_1)(\la_2\mu_3-\la_3\mu_2)}{(\la_2\mu_4-\la_4\mu_2)(\la_1\mu_3-\la_3\mu_1)}\]}
+    \end{proposition}
+    \begin{remark}
+    Se $\la_i\neq0$ per ogni $i$ allora ponendo $z_i=\mu_i/\la_i$ troviamo
+    \[\beta(P_1,P_2,P_3,P_4)=\frac{(z_4-z_1)(z_3-z_2)}{(z_4-z_2)(z_3-z_1)}=\dfrac{\;\frac{z_4-z_1}{z_3-z_1}\;}{\frac{z_4-z_2}{z_3-z_2}}=\frac{[P_1,P_3,P_4]}{[P_2,P_3,P_4]},\]
+    ovvero il birapporto \`e il rapporto di due rapporti semplici.
+    \end{remark}
+    \begin{corollary}
+    Se $P_4$ \`e il punto all'infinito, ponendo $z_i$ come sopra per $i=1,2,3$ si ha che
+    \[\beta(P_1,P_2,P_3,\infty)=\frac{z_3-z_2}{z_3-z_1}=[P_3,P_1,P_2].\]
+    \end{corollary}
+
+    Vediamo ora che effettivamente il birapporto \`e invariante per proiettivit\`a:
+    \begin{proposition}[Proiettivit\`a conservano birapporto]
+    Se $f:\PV\to\PW$ \`e una proiettivit\`a tra due rette proiettive e $P_1,P_2,P_3,P_4\in \PV$ con $P_1,P_2,P_3$ distinti allora
+    \[\beta(P_1,P_2,P_3,P_4)=\beta(f(P_1),f(P_2),f(P_3),f(P_4)).\]
+    \end{proposition}
+
+    Possiamo estendere la proposizione precedente come segue:
+    \begin{proposition}[Criterio del birapporto per l'esistenza di proiettivit\`a]\label{CriterioEsistenzaProiettivitaConBirapporto}
+    Se $\PV$ e $\PW$ sono rette proiettive, $P_1,P_2,P_3,P_4\in \PV$ con $P_1,P_2,P_3$ distinti e $Q_1,Q_2,Q_3,Q_4\in \PW$ con $Q_1,Q_2,Q_3$ distinti allora esiste una proiettivit\`a $f:\PV\to\PW$ tale che $f(P_i)=Q_i$ per tutti gli $i$ se e solo se
+    \[\beta(P_1,P_2,P_3,P_4)=\beta(Q_1,Q_2,Q_3,Q_4).\]
+    \end{proposition}
+
+    \begin{proposition}
+    Dati $P_1,P_2,P_3,P_4$ allineati distinti e ponendo $\beta=\beta(P_1,P_2,P_3,P_4)$ allora abbiamo che $\forall \sigma\in S_4$, il birapporto $\beta(P_{\sigma(1)},P_{\sigma(2)},P_{\sigma(3)},P_{\sigma(4)})$ pu\`o assumere solo uno tra i seguenti valori:
+    \[\beta,\frac1\beta,1-\beta,\frac1{1-\beta},\frac{\beta-1}\beta,\frac\beta{\beta-1}.\]
+    \end{proposition}
+
+    Vediamo quindi che il birapporto non \`e un invariante per le quaterne non ordinate. Cerchiamo di costruire un invariante.
+
+    \begin{proposition}
+    Supponiamo $\cha\K=0$ e consideriamo la funzione razionale
+    \[j(x)=\frac{(x^2-x+1)^3}{x^2(x-1)^2}.\]
+    Se $\beta$ \`e il birapporto di quattro punti distinti ($\beta\neq0,1$ in particolare) allora $j(\beta)=j(\beta')$ se e solo se
+    \[\beta'\in\left\{\beta,\frac1\beta,1-\beta,\frac1{1-\beta},\frac{\beta-1}\beta,\frac\beta{\beta-1}\right\}=B.\]
+    \end{proposition}
+
+    \begin{definition}[Modulo/j-invariante]
+    Per $P_1,P_2,P_3,P_4$ distinti abbiamo visto che $j(\beta(P_1,P_2,P_3,P_4))$ \`e un invariante e si chiama \textbf{modulo} o \textbf{j-invariante} della quaterna. Per comodit\`a indichiamo
+    $j(\beta(P_1,P_2,P_3,P_4))$ con $j(\{P_1,P_2,P_3,P_4\})$.
+    \end{definition}
+
+    \begin{theorem}
+    Se $\PV,\PW$ sono rette proiettive e $\{P_1,P_2,P_3,P_4\}$, $\{Q_1,Q_2,Q_3,Q_4\}$ sono quaterne di punti distinti di $\PV$ e $\PW$ rispettivamente allora esiste $f:\PV\to\PW$ tale che
+    \[f(\{P_1,P_2,P_3,P_4\})=\{Q_1,Q_2,Q_3,Q_4\}\]
+    se e solo se $j(\{P_i\})=j(\{Q_i\})$.
+    \end{theorem}
+
+    \section{Coniche proiettive}
+    \begin{definition}[Conica proiettiva]
+    Una \textbf{conica proiettiva} di $\Pj^2(\K)$ \`e un elemento di $\Pj(\K_2[x_0,x_1,x_2])$. Definiamo il \textbf{supporto} di una conica $[p]$ come
+    \[V([p])=\{[x_0,x_1,x_2]\mid p(x_0, x_1, x_2)=0\}\]
+    \end{definition}
+    \begin{remark}
+    $\dim\K_2[x_0,x_1,x_2]=|\{x_0^2,x_1^2,x_2^2,x_0x_1,x_0x_2,x_1x_2\}|=6$, quindi lo spazio proiettivo delle coniche ha dimensione $5$.
+    \end{remark}
+    \begin{remark}
+    Osserviamo che per $[p']=[p]$ e $[x_0,x_1,x_2]=[y_0,y_1,y_2]$
+    \[p'(y_0,y_1,y_2)=\mu p(\la x_0,\la x_1, \la x_2)=\mu\la^2p(x_0,x_1,x_2).\]
+    \`E quindi ben definito quando un punto del proiettivo \`e annullato da un polinomio omogeneo ma NON \`e definita la sua immagine.
+    \end{remark}
+
+    \noindent
+    Come per il caso affine possiamo definire delle matrici che rappresentano coniche. Data la conica
+    \[[ax_0^2+bx_1^2+cx_2^2+dx_0x_1+ex_0x_2+fx_1x_2]\]
+    la possiamo scrivere come $x^\top A x$ dove
+    \[x=\mat{x_0\\ x_1\\ x_2},\quad A=\mat{a & d/2 & e/2\\ d/2 & b & f/2\\ e/2 & f/2 & c}.\]
+    Chiamiamo $A$ la matrice che \textbf{rappresenta} la conica.
+    \begin{remark}
+    $A$ \`e simmetrica e in effetti c'\`e una bigezione tra lo spazio delle coniche e $\Pj(S(3,\K))$.
+    \end{remark}
+    \begin{remark}
+    Se pongo l'indeterminata $x_0$ uguale a $1$ la teoria che stiamo sviluppando ci restituisce ci\`o che avevamo gi\`a ricavato per le coniche affini. La mappa
+    \[\funcDef{\Pj(\K_d[x_0,\cdots,x_n])}{\Pj(\K[x_1,\cdots, x_n])}{[p(x_0,\cdots,x_n)]}{[p(1,x_1,\cdots,x_n)]}\]
+    \`e detta \textbf{deomogenizzazione} rispetto all'indeterminata $x_0$.
+    \end{remark}
+
+
+    \subsection{Equivalenza proiettiva e Classificazione delle coniche}
+    Studiamo ora come mettere in relazione coniche e proiettivit\`a.
+
+    \begin{definition}[Immagine di una conica tramite una proiettivit\`a]
+    Data $f:\Pj^2\to\Pj^2$ e una conica $C=[p]$ poniamo $f(C)\doteqdot f^\ast C\doteqdot [p\circ M\ii]$ dove $M$ \`e una matrice che rappresenta $f$ nel riferimento standard. La notazione $f(C)$ non crea ambiguit\`a, infatti $f:\Pj^2\to\Pj^2$ e $f^\ast$ hanno domini diversi per esempio.
+    \end{definition}
+    \begin{remark}
+    La definizione \`e ben posta, infattis
+    \[[\la p\circ (\mu M)\ii]=[\la \mu^{-2}(p\circ M\ii)]=[p\circ M\ii].\]
+    \end{remark}
+
+    \begin{proposition}
+    Sia $C$ una conica e $f$ una proiettivit\`a del piano proiettivo, allora $V(f(C))=f(V(C))$.
+    \end{proposition}
+
+    \begin{definition}[Equivalenza proiettiva]
+    Due coniche $C,C'$ di $\Pj^2$ sono \textbf{proiettivamente equivalenti} se esiste una proiettivit\`a $f:\Pj^2\to\Pj^2$ tale che $f(C)=C'$.
+    \end{definition}
+    \begin{remark}
+    $f(g(C))=(f\circ g)(C)$, infatti se $F, G$ sono matrici che rappresentano $f$ e $g$ rispettivamente abbiamo
+    \[f(g(C))=f([p\circ G\ii])=[p\circ G\ii\circ F\ii]=[p\circ (FG)\ii]=(f\circ g)(C).\]
+    \end{remark}
+
+    Osserviamo che l'equivalenza proiettiva \`e una relazione di equivalenza, quindi ha senso classificare le coniche a meno di questa equivalenza.
+
+    \begin{remark}
+    Se $A$ \`e una matrice simmetrica che rappresenta la conica $[p]=C$ e $f=[M]$ \`e una proiettivit\`a allora
+    \[f(C)=[(M\ii)^\top AM\ii].\]
+    \end{remark}
+    \begin{remark}
+    $A$ e $A'$ sono matrici simmetriche che rappresentano coniche proiettivamente equivalenti se e solo se esistono $M\in \GL[3]\K$ e $\la\in \K^\times$ tali che
+    \[A'=\la M^\top A M,\]
+    ovvero se $A$ e $A'$ sono congruenti a meno di scalare.
+    \end{remark}
+
+    Allora classificare le coniche proiettive ci porta a classificare i prodotti scalari a meno di scalare. Questo sappiamo farlo per $\R$ e $\C$.
+
+    \begin{theorem}[Classificazione delle coniche proiettive complesse]
+    Le coniche proiettive complesse si distinguono in tre classi a meno di equivalenza proiettiva. Queste sono determinate dal rango della matrice che le rappresenta. Dei rappresentanti sono dati da
+    \begin{center}
+    \small{\begin{tabular}{|c|c|c|c|}
+    \hline
+    Rango & Rappresentante & Matrice & Nome\\\hline
+    $3$ & $x_0^2+x_1^2+x_2^2$ & $\mat{1&&\\&1&\\&&1}$ & Non degenere\\
+    $2$ & $x_0^2+x_1^2$ & $\mat{1&&\\&1&\\&&0}$ & Degenere\\
+    $1$ & $x_0^2$ & $\mat{1&&\\&0&\\&&0}$ & Doppiamente degenere\\\hline
+    \end{tabular}}
+    \end{center}
+    \end{theorem}
+    \begin{remark}
+    Nel caso di rango $2$, essendo in un campo algebricamente chiuso, vale che $x_0^2+x_1^2=(x_0+ix_1)(x_0-ix_1)$, quindi il supporto delle coniche proiettive complesse degeneri \`e dato da due rette distinte. Per il caso di rango $1$ abbiamo una retta doppia data da $x_0=0$.
+    \end{remark}
+    \begin{remark}
+    In realt\`a questa classificazione continua a valere per un qualsiasi campo algebricamente chiuso di caratteristica diversa da $2$.
+    \end{remark}
+
+    \begin{theorem}[Classificazione delle coniche proiettive reali]
+    Le coniche proiettive reali si distinguono in cinque classi a meno di equivalenza proiettiva. Queste sono determinate dalla segnatura della matrice che le rappresenta a meno di identificare $(a,b,c)$ e $(b,a,c)$. Dei rappresentanti sono dati da
+    \begin{center}
+    \footnotesize{\begin{tabular}{|c|c|c|c|}
+    \hline
+    Segnatura & Rappresentante & Degenericit\`a & Supporto\\\hline
+    $(3,0,0)$ & $x_0^2+x_1^2+x_2^2$ & Non degenere & Vuoto\\
+    $(2,1,0)$ & $x_0^2+x_1^2-x_2^2$ & Non degenere & Non vuoto\\
+    $(2,0,1)$ & $x_0^2+x_1^2$ & Degenere & Punto\\
+    $(1,1,1)$ & $x_0^2-x_1^2$ & Degenere & Due rette distinte\\
+    $(1,0,2)$ & $x_0^2$ & Doppiamente degenere & Retta doppia\\\hline
+    \end{tabular}}
+    \end{center}
+    \end{theorem}
+    \begin{remark}
+    Nei casi degeneri possiamo trovare facilmente il supporto per i rappresentanti:
+    \begin{align*}
+    &V([x_0^2+x_1^2])=[0,0,1]\\
+    &V([x_0^2-x_1^2])=\{x_0-x_1=0\}\cup\{x_1+x_0=0\}\\
+    &V([x_0^2])=\{x_0=0\}
+    \end{align*}
+    \end{remark}
+
+    \subsection{Parte affine e chiusura proiettiva}
+
+    \begin{definition}[Parte affine]
+    Sia $C=[p]$ una conica proiettiva e supponiamo che $x_0\nmid p$ . Allora il polinomio $f(x,y)=p(1,x,y)$ (il \textbf{deomogeneizzato} di $p$ rispetto alla prima indeterminata) definisce una conica affine che definiamo \textbf{parte affine} di $C$.\\
+    \noindent
+    Poniamo come notazione $[f]=j_0\ii(C)$
+    \end{definition}
+    \begin{remark}
+    La condizione $x_0\nmid p$ assicura che $\deg f=2$. Geometricamente stiamo escludendo componenti interamente all'infinito.
+    \end{remark}
+    \begin{remark}
+    Se siamo su un campo infinito, per il principio di identit\`a dei polinomi abbiamo che $x_0\nmid p$ \`e equivalente a richiedere $\{x_0=0\}\not\subseteq V(C)$.
+    \end{remark}
+    \begin{proposition}
+    Per $p$ e $f$ come sopra abbiamo (identificando $\K^2$ con $U_0$) $V([p])\cap U_0=V([f])$.
+    \end{proposition}
+
+    \begin{definition}[Chiusura proiettiva]
+    Se $C=[f]$ \`e una conica affine chiamiamo la sua \textbf{chiusura proiettiva} la conica proiettiva di equazione
+    \[p(x_0,x_1,x_2)=x_0^2f(x_1/x_0,x_2/x_0).\]
+    Poniamo come notazione $[p]=j_0(C)=\ol{C}$.
+    \end{definition}
+
+
+
+    \begin{remark}
+    Per come le abbiamo definite valgono
+    $j_0\ii(\ol{C})=C$ e, se $x_0\nmid p$, $\ol{j_0\ii([p])}=[p]$.
+    \end{remark}
+
+    \begin{definition}[Punti all'infinito di una conica]
+    Data una conica affine $C$ definiamo $V(\ol C)\cap H_0$ i \textbf{punti all'infinito} o \textbf{impropri} di $C$.
+    \end{definition}
+
+    \begin{remark}
+    Se $A$ \`e la matrice che rappresenta la conica affine $f$, cio\`e
+    \[f(x,y)=\mat{1 & x & y}A\mat{1\\ x\\ y}\]
+    allora $A$ \`e la matrice che rappresenta anche la chiusura proiettiva
+    \[p(x_0,x_1,x_2)=\mat{x_0 & x_1 & x_2}A\mat{x_0\\ x_1\\ x_2}.\]
+    Segue che per $C$ conica affine, $C$ \`e non degenere se e solo se $\ol C$ \`e non degenere.
+    \end{remark}
+    \begin{remark}
+    Osserviamo che il numero di classi di coniche non degeneri a supporto non vuoto nel caso reale non coincidono tra le coniche affini e le coniche proiettive.
+    In particolare vediamo che le chiusure proiettive di ellissi, iperboli e parabole devono essere proiettivamente equivalenti. Vedremo che la differenza corrisponde a come incontrano la retta all'infinito.
+    \end{remark}
+
+    \begin{theorem}
+    Sia $C$ una conica affine reale non vuota non degenere, allora
+    \begin{itemize}[noitemsep]
+    \item $C$ \`e un'ellisse $\coimplies$ $V(\ol C)\cap H_0=\emptyset$
+    \item $C$ \`e una parabola $\coimplies$ $|V(\ol C)\cap H_0|=1$
+    \item $C$ \`e un'iperbole $\coimplies$ $|V(\ol C)\cap H_0|=2$
+    \end{itemize}
+    \end{theorem}
+
+    \begin{proposition}[Coniche per 5 punti]
+    Dati cinque punti $P_0,\cdots, P_4\in \Pj^2$ in posizione generale esiste un'unica conica $C$ tale che $P_i\in V(C)$ per ogni $i$ e questa \`e non degenere.
+    \end{proposition}
+
+
+
+    \subsection{Tangenti}
+    [Da ora in poi considereremo solo campi infiniti con caratteristica diversa da $2$. Principalmente tratteremo di $\R$ e $\C$.]
+
+    \subsubsection{Intersezioni con rette e riducibilit\`a}
+    Studiamo come si comportano le intersezioni tra una retta e una conica in modo da poter definire successivamente la tangente.
+
+    \begin{definition}[Componenti e riducibilit\`a]
+    Una retta $r$ di equazione $\ell$ \`e una \textbf{componente} della conica $C=[F]$ se $\ell\mid F$.\\
+    Una conica $C=[F]$ \`e \textbf{irriducibile} se $F$ \`e irriducibile.
+    \end{definition}
+    \begin{remark}
+    Se $r$ \`e una componente di $C$ allora $C$ non \`e irriducibile e viceversa dato che $\deg C=2$.
+    \end{remark}
+    \begin{remark}
+    L'irriducibilit\`a \`e un invariante per equivalenza affine/proiettiva.
+    \end{remark}
+    \begin{remark}
+    Se $r$ \`e componente di $C$ allora $r\subseteq V(C)$ e quindi $|r\cap V(C)|$ \`e infinito.
+    \end{remark}
+
+
+    \begin{lemma}
+    Dato un polinomio $p\in \K[x_0,\cdots,x_n]$ omogeneo tale che $x_0\nmid p$, esso \`e irriducibile se e solo se $f=p(1,x_1,\cdots, x_n)$ \`e irriducibile.
+    \end{lemma}
+    \begin{remark}
+    I fattori irriducibili di un polinomio omogeneo sono omogenei.
+    \end{remark}
+
+
+
+    \begin{proposition}[Numero di intersezioni tra coniche e rette]
+    Sia $C=[F]$ una conica in $\Pj^2$ e $r$ una retta, allora $|V(C)\cap r|$ \`e finito se e solo se \`e minore o uguale a $2$. Se il campo \`e algebricamente chiuso allora $|V(C)\cap r|\geq 1$.
+    \end{proposition}
+
+
+
+    \begin{proposition}[Non degenere se e solo se irriducible]
+    Se siamo su un campo algebricamente chiuso una conica $C$ \`e irriducibile se e solo se \`e non degenere.
+    \end{proposition}
+    \begin{remark}
+    Non degenere implica sempre irriducibile, la dimostrazione proposta sopra non ha usato l'ipotesi di chiusura algebrica.
+    \end{remark}
+
+    \begin{proposition}
+    Se $C$ \`e una conica tale che $|V(C)\cap r|=\infty$ per una retta $r$ di equazione $\ell$ allora $r$ \`e una componente di $C=[p]$.
+    \end{proposition}
+
+    \subsubsection{Tangenti}
+    \begin{definition}[Retta tangente]
+    Se $C$ \`e una conica non degenere allora $r$ \`e \textbf{tangente} a $C$ in $P=[w]\in V(C)\bs H_0$ se $t^2\mid C([w+tv])$ dove $r=\{[w+tv]\mid t\in \K\}$.
+    \end{definition}
+    \begin{remark}
+    Per le coniche in particolare, questo corrisponde a chiedere $|V(C)\cap r|=\{P\}$.
+    \end{remark}
+
+    \begin{remark}
+    Se $f:\Pj^2\to\Pj^2$ \`e una proiettivit\`a, $C$ una conica, $P\in V(C)$ e $r$ tangente a $C$ in $P$ allora $f(r)$ \`e tangente a $f(C)$ in $f(P)$.
+    \end{remark}
+    \begin{proposition}[Equazione della tangente]
+    Sia $C$ una conica non degenere. Per ogni $P\in V(C)$ esiste un unica retta $\tau_P$ tangente a $C$ in $P$. Inoltre, se $M\in S(3,\K)$ rappresenta $C$ e $P=[v]$ allora $\tau_P$ ha equazione $(Mv)^\top x=0$.
+    \end{proposition}
+
+    \begin{remark}
+    $\nabla C(v)=Mv$ quindi possiamo scrivere la retta tangente come lo spazio ortogonale al gradiente dell'equazione nel punto (ricordiamo che stiamo parlando del caso non degenere).
+    \end{remark}
+
+
+    \begin{definition}[Tangenti a conica degenere]
+    Se $C=\ell_1\ell_2$ con $\ell_1,\ell_2$ omogenei lineari allora, posto $s_1=V(\ell_1)$ e $s_2=V(\ell_2)$, si ha che $r$ \`e tangente a $C$ in $P\in V(C)$ se
+    \begin{itemize}[noitemsep]
+    \item $P\in s_1\bs s_2$ e $r=s_1$
+    \item $P\in s_2\bs s_1$ e $r=s_2$
+    \item $P\in s_1\cap s_2$ e $r$ \`e qualsiasi.
+    \end{itemize}
+    \end{definition}
+    \begin{remark}
+    Se $\ell_1=\ell_2$ allora ogni retta \`e tangente a $C$ in $P$ per ogni $P\in C$.
+    \end{remark}
+
+    \subsection{Polarit\`a}
+    \begin{definition}[Retta polare]
+    Sia $C$ una conica non degenere e sia $M$ una matrice simmetrica che la rappresenta. Dato un punto $P=[v]$, la \textbf{retta polare} di $P$ rispetto a $C$ \`e la retta di equazione
+    \[(Mv)^\top x=0\]
+    che indichiamo con $pol(P)$.
+    \end{definition}
+    \begin{remark}
+    Dato che $M$ \`e invertibile si ha che per ogni retta $r$ di coordinate $w$ nel duale possiamo costruire il punto $P=[M\ii w]$ tale che $r=pol(P)$ (rispetto alla conica $C$ rappresentata da $M$). Il punto $P$ si dice \textbf{polo} della retta rispetto a $C$.
+    \end{remark}
+
+    \begin{proposition}
+    Siano $P,Q\in\Pj^2$ e sia $C$ una conica non degenere.
+    \begin{enumerate}
+    \item $P\in pol(Q)\coimplies Q\in pol(P)$
+    \item Se $P\in V(C)$ allora $pol(P)$ \`e la tangente a $C$ in $P$ ($\tau_P$)
+    \item $pol(P)\cap V(C)=\{Q\in V(C)\mid P\in \tau_Q\}$.
+    \end{enumerate}
+    \end{proposition}
+
+    \begin{definition}[Conica duale]
+    Consideriamo l'isomorfismo proiettivo
+    \[\funcDef{\Pj^2}{(\Pj^2)^\ast}{P}{pol(P)},\]
+    che \`e tale perch\'e trasformazione proiettiva tra spazi della stessa dimensione.
+    Se restringiamo il dominio al supporto della conica in questione vediamo che l'immagine deve essere il supporto di una conica in $(\Pj^2)^\ast$, che chiamiamo \textbf{conica duale} di $C$ e indichiamo con $C^\ast$ o $pol(C)$.
+    \end{definition}
+    \begin{remark}
+    Se $M$ rappresenta $C$ allora $C^\ast$ \`e rappresentata da $M\ii$
+    \end{remark}
+
+    \subsection{Punti reali e punti complessi}
+    \begin{definition}[Complessificazione]
+    Se $C=[F]$ \`e una conica su $\Pj^2\R$, la sua \textbf{complessificata} \`e la conica $C_\C$ data dalla stessa equazione ma vista a coefficienti in $\C$.
+    \end{definition}
+
+    \begin{remark}
+    Se $C$ e $D$ sono coniche complesse allora
+    \[C=D\coimplies V(C)=V(D)\]
+    \end{remark}
+
+    \begin{remark}
+    Tramite l'inclusione $\Pj^2\R\subseteq \Pj^2\C$ si ha che $V(C)\subseteq V(C_\C)$. Pi\`u precisamente vale
+    \[V(C)=V(C_\C)\cap \Pj^2\R.\]
+    \end{remark}
+
+    \begin{remark}
+    Non tutte le coniche in $\Pj^2\C$ si ottengono complessificando coniche reali. Inoltre non tutti i punti di $\Pj^2\R$ (visto nell'immersione $\Pj^2\C$) hanno coordinate reali, per esempio $[1:1:2]=[i:i:2i]$.
+    \end{remark}
+
+
+    \subsection{Sistemi lineari di coniche}
+
+    \begin{definition}[Sistema lineare di coniche]
+    Un \textbf{sistema lineare di coniche} \`e un sottospazio proiettivo di
+    \[\Pj(\K_2[x_0,x_1,x_2]).\]
+    Un sistema di dimensione $1$ si dice \textbf{fascio}.
+    \end{definition}
+
+    \begin{proposition}
+    Se $P_1,\cdots, P_4$ sono punti in posizione generale allora
+    \[\Lambda=\{C\mid P_1,\cdots, P_4\in V(C)\}\]
+    \`e un fascio di coniche.
+    \end{proposition}
+
+    \begin{corollary}
+    Dati $P_1,\cdots,P_4$ come sopra, se $\ell_1,\ell_2,g_1,g_2$ sono le equazioni delle rette \[L(P_1,P_3),L(P_2,P_4),L(P_1,P_4),L(P_2,P_3)\] allora la conica generica del fascio della proposizione \`e della forma
+    \[\la\ell_1\ell_2+\mu g_1g_2.\]
+    \end{corollary}
+
+    \begin{remark}
+    Anche imporre la tangenza ad una data retta corrisponde ad una condizione lineare sulla conica.
+    \end{remark}
+
+    \begin{definition}[Punto base]
+    Se $\Lambda$ \`e un sistema lineare di coniche, un punto $P$ \`e un \textbf{punto base} di $\Lambda$ se $P\in V(C)$ per ogni $C\in\Lambda$.
+    \end{definition}
+
+    \begin{remark}
+    Se $\Lambda$ \`e un fascio e $G_1,G_2$ sono coniche distinte di $\Lambda$ allora i punti base di $\Lambda$ sono $V(G_1)\cap V(G_2)$, infatti i punti base sono inclusi in questa intersezione e ogni altra conica di $\Lambda$ \`e della forma $\la G_1+\mu G_2$, che quindi si annulla su questi punti.
+    \end{remark}
+
+    \begin{remark}
+    I punti base possono essere infiniti, si consideri per esempio il fascio $\la x_0x_1+\mu x_0x_2=x_0(\la x_1+\mu x_2)$.
+    \end{remark}
+
+    \begin{remark}
+    Per quattro punti in posizione generale passano esattamente tre coniche degeneri
+    \end{remark}
+
+
+
+
+
+
+
+
+
+
+\end{multicols*}

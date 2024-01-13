@@ -1,0 +1,792 @@
+\chapter{Analisi Complessa}
+
+\begin{multicols*}{2}
+
+
+\section{Richiami di calcolo in pi\`u variabili}
+\begin{definition}[Differenziabilit\`a e differenziale]
+Sia $U\subseteq \R^m$ un aperto e sia $f:U\to \R^n$ una funzione. $f$ \`e  \textbf{differenziabile} in $x_0\in U$ se esiste una funzione lineare $L:\R^m\to \R^n$ tale che
+\[f(x_0+v)=f(x_0)+L(v)+o(|v|).\]
+In tal caso $L$ \`e unica e si dice \textbf{differenziale} di $f$ in $x_0$ e si denota $df_{x_0}:\R^m\to \R^n$.\footnote{La notazione usata nel corso di analisi 2 \`e $\Dc f(x_0)$ al posto di $df_{x_0}$.}
+\end{definition}
+\begin{remark}
+Se $f$ \`e $\R-$lineare allora coincide con il proprio differenziale.
+\end{remark}
+\begin{remark}
+Il differenziale di una composizione \`e la composizione dei differenziali.
+\end{remark}
+\begin{definition}[Derivate parziali]
+Se $\{e_i\}$ \`e la base canonica di $\R^m$ allora definiamo la \textbf{$i-$esima derivata parziale} di $f$ come
+\[df_{x_0}(e_i)=\pdpi if(x_0).\]
+\end{definition}
+
+\noindent
+Per il resto del capitolo identifichiamo $\R^2$ con $\C$ tramite l'isomorfismo $(x,y)\leftrightarrow x+iy$.
+
+\begin{remark}
+$\C$ \`e sia un $\C-$spazio vettoriale (di dimensione $1$ con base $\{1\}$) che un $\R-$spazio vettoriale (di dimensione $2$ con base $\{1,i\}$).
+\end{remark}
+
+\begin{definition}[Coniugio]
+La seguente mappa
+\[\funcDef\C\C {x+iy}{x-iy}\]
+\`e detta \textbf{coniugio}. Se $x\in \C$ spesso indichiamo la sua immagine tramite la mappa di coniugio con $\ol z$ e chiamiamo questo il \textbf{coniugato (complesso)} di $z$.
+\end{definition}
+\begin{remark}
+Il coniugio \`e $\R-$lineare ma non $\C-$lineare ($-i=\ol{i}\neq i\ol{1}=i$).
+\end{remark}
+
+\begin{proposition}[Il differenziale \`e $\C$-lineare]
+Il differenziale \`e $\C$-lineare, cio\`e
+\[d((a+bi)f)_P=(a+bi)df_P.\]
+\end{proposition}
+
+
+\begin{proposition}[Propriet\`a del differenziale]
+Siano $f_1,f_2:U\to\C$ con $U\subseteq\R^m$ aperto mappe differenziabili in $P$, allora
+\begin{enumerate}[noitemsep]
+\item $(d\ol f_1)_P=(\ol{df_1})_P$
+\item $d(f_1f_2)_P=(df_1)_Pf_2(P)+f_1(P)(df_2)_P$
+\item Se $f_1(P)\neq 0$ allora $\frac 1{f_1}$ \`e definita in un intorno di $P$ e
+\[d\pa{\frac1{f_1}}_P=-\frac{(df_1)_P}{f_1(P)^2}.\]
+\end{enumerate}
+\end{proposition}
+
+\begin{notation}
+Per semplicit\`a notazionale a volte scriveremo $z$ al posto di $id_\C$, $\ol z$ al posto della mappa coniugio, $x$ per $a+bi\mapsto a=\Real(a+bi)$ e $y$ per $a+bi\mapsto b=\Imag(a+bi)$. Cercher\`o di rendere la notazione meno ambigua possibile quando possibile.
+\end{notation}
+
+\begin{remark}
+$z=x+iy$ e $\ol z=x-iy$ come funzioni. Osserviamo inoltre che
+\[dz=dx+idy,\quad d\ol z=dx-idy\]
+per linearit\`a. Nonostante $z=dz$ e $\ol z=d\ol z$ manterremo le $d$ quando questo render\`a pi\`u chiari i ragionamenti (vale a dire nel contesto delle 1-forme).\\
+Osserviamo che con queste notazioni $dx=x$ e $dy=y$.
+\end{remark}
+
+\begin{remark}
+Se $f:U\to\C$ \`e differenziabile in $P\in U$ si ha che
+\[df_P=\pdp[x]f(P)dx+\pdp[y]f(P)dy.\]
+\end{remark}
+\begin{remark}
+Dato che $dz=dx+idy$ e $d\ol z=dx-idy$ si ha che
+\[dx=\frac{dz+d\ol z}2,\qquad dy=\frac{dz-d\ol z}{2i}.\]
+Da questo segue che
+\begin{align*}
+df=&\pdp[x]fdx+\pdp[y]fdy =\\
+=&\pdp[x]f\frac{dz+d\ol z}2+\pdp[y]f\frac{dz-d\ol z}{2i}=\\
+=&\frac12\pa{\pdp[x]f-i\pdp[y]f}dz+\frac12\pa{\pdp[x]f+i\pdp[y]f}d\ol z.
+\end{align*}
+\end{remark}
+\noindent
+Motivati dall'espressione sopra per $df$ diamo le seguenti definizioni:
+\begin{notation}
+Poniamo
+\[\pdp[z]f=\frac12\pa{\pdp[x]f-i\pdp[y]f},\qquad \pdp[\ol z]f=\frac12\pa{\pdp[x]f+i\pdp[y]f},\]
+da cui
+\[df=\pdp[z]fdz+\pdp[\ol z]fd\ol z.\]
+\end{notation}
+\begin{remark}
+Si ha che $\pdp[z]fdz$ \`e $\C-$lineare e $\pdp[\ol z]fd\ol z$ \`e $\C-$antilineare.
+\end{remark}
+
+Abbiamo dunque decomposto $f$ in una componente $\C-$lineare e una componente $\C-$antilineare. \\
+\begin{proposition}[Le $\R$ lineari sono la somma diretta delle $\C$ lineari e $\C$ antilineari]\label{RlinSonoSommaDirettaClinECantilin}
+
+\footnotesize{$\cpa{f:\C\to \C\sep \R-lin.}=\cpa{f:\C\to \C\sep \C-lin.}\oplus\cpa{f:\C\to \C\sep \C-antilin.}$}
+\end{proposition}
+
+\section{Funzioni olomorfe}
+\begin{definition}[Funzione olomorfa]
+Siano $U\subseteq \C$ un aperto, $z_0\in U$ e $f:U\to \C$. La funzione $f$ si dice \textbf{olomorfa} (o \textbf{derivabile in senso complesso}) in $z_0$ se il seguente limite esiste
+\[\lim_{z\to z_0}\frac{f(z)-f(z_0)}{z-z_0}=f'(z_0)\in\C.\]
+$f$ \`e \textbf{olomorfa} se lo \`e in $z_0$ per ogni $z_0\in U$.\\
+Poniamo
+\[\Oc(U)=\cpa{f:U\to\C\sep f\text{ olomorfa}}\]
+\end{definition}
+\noindent
+Osserviamo che essere olomorfa ed essere differenziabile hanno definizioni formalmente molto simili, ma sono propriet\`a diverse come mostra la seguente proposizione. La differenza sostanziale sta nel fatto che $z-z_0$ nella definizione \`e un numero complesso, non una distanza. Pi\`u esplicitamente, la differenziabilit\`a richiede solo l'esistenza di \[\lim_{z\to z_0}\frac{f(z)-f(z_0)}{|z-z_0|},\] che \`e una condizione pi\`u debole.
+
+\begin{lemma}
+Se $f:U\to \C$ \`e olomorfa in $z_0\in U$ e $f'(z_0)$ denota il limite della definizione di olomorfa allora
+\[df_{z_0}(w)=f'(z_0)w.\]
+\end{lemma}
+
+\begin{proposition}[Caratterizzazioni delle funzioni olomorfe]\label{CaratterizzazioneOlomorfaInPunto}
+Sia $f:U\to \C$ con $U$ aperto e $z_0\in U$. Le seguenti affermazioni sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $f$ \`e olomorfa in $z_0$
+\item $f$ \`e differenziabile in $z_0$ e $df_{z_0}$ \`e $\C-$lineare
+\item $f$ \`e differenziabile in $z_0$ e $\displaystyle \pdp[\ol z]f(z_0)=0$
+\item $f$ \`e differenziabile e valgono le \textbf{equazioni di Cauchy-Riemann}, cio\`e
+\[\pdp[x]{\Real(f)}=\pdp[y]{\Imag(f)},\quad \pdp[y]{\Real(f)}=-\pdp[x]{\Imag(f)}.\]
+\item $df_{z_0}(w)=f'(z_0)w$.
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Propriet\`a aritmetiche delle olomorfe]\label{ProprietaAritmeticheOlomorfe}
+Siano $f:U\to \C$ e $g:V\to \C$ olomorfe. Allora
+\begin{enumerate}[noitemsep]
+\item se $U=V$ allora $f+g:U\to \C$ \`e olomorfa
+\item se $U=V$ allora $fg:U\to \C$ \`e olomorfa e
+\[(fg)'=f'g+fg'\]
+\item se $f(U)\subseteq V$ allora $g\circ f:U\to \C$ \`e olomorfa e
+\[(g\circ f)'(z_0)=g'(f(z_0))f'(z_0)\]
+\item se $f'(z_0)\neq 0$ e $f\in C^1$ allora esistono un intorno $W$ di $f(z_0)$ in $\C$ e un intorno $Z$ di $z_0$ in $U$ tali che $f(Z)=W$, $f\res Z\to W$ \`e bigettiva e $(f\res Z)\ii :W\to Z$ \`e olomorfa con
+\[((f\res Z)\ii)'(f(z_0))=\frac1{f'(z_0)}\]
+\end{enumerate}
+\end{theorem}
+
+
+
+\section{Analitiche}
+Studiamo una classe di funzioni apparentemente pi\`u piccola delle funzioni olomorfe. Mostreremo successivamente che le funzioni analitiche da $U\subseteq \C$ aperto a $\C$ sono esattamente le funzioni olomorfe. Per il momento limitiamoci a studiarle in quanto tali.
+
+\subsection{Serie di potenze}
+\begin{definition}[Serie di potenze]
+Una serie della forma
+\[\sum_{n=0}^\infty a_n(z-z_0)^n\]
+\`e detta \textbf{serie di potenze} di \textbf{centro} $z_0$.
+\end{definition}
+\begin{remark}
+Una serie di potenze ammette un \textbf{raggio di convergenza}, cio\`e esiste $R>0$ tale che la serie converge assolutamente in $B_R(z_0)$ e diverge in $\C\bs \ol{B_R(z_0)}$.
+\end{remark}
+
+\begin{definition}[Funzione analitica]
+Una funzione $f:U\to \C$ \`e \textbf{analitica} se per ogni $z_0\in U$ esiste $R>0$ tale che $f$ sia esprimibile come serie di potenze centrata in $z_0$ per ogni $z\in B_R(z_0)$.
+\end{definition}
+\begin{proposition}[Le analitiche sono continue]\label{AnaliticaImplicaContinua}
+Una funzione $f:U\to \C$ analitica \`e continua.
+\end{proposition}
+
+\begin{theorem}[Serie di potenze sono analitiche]\label{SeriePotenzeSonoAnalitiche}
+Supponiamo che
+\[f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n\]
+per ogni $z\in B_R(z_0)$ con $R>0$. Allora $f$ \`e analitica su $B_R(z_0)$.
+\end{theorem}
+\begin{remark}
+Il teorema potrebbe sembrare banale ma ricordiamo che analitica significa che la funzione si esprime come serie di potenze centrata in un \textit{qualsiasi} punto del dominio. La scrittura con centro in $z_0$ non \`e sufficiente.
+\end{remark}
+
+\begin{theorem}[Serie derivata]\label{DerivataSerieDiPotenze}
+Se $f=\sum a_n(z-z_0)^n$ su $B_R(z_0)$ allora $f$ \`e olomorfa su $B_R(z_0)$ e
+\[f'(z)=\under{\text{\textbf{serie derivata}}}{\sum_{n=1}^\infty a_nn(z-z_0)^{n-1}}\quad \text{per ogni $z\in B_R(z_0)$}\]
+\end{theorem}
+\begin{corollary}\label{AnaliticaImplicaOlomorfa}
+Una funzione analitica complessa \`e $C^\infty$ in senso complesso.
+\end{corollary}
+\begin{corollary}[Serie di Taylor]\label{TaylorSerieDiPotenze}
+Se $f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n$ in un intorno di $z_0$ allora
+\[f^{(n)}(z_0)=n!\ a_n,\]
+in particolare l'espressione di $f$ come serie di potenze \`e unica:
+\[f(z)=\sum_{n=0}^\infty \frac{f^{(n)}(z_0)}{n!}(z-z_0)^n\]
+\end{corollary}
+
+\begin{remark}[Composizione di analitiche \`e analitica]\label{ComposizioneAnaliticheEAnalitica}
+Siano $f:U\to V$ e $g:V\to \C$ analitiche, allora $g\circ f$ \`e analitica.
+\end{remark}
+
+
+
+\subsection{Ordine di annullamento}
+Studiamo come si comportano gli zeri delle funzioni analitiche. Questo si riveler\`a molto utile nel dare principi di rigidit\`a per le olomorfe.
+
+\begin{definition}[Ordine di annullamento]
+Sia $f:U\to \C$ olomorfa. L'\textbf{ordine di annullamento} (o \textbf{di svanimento} o \textbf{di zero}) di $f$ in $z_0$ \`e dato da
+\[\begin{cases}
+\min\cpa{n\in\N\sep
+f^{(n)}(z_0)\neq 0} & \text{se }\exists n\in\N\ t.c.\ f^{(n)}(z_0)\neq 0\\
+\infty &\text{altrimenti.}
+\end{cases}\]
+\end{definition}
+\begin{remark}
+$f$ ha ordine di annullamento $0$ se $f(z_0)\neq 0$ e ha ordine $\geq 1$ se $f(z_0)=0$.
+\end{remark}
+
+\begin{lemma}[Caratterizzazione dell'ordine di annullamento]\label{CaratterizzazioneOrdineDiAnnullamento}
+Sia $f$ analitica (e quindi olomorfa per (\ref{AnaliticaImplicaOlomorfa})). Le seguenti proposizioni sono equivalenti:
+\begin{enumerate}[noitemsep]
+\item $z_0$ ha ordine di annullamento $n_0$ per $f$
+\item $f(z)=(z-z_0)^{n_0}g(z)$ in un intorno di $z_0$ con $g(z_0)\neq 0$ e $g$ analitica.
+\end{enumerate}
+\end{lemma}
+
+\begin{remark}
+Se $f$ \`e analitica, $z_0$ ha ordine di annullamento $\infty$ per $f$ se e solo se $f=0$ in un intorno di $z_0$.
+\end{remark}
+
+
+\begin{lemma}\label{ZeriAnaliticaSonoIsolatiOIntornoNullo}
+Sia $f:U\to \C$ analitica e sia $Z=\{z_0\in U\mid f(z_0)=0\}$. Sia $z_0\in Z$. Si ha che $z_0$ \`e un punto isolato di $Z$ o $z_0\in int(Z)$.
+\end{lemma}
+
+\begin{theorem}[Zeri di analitica sono isolati o coprono la comp. connessa]\label{ZeriDiAnaliticaSonoIsolatiOCopronoLaComponenteConnessa}
+Sia $f:U\to\C$ analitica con $U$ connesso. Supponiamo che $Z=f\ii(0)\subseteq U$ abbia un punto di accumulazione in $U$. Allora $f=0$ come funzione su $U$.
+\end{theorem}
+\noindent
+Possiamo riformulare questo risultato nel potente
+\begin{corollary}[Principio di identit\`a per analitiche]\label{LuogoDoveAnaliticheCoincidonoSonoIsolatiOCopronoLaComponenteConnessa}
+Se $U$ \`e connesso e $f,g:U\to \C$ sono analitiche e $W\subseteq U$ contiene un punto non isolato allora $f=g$ su $U$ se e solo se $f=g$ su $W$.
+\end{corollary}
+
+\section{Esponenziale e logaritmo complessi}
+\subsection{Esponenziale complesso}
+\begin{definition}[Esponenziale complesso]
+Definiamo
+\[e^z=\sum_{n=0}^\infty \frac{z^n}{n!}.\]
+\end{definition}
+\begin{remark}
+L'esponenziale ha raggio di convergenza infinito. In particolare \`e sempre assolutamente convergente.
+\end{remark}
+
+\begin{proposition}[Propriet\`a dell'esponenziale complesso]\label{ProprietaEsponenzialeComplesso}
+Valgono i seguenti fatti
+\begin{enumerate}[noitemsep]
+\item $e^{z+w}=e^ze^w$ per ogni $z,w\in \C$. In particolare $(e^{z})\ii=e^{-z}$ quindi $exp:\C\to \C^\times$ \`e ben definita.
+\item Se $z=x+iy$ con $x,y\in \R$ allora
+\[e^z=e^xe^{iy}=e^x(\cos y+i\sin y).\]
+\item $\abs{e^{iy}}=\abs{\cos y+i\sin y}=1$, in particolare
+\[\abs{e^{x+iy}}=\abs{e^x}=e^{\Real(z)}.\]
+\item $exp:\C\to \C^\times$ \`e surgettiva
+\item Essendo analitica, $\exp$ \`e olomorfa ed evidentemente $\exp'(z)=\exp(z)$.
+\item $e^z=e^w$ se e solo se $z-w=2k\pi i$
+\end{enumerate}
+\end{proposition}
+
+
+\subsection{Logaritmo complesso}
+Sappiamo che $\exp:\C\to \C^\times$ \`e surgettiva. Questa mappa non \`e iniettiva, dunque non ha senso cercare una inversa globale, ma possiamo provare perlomeno a cercare $L:\C^\times\to C$ tale che $\exp L=id_{\C^\times}$.\\
+Insiemisticamente una tale mappa esiste\footnote{(Curiosit\`a) \`e una formulazione equivalente dell'assioma della scelta}, ma vorremmo cercarla continua. Purtroppo mostreremo che una tale funzione non esiste.
+
+\begin{proposition}[L'esponenziale complesso \`e un rivestimento]\label{EsponenzialeComplessoERivestimento}
+La mappa $\exp:\C\to \C^\times$ \`e un rivestimento.
+\end{proposition}
+
+\begin{corollary}
+Non esiste $L:\C^\times\to \C$ continua tale che $e^{L(z)}=z$ per ogni $z\in\C^\times$.
+\end{corollary}
+
+\noindent
+Cerchiamo allora di invertire l'esponenziale su un sottodominio di $\C^\times$ in modo continuo
+
+\begin{theorem}[Branche del logaritmo]\label{BrancheDelLogaritmo}
+Sia $U\subseteq \C^\times$ aperto connesso tale che l'inclusione $U\inj \C^\times$ induca l'omomorfismo banale $\pi_1(U)\to \pi_1(\C^\times)$\footnote{Per esempio possiamo prendere $U$ semplicemente connesso. L'idea geometrica \`e che non possiamo considerare un insieme che contenga lacci che si attorcigliano attorno l'origine.}. Allora esiste una mappa detta \textbf{branca del logaritmo} continua
+\[L:U\to\C\quad t.c.\quad e^{L(z)}=z\quad \forall z\in U.\]
+Due tali branche che coincidono in un punto coincidono su tutto $U$.
+\end{theorem}
+
+\noindent
+Definiamo allora un logaritmo standard:
+\begin{definition}[Branca principale del logaritmo complesso]
+Sia \[U=\C\bs\{z\in\C\mid \Imag(z)=0\ e\ \Real(z)\leq 0\}.\]
+Chiaramente $U\subseteq\C^\times$ \`e semplicemente connesso quindi il teorema (\ref{BrancheDelLogaritmo}) garantisce l'esistenza di un logaritmo $L:U\to \C$, il quale \`e unico per l'unicit\`a dei sollevamenti (\ref{UnicitaSollevamenti}) se fissiamo $L(1)=0$ (scelta lecita perch\'e $\exp\ii(1)=\{2k\pi\}_{k\in\Z}$).
+\end{definition}
+\begin{proposition}[Formula esplicita per la branca principale del logaritmo]
+Se $L$ \`e la branca principale del logaritmo si ha che
+\[L(z)=\log|z|+i\arg(z),\]
+dove $\log$ \`e il logaritmo reale e $\arg(z)$ \`e l'argomento principale di $z$, definito per esempio da
+\[\arg(x+iy)=\begin{cases}
+\arccos\pa{\frac x{\sqrt{x^2+y^2}}} & y\geq 0\\
+-\arccos\pa{\frac x{\sqrt{x^2+y^2}}} & y\leq 0
+\end{cases}\]
+\end{proposition}
+
+
+
+\begin{proposition}[Le branche del logaritmo sono olomorfe]\label{BrancheDelLogaritmoSonoOlomorfe}
+Le branche del logaritmo complesso sono olomorfe.
+\end{proposition}
+
+\begin{theorem}[Espansione in serie del logaritmo]\label{EspansioneInSerieDelLogaritmo}
+Sia $L:\C\bs\{z\in\R\subseteq\C\mid z\leq 0\}\to \C$ la branca principale del logaritmo. Allora per ogni $z\in B_1(0)$ abbiamo
+\[L(1+z)=\sum_{n=1}^\infty(-1)^{n+1}\frac{z^n}{n}\]
+\end{theorem}
+
+\section{1-Forme complesse}
+\begin{definition}[1-forma continua]
+Sia $U\subseteq\C$ un aperto. Una \textbf{1-Forma} continua su $U$\footnote{sottointenderemo ``continua" quasi sempre} \`e una funzione $\omega:U\times \C\to \C$ continua e $\R-$lineare nel secondo argomento.\\
+Di solito al posto di $\omega(z_0,v)$ si scrive $\omega(z_0)(v)$ o $\omega_{z_0}(v)$ per rimarcare il fatto che $\omega(z_0,\cdot)$ \`e una funzione $\R-$lineare.
+\end{definition}
+\begin{remark}
+Se $f:U\to \C$ \`e $C^1$ allora $df$ \`e una 1-forma, infatti
+\[df(z,w)=df_z(w),\]
+dove la continuit\`a rispetto a $z$ \`e la definizione di $C^1$.
+\end{remark}
+
+\begin{definition}[Forme esatte e chiuse]
+Una 1-forma $\omega$ si dice \textbf{esatta} se esiste $f:U\to \C$ di classe $C^1$ tale che $\omega=df$. In tal caso $f$ si chiama \textbf{primitiva} di $\omega=df$.\\
+Una 1-forma $\omega$ su $U$ si dice \textbf{chiusa} se \`e localmente esatta, cio\`e se per ogni $z_0\in U$ esiste un intorno $V$ di $z_0$ con $z_0\in V\subseteq U$ tale che $\omega\res V$ \`e esatta, cio\`e esiste $f:V\to \C$ di classe $C^1$ con $\omega\res V\doteqdot \omega\res{V\times \C}=df$.
+\end{definition}
+\begin{remark}
+Per definizione ogni forma esatta \`e chiusa.
+\end{remark}
+
+\begin{remark}[1-forme in coordinate]
+Poich\'e $\Hom_\R(\C,\C)$ \`e un $\C-$spazio vettoriale e sia $\{dx,dy\}$ che $\{dz,d\ol z\}$ ne sono basi, possiamo scrivere ogni 1-forma $\omega$ su $U$ nelle forme
+\[\omega(x+iy)=a(x,y)dx+b(x,y)dy,\]
+dove $a,b:U\to \C$ sono continue oppure
+\[\omega(z)=f(z)dz+g(z)d\ol z\]
+dove $f,g:U\to \C$ sono continue.
+\end{remark}
+
+\subsection{Integrazione di 1-forme}
+\begin{definition}[Integrale di funzione da intervallo reale a $\C$]
+Se $f(t)=g(t)+ih(t)$ con $g,h:[a,b]\to \R$ allora
+\[\int_a^bf(t)dt=\int_a^bg(t)dt+i\int_a^bh(t)dt.\]
+\end{definition}
+
+\begin{definition}[Integrale lungo una curva $C^1$]
+Sia $\omega$ una 1-forma su $U\subseteq \C$ e sia $\gamma:[a,b]\to U$ un cammino $C^1$. \textbf{L'integrale di $\omega$ lungo $\gamma$} \`e dato da
+\[\int_\gamma\omega=\int_a^b\omega_{\gamma(t)}(\gamma'(t))dt.\]
+\end{definition}
+
+\begin{definition}[Curva $C^1$ a tratti]
+Una curva $\gamma:[a,b]\to \C$ \`e \textbf{$C^1$ a tratti} se esiste una partizione $\{t_0,\cdots, t_n\}$\footnote{Ricordiamo da Analisi 1 che una partizione ha la forma
+\[a=t_0<t_1<\cdots<t_{n-1}<t_n=b\]
+} di $[a,b]$ tale che $\gamma\res{\spa{t_i,t_{i+1}}}$ \`e $C^1$ per ogni $i$.
+\end{definition}
+
+\begin{remark}[Caso per curve $C^1$ a tratti]
+Se $\gamma:[a,b]\to \C$ \`e $C^1$ a tratti poniamo
+\[\int_\gamma\omega=\sum_{i=0}^{n-1}\int_{t_i}^{t_{i+1}}\omega_{\gamma(t)}(\gamma'(t))dt\]
+\end{remark}
+
+\begin{proposition}[Invarianza dell'integrale per riparametrizzazione]\label{InvarianzaIntegralePerRiparametrizzazione}
+Sia $\delta:[c,d]\to U$ una riparametrizzazione di $\gamma$, cio\`e $\delta=\gamma\circ \vp$ con $\vp:[c,d]\to [a,b]$ di classe $C^1$ con $\vp(c)=a$ e $\vp(d)=b$. Allora
+\[\int_\delta\omega=\int_\gamma\omega\]
+\end{proposition}
+\begin{proposition}[Integrazione di 1-forme esatte]\label{IntegrazioneDi1formeEsatte}
+Se $\omega$ \`e esatta con primitiva $f:U\to \C$ allora
+\[\int_\gamma\omega=f(\gamma(b))-f(\gamma(a)).\]
+\end{proposition}
+
+\begin{corollary}
+Se $\gamma:[a,b]\to U$ \`e una curva $C^1$ a tratti chiusa e $\omega$ \`e una forma esatta su $U$ allora $\int_\gamma\omega=0$.
+\end{corollary}
+
+\begin{example}[Forma chiusa non esatta]
+Consideriamo la forma $\omega=\frac1zdz$ definita su $\C^\times$.\\
+\ul{\textit{Chiusa}}) Segue dal fatto che il logaritmo \`e localmente olomorfo e la sua derivata \`e \[L'(z)=\frac1z.\]
+\ul{\textit{Non Esatta}}) Sia $\gamma:[0,1]\to \C^\times$ data da $\gamma(t)=e^{2\pi it}$. Allora
+\[\int_\gamma\omega=\int_0^1\frac1{\gamma(t)}\gamma'(t)dt=\int_0^1e^{-2\pi it}2\pi ie^{2\pi it}dt=2\pi i\neq 0.\]
+\end{example}
+
+\noindent
+Poich\'e diremo spesso ``aperto connesso"diamo la seguente
+\begin{definition}[Dominio]
+Un insieme $D\subseteq \C$ \`e un \textbf{dominio} se \`e aperto e connesso.
+\end{definition}
+\begin{remark}
+Poich\'e $\C$ \`e localmente connesso per archi si ha che un dominio   \`e anche connesso per archi e localmente connesso per archi (\ref{ApertoInLocalmenteConnessoPerArchiEConnessoPerArchi}).
+\end{remark}
+
+
+
+\begin{proposition}[Caratterizzazione esattezza con integrali su lacci]\label{CaratterizzazioneEsatezzaInTerminiDiIntegraliSuLacci}
+Sia $D\subseteq \C$ dominio e $\omega$ una 1-forma su $D$. Allora $\omega$ \`e esatta se e solo se $\int_\gamma\omega=0$ per ogni $\gamma$ laccio su $D$ di classe $C^1$ a tratti.
+\end{proposition}
+
+\begin{corollary}[Caratterizzazione di forme esatte in disco]\label{CaratterizzazioneEsattezzaInDiscoConIntegraliSuBordiRettangolari}
+Se $D$ \`e un disco allora $\omega$ \`e esatta in $D$ se e solo se $\int_\gamma\omega=0$ per ogni curva chiusa $\gamma$ bordo di un rettangolo parallelo agli assi.
+\end{corollary}
+
+\begin{corollary}
+Se $D$ \`e un disco allora $\omega$ \`e esatta in $D$ se e solo se $\omega$ \`e chiusa in $D$.
+\end{corollary}
+
+
+\subsection{Primitive lungo curve e lungo omotopie}
+\begin{lemma}[Numero di Lebesgue per forme chiuse]\label{NumeroLebesgueFormeChiuse}
+Siano $\gamma:[a,b]\to D$ continua e $\omega$ una 1-forma chiusa su $D$. Allora esiste $\e>0$ tale che se $[c,d]\subseteq [a,b]$ e $d-c<\e$ allora esiste un disco $U\subseteq D$ tale che $\omega$ \`e esatta su $U$ e $\gamma([c,d])\subseteq U$. Per brevit\`a diremo che $\e$ \`e un \textbf{numero di Lebesgue} per $\omega$ sulla curva $\gamma$\footnote{Questa definizione NON \`e standard e NON \`e stata data durante il corso. L'ho data io per rendere pi\`u scorrevole il testo quando useremo questo lemma.}.
+\end{lemma}
+
+\begin{definition}[Primitiva lungo una curva]
+Sia $\gamma:[a,b]\to D$ continua. Sia $\omega=Pdx+Qdy$ una 1-forma chiusa su $D$. Una \textbf{primitiva} per $\omega$ \textbf{lungo $\gamma$} \`e una funzione continua $f:[a,b]\to \C$ tale che per ogni $t_0\in[a,b]$ esistono $U\subseteq D$ intorno aperto di $\gamma(t_0)$ e $F:U\to \C$ primitiva di $\omega$ su $U$ tale che $F(\gamma(t))=f(t)$ per ogni $t\in\gamma\ii(U)$.\footnote{Ricordo che la notazione che uso in queste dispense assegna il simbolo $\ol \gamma$ al cammino inverso. Con $\gamma\ii(U)$ intendo la preimmagine di $U$ tramite la mappa $\gamma:[a,b]\to D$}
+\end{definition}
+
+\begin{theorem}[Esistenza e quasi unicit\`a delle primitive lungo curve]\label{EsistenzaQuasiUnicitaPrimitiveLungoCurve}
+Per ogni $\gamma:[a,b]\to D$ continua e per ogni 1-forma $\omega$ chiusa su $D$ esiste una primitiva di $\omega$ lungo $\gamma$, che \`e unica a meno di costanti additive.
+\end{theorem}
+
+
+\begin{definition}[Primitiva lungo una omotopia]
+Siano $H:[0,1]\times[a,b]\to D$ una omotopia fra $\gamma_0$ e $\gamma_1$ e $\omega$ una 1-forma chiusa su $D$. Una \textbf{primitiva di $\omega$ lungo $H$} \`e $f:[0,1]\times[a,b]\to D$ tale che per ogni $(s_0,t_0)\in [0,1]\times[a,b]$ esistono $U\subseteq D$ intorno di $H(s_0,t_0)$ e $F:U\to\C$ primitiva di $\omega$ tale che $F(H(s,t))=f(s,t)$ per ogni $(s,t)\in H\ii(U)$.
+\end{definition}
+\begin{remark}
+La restrizione di $f$ primitiva lungo una omotopia ai segmenti orizzontali o verticali restituisce una primitiva di $\omega$ lungo la curva corrispondente.
+\end{remark}
+
+\begin{theorem}[Esistenza e quasi unicit\`a delle primitive lungo omotopie]\label{EsistenzaEQuasiUnicitaPrimitiveLungoOmotopie}
+Se $\omega$ \`e una 1-forma chiusa allora ammette una primitiva lungo qualsiasi omotopia $H:[0,1]\times[a,b]\to D$.
+\end{theorem}
+
+\begin{corollary}[Integrazione di forme chiuse tramite primitiva lungo curve]\label{IntegrazioneFormeChiuseTramitePrimitivaLungoCurve}
+Se $\omega$ \`e chiusa, $\gamma$ \`e $C^1$ a tratti e $f$ \`e primitiva di $\omega$ lungo $\gamma$ allora
+\[\int_\gamma\omega=f(b)-f(a).\]
+\end{corollary}
+
+\noindent Se $\gamma$ \`e continua ma non $C^1$ a tratti diamo come definizione di integrale quella che mantiene vero questo risultato
+\begin{definition}[Integrale di 1-forme chiuse su cammini continui]
+Data $\omega$ una forma chiusa su $U$ e $\gamma:[a,b]\to U$, allora, detta $f$ una primitiva di $\omega$ lungo $\gamma$, definiamo
+\[\int_\gamma\omega=f(b)-f(a).\]
+\end{definition}
+
+
+\begin{theorem}[Invarianza dell'integrale per cammini omotopi]\label{InvarianzaIntegraleCamminiOmotopi}
+Siano $D\subseteq\C$ dominio, $\gamma_0,\gamma_1:[a,b]\to D$ curve omotope a estremi fissi e $\omega$ chiusa su $D$. Allora
+\[\int_{\gamma_0}\omega=\int_{\gamma_1}\omega.\]
+\end{theorem}
+
+
+\subsection{Forme chiuse da funzioni olomorfe}
+Da questo momento in poi nel corso la definizione di ``funzione olomorfa" diventer\`a implicitamente ``funzione olomorfa e $C^1$". Il motivo verr\`a reso chiaro tra qualche risultato.
+\bigskip
+
+\noindent Citiamo il
+\begin{theorem}[Gauss-Green]\label{TeoremaGaussGreen}
+Sia $\omega=Pdx+Qdy$ una 1-forma $C^1$ nell'intorno di un rettangolo $\ol R$ con lati paralleli agli assi. Allora
+\[\iint_R\pa{\pdp Q-\pdp[y]P}dxdy=\int_{\partial R}\omega.\]
+\end{theorem}
+\begin{remark}
+Se $\omega=Adz+Bd\ol z$ allora
+\[\iint_R\pa{\pdp[z] B-\pdp[\ol z]A}dzd\ol z=\int_{\partial R}\omega.\]
+\end{remark}
+\begin{theorem}[Caratterizzazione delle forme chiuse $C^1$ con derivate parziali]\label{CaratterizzazioneFormeChiuseC1TramiteDerivateParziali}
+Sia $\omega=Pdx+Qdy$ una 1-forma $C^1$ su $D$ dominio. Allora \[\omega  \text{ chiusa} \coimplies \pdp[y]P=\pdp Q.\]
+\end{theorem}
+
+\begin{corollary}[$fdz$ chiusa se e solo se $f$ olomorfa]\label{fdzchiusaSeESoloSefOlomorfaInC1}
+Sia $f\in C^1(D)$. Allora $\omega=fdz$ \`e chiusa se e solo se $f$ \`e olomorfa.
+\end{corollary}
+
+\begin{corollary}
+La forma $fdz$ \`e esatta in $D$ se e solo se esiste $F:D\to\C$ olomorfa tale che $F'=f$.
+\end{corollary}
+
+\noindent In realt\`a una implicazione della caratterizzazione (\ref{fdzchiusaSeESoloSefOlomorfaInC1}) vale anche senza supporre $f$ di classe $C^1$.
+
+\begin{theorem}[Cauchy]\label{OlomorfaDefinisceFormaChiusa}
+Se $f$ \`e olomorfa allora $fdz$ \`e chiusa.
+\end{theorem}
+
+\noindent Poich\'e l'implicazione (\ref{OlomorfaDefinisceFormaChiusa}) non \`e stata dimostrata, la trattazione che segue \`e rigorosa solo se sostituiamo la parola ``olomorfa" con ``olomorfa $C^1$". Per rendere pi\`u generali le dispense proceder\`o invocando quando necessario il teorema di Cauchy (\ref{OlomorfaDefinisceFormaChiusa}) quando il corso ha usato l'analogo per le $C^1$. Se preferite attenervi solo a ci\`o che \`e stato dimostrato considerate solo funzioni olomorfe di classe $C^1$ e sostituite ogni riferimento a (\ref{OlomorfaDefinisceFormaChiusa}) con un riferimento a (\ref{fdzchiusaSeESoloSefOlomorfaInC1}).
+\bigskip
+
+\noindent
+Concludiamo la sezione fornendo un utile risultato sull'estensione dell'olomorfia.
+
+
+\begin{theorem}[Continua olomorfa fuori un segmento d\`a forma chiusa]\label{ContinuaOlomorfaEccettoInSegmentoDaFormaChiusa}
+Sia $D\subseteq \C$ aperto, $f$ continua in $D$ e olomorfa fuori da un segmento $L\subseteq D$. Allora $fdz$ \`e chiusa in $D$.
+\end{theorem}
+\begin{corollary}\label{ContinuaOlomorfaEccettoUnPuntoEOlomorfa}
+Sia $D\subseteq \C$ aperto, $f$ continua in $D$ e olomorfa $C^1$ fuori da un segmento $L\subseteq D$. Allora $f$ \`e olomorfa in $D$.
+\end{corollary}
+
+\section{Indice di avvolgimento e Formula di Cauchy}
+\begin{definition}[Indice di avvolgimento]
+Sia $\gamma$ una curva chiusa in $\C$ e sia $z_0$ un punto che NON appartiene al supporto di $\gamma$ ($z_0\in \C\bs \gamma([0,1])$). Allora l'\textbf{indice di avvolgimento} di $\gamma$ attorno $z_0$ \`e dato da
+\[\Ind(\gamma,z_0)=\frac1{2\pi i}\int_{\gamma}\frac{dz}{z-z_0}.\]
+\end{definition}
+\begin{remark}
+La forma $\frac{dz}{z-z_0}$ \`e chiusa in $\C\bs\{z_0\}$, quindi ammette primitiva lungo $\gamma$ anche se $\gamma$ \`e continua ma non $C^1$ (\ref{EsistenzaQuasiUnicitaPrimitiveLungoCurve}). L'integrale nella definizione di $\Ind(\gamma,z_0)$ \`e quindi ben definito anche se $\gamma$ non \`e $C^1$ a tratti.
+\end{remark}
+
+\begin{proposition}[Indice di avvolgimento \`e intero]\label{IndiceAvvolgimentoEIntero}
+Per ogni $z_0$ e per ogni curva continua $\gamma$ che non passa per $z_0$ si ha che
+\[\Ind(\gamma,z_0)\in \Z.\]
+\end{proposition}
+\begin{remark}
+Intuitivamente $\Ind(\gamma,z_0)$ conta quante volte $\gamma$ ``gira attorno a $z_0$".
+\end{remark}
+
+
+
+
+
+\begin{theorem}[Formula integrale di Cauchy]\label{FormulaIntegraleCauchy}
+Siano $D\subseteq\C$ aperto, $f\in\Oc(D)$ e $\gamma:[0,1]\to D$ una curva chiusa omotopa ad una curva costante. Sia $z\in D\bs\gamma([0,1])$. Allora\footnote{Qui e in futuro useremo $\zeta$ quando $z$ \`e gi\`a occupato. Quindi per $d\zeta$ intendiamo comunque $dx+idy$.}
+\[\Ind(\gamma,z)f(z)=\frac1{2\pi i}\int_\gamma \frac{f(\zeta)}{\zeta-z}d\zeta.\]
+\end{theorem}
+\begin{remark}
+Dal teorema segue immediatamente che una funzione olomorfa definita su un disco \`e completamente determinata dal suo valore sul bordo del disco.
+\end{remark}
+
+\subsection{Olomorfa implica analitica}
+\begin{theorem}[Continue sul bordo di un disco definiscono olomorfa nel disco]\label{ContinueSuBordoDiDiscoDefinisconoOlomorfaInDisco}
+Sia $B=B(z_0,R)$ e $h:\partial B\to \C$ continua. Sia $\gamma:[0,2\pi]\to \C$ data da $\gamma(t)=z_0+Re^{it}$ e poniamo
+\[f(z)=\frac1{2\pi i}\int_{\gamma}\frac{h(\zeta)}{\zeta-z}d\zeta.\]
+Allora abbiamo che
+\begin{enumerate}[noitemsep]
+\item $f(z)=\ser na_n(z-z_0)^n$ serie di potenze con raggio di convergenza maggiore o uguale a $R$.
+\item $a_n=\displaystyle\frac1{2\pi i}\int_\gamma\frac{h(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta$.
+\end{enumerate}
+In particolare $f\in \Oc(B)$ e $a_n=\frac{f^{(n)}(z_0)}{n!}$.
+\end{theorem}
+
+
+\begin{corollary}[Una funzione olomorfa \`e analitica]\label{OlomorfaImplicaAnalitica}
+Dati $D\subseteq \C$ aperto, $f\in \Oc(D)$ e $\ol B=\ol{B(z_0,R)}\subseteq D$ si ha che
+\begin{enumerate}[noitemsep]
+\item $\displaystyle f(z)=\ser na_n(z-z_0)^n$ con raggio di convergenza maggiore o uguale a $R$
+\item Posto $\gamma(t)=z_0+Re^{it}$ si ha che \[a_n=\frac{f^{(n)}(z_0)}{n!}=\frac1{2\pi i}\int_{\gamma}\frac{f(\zeta)}{(\zeta-z_0)^{n+1}}d\zeta.\]
+\end{enumerate}
+\end{corollary}
+
+\subsubsection{Propriet\`a delle olomorfe ereditate delle analitiche}
+\begin{corollary}[Propriet\`a delle olomorfe ereditate dalle analitiche]\label{ProprietaCheOlomorfeEreditanoDaAnalitiche}
+Sia $D\subseteq \C$ aperto, $f\in \Oc(D)$ e $\ol B=\ol{B(z_0,R)}\subseteq D$, allora
+\begin{enumerate}[noitemsep]
+\item $f\in C^\infty(D)$
+\item Per ogni $z\in B$ e per ogni $n\in \N$
+\[f^{(n)}(z)=n!\cauchyint[n+1]<-z>{\gamma},\]
+dove $\gamma(t)=z_0+Re^{it}$.
+\item Per ogni $n\in\N$ abbiamo $f^{(n)}\in \Oc(D)$
+\end{enumerate}
+\end{corollary}
+
+
+\noindent Data l'importanza della seguente propriet\`a ereditata dalle analitiche la isoliamo in una proposizione:
+\begin{proposition}[Principio di identit\`a]\label{PrincipioDiIdentita}
+Sia $D$ un dominio e siano $f,g:D\to \C$ olomorfe. Se $f$ e $g$ coincidono su un aperto allora coincidono su tutto $D$.
+\end{proposition}
+
+\section{Applicazioni}
+\subsection{Disuguaglianze di Cauchy e Teorema di Liouville}
+\begin{notation}
+Siano $D\subseteq \C$ aperto, $z_0\in D$, $\ol B=\ol{B(z_0,R)}\subseteq D$ e $f$ olomorfa su $D$. Per ogni $r\leq R$ poniamo
+\[M(r)=\max\cpa{|f(z)|\sep \abs{z-z_0}=r}=\max_{z\in \partial B_r(z_0)}\{|f(z)|\}.\]
+\end{notation}
+\begin{proposition}[Disuguaglianze di Cauchy]\label{DisuguaglianzeCauchy}
+Siano $D\subseteq \C$ aperto, $z_0\in D$, $\ol B=\ol{B(z_0,r)}\subseteq D$ e $f$ olomorfa su $D$.
+Allora
+\[\abs{f^{(n)}(z_0)}\leq \frac{n!M(r)}{r^n}.\]
+\end{proposition}
+\begin{remark}
+Le disuguaglianze di Cauchy danno una maggiorazione di $\abs{f^{(n)}(z_0)}$ in termini di $n,\ r$ e il massimo che $f$ assume sul BORDO del disco di raggio $r$ centrato in $z_0$.
+\end{remark}
+
+\begin{corollary}[Teorema di Liouville]\label{TeoremaLiouville}
+Ogni funzione limitata olomorfa su $\C$\footnote{Le funzioni olomorfe su $\C$ si dicono \textbf{intere}.} \`e costante.
+\end{corollary}
+
+\begin{corollary}[Teorema fondamentale dell'algebra]\label{TeoremaFondamentaleAlgebra}
+Ogni polinomio $p\in\C[z]$ di grado $n\geq 1$ ha esattamente $n$ radici distinte contate con molteplicit\`a.
+\end{corollary}
+
+\subsection{Principio della media}
+\begin{definition}[Propriet\`a della media]
+Una funzione $f:D\to \C$ soddisfa la \textbf{propriet\`a della media} se per ogni $z_0\in D$ esiste $r_0>0$ tale che $\ol{B_{r_0}(z_0)}\subseteq D$ e per ogni $r\in(0,r_0)$ si ha che
+\[f(z_0)=\frac1{2\pi}\int_0^{2\pi}f(z_0+re^{it})dt.\]
+\end{definition}
+\begin{proposition}[Propriet\`a della media implica continua]\label{ProprietaDellaMediaImplicaContinua}
+Se $f:D\to \C$ soddisfa la propriet\`a della media allora \`e continua.
+\end{proposition}
+\begin{theorem}[Principio della media]\label{PrincipioDellaMedia}
+Siano $D\subseteq\C$ aperto, $f\in\Oc(D)$ e $\ol B=\ol{B(z_0,r)}\subseteq D$. Allora
+\[f(z_0)=\frac1{2\pi}\int_0^{2\pi} f(z_0+re^{it})dt,\]
+in particolare $f$ soddisfa la propriet\`a della media.
+\end{theorem}
+\begin{remark}
+Nelle ipotesi del teorema, anche $\Real(f)$ e $\Imag(f)$ soddisfano la propriet\`a della media.
+\end{remark}
+\begin{remark}[Propriet\`a della media su area]
+Nelle ipotesi del teorema vale
+\[f(z_0)=\frac1{\pi r^2}\int_Bf(z)dxdy.\]
+\end{remark}
+
+
+
+\subsection{Principio del massimo}
+\begin{theorem}[Principio del massimo 1]\label{PrincipioMassimo1}
+Sia $f:D\to \C$ con la propriet\`a della media. Supponiamo che esista $z_0\in D$ massimo locale per $|f|$ (oppure per $f$ se $f:D\to \R$). Allora $f$ \`e costante in un intorno di $z_0$.
+\end{theorem}
+
+\begin{corollary}[Olomorfa con massimo locale in modulo o per componente \`e costante]\label{OlomorfaConMassimoLocalInModuloOPerComponenteECostante}
+Se $D\subseteq \C$ dominio e $f\in\Oc(D)$ \`e tale che esiste $z_0\in D$ punto di massimo locale per $|f|$ (oppure $\Real(f)$ oppure $\Imag(f)$) allora $f$ \`e costante.
+\end{corollary}
+
+
+\begin{corollary}[Principio del massimo 2]\label{PrincipioMassimo2}
+Sia $D\subseteq \C$ un dominio limitato. Sia $f\in \Oc(D)\cap C^0\pa{\ol D}$. Poniamo
+\[M=\max_{x\in \partial D}|f(z)|.\]
+Allora
+\begin{enumerate}[noitemsep]
+\item $|f(z)|\leq M$ per ogni $z\in D$
+\item se esiste $z_0\in D$ tale che $|f(z_0)|=M$ allora $f$ \`e costante.
+\end{enumerate}
+Valgono anche risultati analoghi per $\Real(f)$ e $\Imag(f)$ al posto di $|f|$.
+\end{corollary}
+\begin{remark}
+L'ipotesi di limitatezza \`e necessaria. Consideriamo per esempio
+\[D=\cpa{z\in\C\sep\Real(z)>0}\quad\text{e}\quad f(z)=e^z.\]
+Evidentemente $e^z$ \`e olomorfa e continua su $D$ perch\'e restrizione di olomorfa su $\C$. Osserviamo che $|f|\res{\partial D}=1$ ma $\displaystyle\sup_{z\in D}|f(z)|=+\infty$.\\
+Il problema \`e il comportamento nel punto all'infinito.
+\end{remark}
+\begin{remark}
+Nel caso $\Real(f)$ e $\Imag(f)$ valgono anche dei principi del minimo. Basta applicare il principio del massimo a $-\Real(f)$ e $-\Imag(f)$.
+\end{remark}
+
+\begin{theorem}[Teorema dell'applicazione aperta]\label{TeoremaApplicazioneAperta}
+Ogni $f\in \Oc(D)$ non costante \`e una mappa aperta.
+\end{theorem}
+
+\section{Singolarit\`a}
+\begin{definition}[Singolarit\`a]
+Se $f\in \Oc(B_r(z_0)\bs\{z_0\})$ allora $z_0$ \`e una \textbf{singolarit\`a} per $f$.
+\end{definition}
+
+
+\begin{definition}[Corona]
+Dati $0\leq r<R\leq+\infty$, l'\textbf{anello} (o \textbf{corona}) definito da $r$ e $R$ \`e l'insieme
+\[A(r,R)=\cpa{z\in\C\sep r<|z|<R}.\]
+Se $r>R$ poniamo $A(r,R)=\emptyset$.
+\end{definition}
+\begin{remark}
+Esempi particolari di anelli sono $A(0,R)=B(0,R)\nz$, $A(r,+\infty)=\C\bs\ol{B(0,r)}$ e $A(0,+\infty)=\C\nz$
+\end{remark}
+\begin{lemma}\label{IntegraleDiUnGiroAttornoAnelloNonDipendeDallaDistanzaDalCentro}
+Se $f\in \Oc(A(r,R))$ allora dato $\rho\in(r,R)$, $\int_{\rho e^{2\pi it}}fdz$ non dipende da $\rho$.
+\end{lemma}
+\begin{lemma}\label{ValoriOlomorfaSuAnelloComeSottrazioneDiIntegrali}
+Sia $f\in \Oc(A(r,R))$ e $z_0\in A(r,R)$. Siano $\rho_1<\rho_2$ e $r<\rho_1<|z_0|<\rho_2<R$. Allora
+\[f(z_0)=\cauchyint{\rho_2e^{2\pi it}}-\cauchyint{\rho_1e^{2\pi it}}\]
+\end{lemma}
+
+\subsection{Serie di Laurent}
+Poich\'e le serie di potenze convergono in un intero disco non possono essere lo strumento adatto per catturare le singolarit\`a. Consideriamo allora una generalizzazione delle serie di potenze che ammette potenze negative, ovvero le serie di Laurent
+\begin{definition}[Serie di Laurent]
+Una \textbf{serie di Laurent} centrata in $z_0$ \`e un'espressione della forma
+\[f=\sum_{n=-\infty}^{+\infty}a_n(z-z_0)^n,\]
+con $a_n\in\C$.\\
+Diremo che $f$ \`e \textbf{convergente} se
+\[f_+=\ser n a_n(z-z_0)^n\quad \text{e}\quad f_-=\ser m a_{-m}\pa{\frac1{z-z_0}}^m\]
+sono convergenti.
+\end{definition}
+\begin{remark}[Le serie di Laurent convergono in anello]
+Data $f$ serie di Laurent proviamo a capire dove converge assolutamente. Per ci\`o che sappiamo sulle serie di potenze si ha che $f_+$ converge assolutamente in un disco. Sia $R$ il raggio di questo disco. Possiamo interpretare $f_-$ come una serie di potenze nelle $\frac1{z-z_0}$ e questo restituisce un raggio di convergenza assoluta $\frac1r$, cio\`e $f_-$ converge assolutamente se
+\[\frac1{|z-z_0|}<\frac1r\coimplies |z-z_0|>r.\]
+Mettendo insieme queste informazioni abbiamo che $f$ converge assolutamente nell'anello
+\[z_0+A(r,R).\]
+Osserviamo che se $r>R$ allora $f$ non converge perch\'e in ogni punto una tra $f_+$ e $f_-$ non converge.
+\end{remark}
+
+
+\begin{proposition}[propriet\`a delle serie di Laurent]\label{ProprietaLaurent}
+Se $f(z)=\sum_{n\in\Z}a_n(z-z_0)^n$ converge in $\Omega=z_0+A(r,R)$ allora
+\begin{enumerate}[noitemsep]
+\item $f$ \`e olomorfa in $\Omega$
+\item per ogni $r<\rho<R$ vale $\displaystyle a_n=\cauchyint[n+1]{z_0+\rho e^{2\pi it}}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{theorem}[Olomorfa su Anello \`e serie di Laurent]\label{OlomorfaSuAnelloESerieDiLaurent}
+Siano $0\leq r<R\leq +\infty$, $z_0\in \C$ e $\Omega=z_0+A(r,R)$. Se $f\in\Oc(\Omega)$ allora $f$ si esprime tramite un'unica serie di Laurent in $z_0$ convergente in $\Omega$.
+\end{theorem}
+
+
+\subsection{Tipi di singolarit\`a}
+\begin{definition}[Tipi di singolarit\`a]
+Sia $f\in \Oc(B_R(z_0)\bs\{z_0\})=\Oc(z_0+A(0,R))$ e scriviamo $f$ in serie di Laurent come segue
+\[f(z)=\sum_{n\in\Z}a_n(z-z_0)^n.\]
+Si dice che $z_0$ \`e
+\begin{itemize}[noitemsep]
+\item una \textbf{singolarit\`a eliminabile} se $a_n=0$ per ogni $n<0$.
+\item un \textbf{polo} di \textbf{ordine} $k>0$ se $a_{-k}\neq 0$ e $a_n=0$ per $n<-k$.\\
+Un polo si dice \textbf{semplice} se ha ordine $1$.
+\item una \textbf{singolarit\`a essenziale} altrimenti.
+\end{itemize}
+\end{definition}
+\begin{remark}[Singolarit\`a eliminabili possono essere ignorate]
+Se $z_0$ \`e una singolarit\`a eliminabile di $f=\sum a_k(z-z_0)^k$ allora ponendo $f(z_0)=a_0$ si ha che $f\in\Oc(B_R(z_0))$.
+\end{remark}
+\begin{remark}[I poli si possono fattorizzare]
+Se $z_0$ \`e un polo di ordine $k$ per $f=\sum_n a_n$ allora
+\[f(z)=\frac1{(z-z_0)^k}h(z)\]
+dove $h$ \`e una funzione olomorfa e $h(z_0)\neq 0$.
+\end{remark}
+
+\begin{theorem}[Estensione di Riemann]\label{TeoremaEstensioneRiemann}
+Sia $f\in \Oc(B^\ast)$, dove $B^\ast=B_R(z_0)\bs\{z_0\}$. Allora se $|f|$ \`e limitato in $B^\ast$ si ha che $z_0$ \`e una singolarit\`a eliminabile.
+\end{theorem}
+
+\begin{theorem}[Casorati-Weierstass]\label{TeoremaCasoratiWeierstrass}
+Sia $f\in \Oc(B^\ast)$, dove $B^\ast=B_R(z_0)\bs\{z_0\}$. Se $z_0$ \`e un singolarit\`a essenziale allora $f(B^\ast)$ \`e denso in $\C$.
+\end{theorem}
+
+
+\section{Funzioni meromorfe e Residui}
+\begin{definition}[Funzione meromorfa]
+Sia $U\subseteq \C$ aperto. Una funzione \textbf{meromorfa} su $U$ \`e una funzione olomorfa $f:U\bs S\to \C$ dove $S\subseteq U$ \`e discreto e per ogni $z_0\in S$ si ha che $z_0$ \`e un polo.\footnote{Intuitivamente una funzione \`e meromorfa se \`e olomorfa ovunque eccetto in qualche polo isolato.}
+\end{definition}
+
+\begin{remark}
+Se $f,g:U\to\C$ sono olomorfe con $U$ connesso e $g$ non costantemente nulla, allora $\frac fg$ \`e meromorfa.
+\end{remark}
+
+\begin{remark}[Inversione mantiene l'ordine scambiando zeri e poli]
+Se $f:U\to \C$ \`e olomorfa non costantemente nulla con $U$ dominio e $f(z_0)=0$ con ordine di annullamento $n_0$ allora $\frac1{f}$ ha un polo di ordine $n_0$ in $z_0$.
+\end{remark}
+
+\begin{definition}[Residuo]
+Siano $U\subseteq \C$ aperto, $z_0\in U$ e $f:U\bs \{z_0\}\to \C$ olomorfa. Definiamo il \textbf{residuo} di $f$ in $z_0$ come
+\[\Res(f,z_0)=a_{-1}=\cauchyint[-1+1]{\al}=\frac1{2\pi i}\int_\al f(z)dz,\]
+dove $\sum_{n\in\Z}a_n(z-z_0)^n$ \`e lo sviluppo di Laurent di $f$ su $B(z_0,\e)\bs\{z_0\}$ per $\e$ abbastanza piccolo e $\al(t)=z_0+\e e^{it}$.
+\end{definition}
+\begin{remark}
+Il residuo \`e una misura di   ``quanto la forma $fdz$ non \`e esatta".
+\end{remark}
+
+
+
+\begin{proposition}[Formula del residuo per rapporto di olomorfe]\label{FormulaResiduoPerRapportoDiOlomorfe}
+Se $g,h:U\to \C$ olomorfe con $z_0$ uno zero di ordine $1$ per $h$ e $g(z_0)\neq 0$ allora posta $f=\frac gh$ abbiamo che $z_0$ \`e un polo di ordine $1$ per $f$ e
+\[\Res(f,z_0)=\lim_{z\to z_0}(z-z_0)\frac{g(z)}{h(z)}=\frac{g(z_0)}{h'(z_0)}.\]
+\end{proposition}
+
+\begin{theorem}[Teorema dei Residui]\label{TeoremaResidui}
+Sia $U\subseteq \C$ aperto, $S\subseteq U$ discreto chiuso\footnote{Per esempio: una successione che tende a un punto in $U$ non \`e ammessa, invece una che accumula a un punto sul bordo di $U$ va bene perch\'e come sottoinsieme di $U$ \`e chiusa.}, $f:U\bs S\to \C$ olomorfa. Sia $K\subseteq U$ una regione compatta omeomorfa a $D^2$. Sia $\al:[0,1]\to\partial K$ una parametrizzazione di $\partial K$ in senso antiorario. Assumiamo anche $S\cap \partial K=\emptyset$. Allora valgono le seguenti affermazioni:
+\begin{enumerate}[noitemsep]
+\item $S\cap K$ \`e finito
+\item $\displaystyle\int_\al f(z)dz=2\pi i\sum_{z_0\in S\cap K}\Res(f,z_0)$.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Derivata Logaritmica}
+\begin{definition}[Derivata logaritmica]
+Data una funzione derivabile $f$ definiamo la sua \textbf{derivata logaritmica} nei punti dove non si annulla come
+\[\frac{f'}f.\]
+\end{definition}
+\begin{remark}[La derivata logaritmica trasforma poli e zeri in poli semplici]
+Se $z_0$ \`e uno zero o polo di $f$ tale che
+\[f(z)=(z-z_0)^{n_0}g(z)\]
+con $g(z_0)\neq 0$, $g(z)$ olomorfa vicina a $z_0$ e $n_0\neq 0$ allora vicino a $z_0$ si ha che
+\begin{align*}
+\frac{f'(z)}{f(z)}=&\frac{n_0(z-z_0)^{n_0-1}g(z)+(z-z_0)^{n_0}g'(z)}{(z-z_0)^{n_0}g(z)}=\\
+=&\frac{n_0}{z-z_0}+\frac{g'(z)}{g(z)}.
+\end{align*}
+Osserviamo inoltre che $\frac{g'(z)}{g(z)}$ \`e olomorfa vicino a $z_0$ perch\'e $g(z_0)\neq 0$.
+\end{remark}
+\begin{remark}
+Simbolicamente si ha che
+\[\frac{f'}{f}=\log(f)',\]
+da cui il nome.
+\end{remark}
+
+
+\begin{proposition}[Residuo in polo della derivata logaritmica \`e l'ordine del polo/zero]\label{ResiduoDellaDerivataLogaritmicaEOrdine}
+Se $f:U\to \C$ \`e meromorfa anche $\frac{f'}{f}$ lo \`e e i poli di $\frac{f'}{f}$ coincidono esattamente con i poli e gli zeri di $f$, inoltre
+\[\Res\pa{\frac{f'}f,z_0}=n_0\]
+dove $n_0$ \`e l'ordine di $z_0$ come zero di $f$ se positivo o $-n_0$ \`e l'ordine di $z_0$ come polo di $f$.
+\end{proposition}
+
+\begin{theorem}[Teorema di Derivata logaritmica]\label{TeoremaDerivataLogaritmica}
+Sia $f:U\to \C$ meromorfa e $K\subseteq U$ compatto omeomorfo a $D^2$. Se $\al$ \`e una parametrizzazione in senso antiorario di $\partial K$ e $\partial K$ non contiene n\'e zeri n\'e poli di $f$ allora
+\[\int_\al\frac{f'(z)}{f(z)}dz=2\pi i(Z-P)\]
+dove $Z$ \`e la somma degli ordini di tutti gli zeri di $f$ contenuti in $K$ e $P$ \`e la somma degli ordini di tutti i poli di $f$ in $K$.
+\end{theorem}
+
+\begin{corollary}[Teorema di Rouch\'e]\label{TeoremaDiRouche}
+Siano $f,g:U\to\C$ olomorfe e  $K\subseteq U$ un compatto omeomorfo a $D^2$. Supponiamo che $|g(z)|<|f(z)|$ per ogni $z\in\partial K$ (in particolare $f(z)\neq 0$ per ogni $z\in\partial K$). Allora il numero di zeri contati con molteplicit\`a di $f$ e di $f-g$ in $K$ coincidono.
+\end{corollary}
+
+\end{multicols*}

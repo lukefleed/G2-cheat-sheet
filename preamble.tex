@@ -1,0 +1,319 @@
+\usepackage[top=1.5cm,bottom=1.5cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath,amssymb,amsfonts,amsthm,stmaryrd}
+\usepackage{mathrsfs} % per mathscr
+\usepackage{graphicx}% ruota freccia per le azioni
+\usepackage{marvosym}% per il \Lightning
+\usepackage{array}
+\usepackage{faktor} % per gli insiemi quoziente
+\usepackage{hyperref}
+\usepackage{xparse} % Per nuovi comandi con tanti input opzionali
+\usepackage{relsize} % per \mathlarger
+\usepackage{tikz-cd}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{cancel}
+\usepackage{enumitem}
+\usepackage{fourier}
+
+\newtheoremstyle{customth}
+{\topsep}{\topsep}
+{\itshape}{}{\bfseries}{.}{\newline}{}
+
+\newtheoremstyle{customdef}
+{\topsep}{\topsep}
+{\normalfont}{}{\bfseries}{.}{\newline}{}
+
+\newtheoremstyle{customrem}
+{\topsep}{\topsep}
+{\normalfont}{}{\itshape}{.}{\newline}{}
+
+\theoremstyle{customth}
+\newtheorem{theorem}{Teorema}[chapter]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollario}
+\newtheorem{proposition}[theorem]{Proposizione}
+\newtheorem{fact}[theorem]{Fatto}
+\newtheorem{application}[theorem]{Applicazione}
+\theoremstyle{customrem}
+\newtheorem{remark}
+[theorem]{Osservazione}
+\theoremstyle{customdef}
+\newtheorem{definition}[theorem]{Definizione}
+\newtheorem{notation}[theorem]{Notazione}
+\newtheorem{example}[theorem]{Esempio}
+
+
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+  \pushQED{\qed}%
+  \normalfont \topsep6\p@\@plus6\p@\relax
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\mbox{}\\*
+}{%
+  \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%============ Simboli standard =================
+%----------------- Lettere ---------------------
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\B}{\mathbb{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\D}{\mathbb{D}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\G}{\mathbb{G}}
+\newcommand{\Hb}{\mathbb{H}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\J}{\mathbb{J}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\Lb}{\mathbb{L}}
+\newcommand{\M}{\mathbb{M}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Ob}{\mathbb{O}}
+\newcommand{\Pj}{\mathbb{P}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Sb}{\mathbb{S}}
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\U}{\mathbb{U}}
+\newcommand{\V}{\mathbb{V}}
+\newcommand{\W}{\mathbb{W}}
+\newcommand{\X}{\mathbb{X}}
+\newcommand{\Y}{\mathbb{Y}}
+\newcommand{\Z}{\mathbb{Z}}
+
+\newcommand{\Ac}{\mathcal{A}}
+\newcommand{\Bc}{\mathcal{B}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Dc}{\mathcal{D}}
+\newcommand{\Ec}{\mathcal{E}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Gc}{\mathcal{G}}
+\newcommand{\Hc}{\mathcal{H}}
+\newcommand{\Ic}{\mathcal{I}}
+\newcommand{\Jc}{\mathcal{J}}
+\newcommand{\Kc}{\mathcal{K}}
+\newcommand{\Lc}{\mathcal{L}}
+\newcommand{\Mc}{\mathcal{M}}
+\newcommand{\Nc}{\mathcal{N}}
+\newcommand{\Oc}{\mathcal{O}}
+\newcommand{\Pc}{\mathcal{P}}
+\newcommand{\Qc}{\mathcal{Q}}
+\newcommand{\Rc}{\mathcal{R}}
+\newcommand{\Sc}{\mathcal{S}}
+\newcommand{\Tc}{\mathcal{T}}
+\newcommand{\Uc}{\mathcal{U}}
+\newcommand{\Vc}{\mathcal{V}}
+\newcommand{\Wc}{\mathcal{W}}
+\newcommand{\Xc}{\mathcal{X}}
+\newcommand{\Yc}{\mathcal{Y}}
+\newcommand{\Zc}{\mathcal{Z}}
+
+\newcommand{\Af}{\mathfrak{A}}
+\newcommand{\Bf}{\mathfrak{B}}
+\newcommand{\Cf}{\mathfrak{C}}
+\newcommand{\Df}{\mathfrak{D}}
+\newcommand{\Ef}{\mathfrak{E}}
+\newcommand{\Ff}{\mathfrak{F}}
+\newcommand{\Gf}{\mathfrak{G}}
+\newcommand{\Hf}{\mathfrak{H}}
+\newcommand{\If}{\mathfrak{I}}
+\newcommand{\Jf}{\mathfrak{J}}
+\newcommand{\Kf}{\mathfrak{K}}
+\newcommand{\Lf}{\mathfrak{L}}
+\newcommand{\Mf}{\mathfrak{M}}
+\newcommand{\Nf}{\mathfrak{N}}
+\newcommand{\Of}{\mathfrak{O}}
+\newcommand{\Pf}{\mathfrak{P}}
+\newcommand{\Qf}{\mathfrak{Q}}
+\newcommand{\Rf}{\mathfrak{R}}
+\newcommand{\Sf}{\mathfrak{S}}
+\newcommand{\Tf}{\mathfrak{T}}
+\newcommand{\Uf}{\mathfrak{U}}
+\newcommand{\Vf}{\mathfrak{V}}
+\newcommand{\Wf}{\mathfrak{W}}
+\newcommand{\Xf}{\mathfrak{X}}
+\newcommand{\Yf}{\mathfrak{Y}}
+\newcommand{\Zf}{\mathfrak{Z}}
+
+\newcommand{\As}{\mathscr{A}}
+\newcommand{\Bs}{\mathscr{B}}
+\newcommand{\Cs}{\mathscr{C}}
+\newcommand{\Ds}{\mathscr{D}}
+\newcommand{\Es}{\mathscr{E}}
+\newcommand{\Fs}{\mathscr{F}}
+\newcommand{\Gs}{\mathscr{G}}
+\newcommand{\Hs}{\mathscr{H}}
+\newcommand{\Is}{\mathscr{I}}
+\newcommand{\Js}{\mathscr{J}}
+\newcommand{\Ks}{\mathscr{K}}
+\newcommand{\Ls}{\mathscr{L}}
+\newcommand{\Ms}{\mathscr{M}}
+\newcommand{\Ns}{\mathscr{N}}
+\newcommand{\Os}{\mathscr{O}}
+\newcommand{\Ps}{\mathscr{P}}
+\newcommand{\Qs}{\mathscr{Q}}
+\newcommand{\Rs}{\mathscr{R}}
+\newcommand{\Ss}{\mathscr{S}}
+\newcommand{\Ts}{\mathscr{T}}
+\newcommand{\Us}{\mathscr{U}}
+\newcommand{\Vs}{\mathscr{V}}
+\newcommand{\Ws}{\mathscr{W}}
+\newcommand{\Xs}{\mathscr{X}}
+\newcommand{\Ys}{\mathscr{Y}}
+\newcommand{\Zs}{\mathscr{Z}}
+
+\newcommand{\ula}{{\underline{a}}}
+\newcommand{\ulb}{{\underline{b}}}
+\newcommand{\ulc}{{\underline{c}}}
+\newcommand{\uld}{{\underline{d}}}
+\newcommand{\ule}{{\underline{e}}}
+\newcommand{\ulf}{{\underline{f}}}
+\newcommand{\ulg}{{\underline{g}}}
+\newcommand{\ulh}{{\underline{h}}}
+\newcommand{\uli}{{\underline{i}}}
+\newcommand{\ulj}{{\underline{j}}}
+\newcommand{\ulk}{{\underline{k}}}
+\newcommand{\ull}{{\underline{l}}}
+\newcommand{\ulm}{{\underline{m}}}
+\newcommand{\uln}{{\underline{n}}}
+\newcommand{\ulo}{{\underline{o}}}
+\newcommand{\ulp}{{\underline{p}}}
+\newcommand{\ulq}{{\underline{q}}}
+\newcommand{\ulr}{{\underline{r}}}
+\newcommand{\uls}{{\underline{s}}}
+\newcommand{\ult}{{\underline{t}}}
+\newcommand{\ulu}{{\underline{u}}}
+\newcommand{\ulv}{{\underline{v}}}
+\newcommand{\ulw}{{\underline{w}}}
+\newcommand{\ulx}{{\underline{x}}}
+\newcommand{\uly}{{\underline{y}}}
+\newcommand{\ulz}{{\underline{z}}}
+
+%---------- Funzioni standard ------------------
+\newcommand{\Ann}{\mathrm{Ann}\,}
+\newcommand{\Arg}{\mathrm{Arg}\,}
+\newcommand{\Aut}{\mathrm{Aut}\,}
+\newcommand{\adj}{\mathrm{adj}\,}
+\newcommand{\cha}{\mathrm{char}\,}
+\newcommand{\comb}{\mathrm{Comb}\,}
+\newcommand{\End}{\mathrm{End}\,}
+\newcommand{\Fix}{\mathrm{Fix}\,}
+\newcommand{\Hom}{\mathrm{Hom}\,}
+\newcommand{\imm}{\mathrm{Imm}\,}
+\newcommand{\mcd}{\mathrm{mcd}\,}
+\newcommand{\mcm}{\mathrm{mcm}\,}
+\newcommand{\orb}{\mathrm{orb}\,}
+\newcommand{\ord}{\mathrm{ord}\,}
+\newcommand{\rnk}{\mathrm{rnk}\,}
+\newcommand{\sgn}{\mathrm{sgn}\,}
+\newcommand{\Span}{\mathrm{Span}\,}
+\newcommand{\stab}{\mathrm{stab}\,}
+\newcommand{\supp}{\mathrm{supp}\,}
+\newcommand{\tr}{\mathrm{tr}\,}
+
+\newcommand{\Real}{\,\Re\mathfrak{e}}
+\newcommand{\Imag}{\,\Im\mathfrak{m}}
+
+%-------------- Frecce -------------------------
+\newcommand{\coimplies}{\Longleftrightarrow}
+\newcommand{\inj}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\ot}{\leftarrow}
+\newcommand{\acts}{\curvearrowright}
+
+%----------- Lettere greche -------------------
+\newcommand{\al}{\alpha}
+\newcommand{\de}{\delta}
+\newcommand{\e}{\varepsilon}
+%\newcommand{\th}{\theta}
+\newcommand{\la}{\lambda}
+\newcommand{\vp}{\varphi}
+
+%----------- Modifica testo -------------------
+\newcommand{\ul}[1]{\underline{#1}}
+\newcommand{\ol}[1]{\overline{#1}}
+\newcommand{\wt}[1]{\widetilde{#1}}
+\newcommand{\wh}[1]{\widehat{#1}}
+\newcommand{\td}[1]{\Tilde{#1}}
+\newcommand{\rg}[1]{{\mathring {#1}}}
+\newcommand{\under}[2]{\underset{#1}{\underbrace{#2}}}
+
+%-------------- Derivate ----------------------
+\newcommand{\ddx}[2][x]{\frac{d#2}{d#1}}
+\newcommand{\pdpi}[2]{{\frac{\partial #2}{\partial x_{#1}}}}
+\newcommand{\pdp}[2][x]{\frac{\partial #2}{\partial #1}}
+
+%-------------- Parentesi ---------------------
+\newcommand{\pa}[1]{\left(#1\right)}
+\newcommand{\spa}[1]{\left[#1\right]}
+\newcommand{\cpa}[1]{\left\{#1\right\}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\Vert#1\right\Vert}
+\newcommand{\ps}[1]{\left\langle #1\right\rangle}
+
+%--------------- Matrici ----------------------
+\newcommand{\mat}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\dmat}[1]{\begin{vmatrix}#1\end{vmatrix}}
+\newcommand{\smat}[1]{\begin{smallmatrix}#1\end{smallmatrix}}
+\newcommand{\BIG}[1]{\mathlarger{\mathlarger{\mathlarger{\mathlarger{#1}}}}}
+
+%--------------- Funzioni ---------------------
+\newcommand{\funcDef}[4]{
+\begin{array}{ccc}
+{#1} & \longrightarrow & {#2}\\
+{#3} & \longmapsto & {#4}
+\end{array}}
+
+%---------------- Altro -----------------------
+\newcommand{\bs}{\setminus}
+\newcommand{\res}[1]{\raisebox{-.5ex}{$|$}_{#1}}
+\newcommand{\quot}[2]{\faktor{#1}{#2}}
+\newcommand{\sep}{\,\middle|\,}
+
+\newcommand{\ii}{^{-1}}
+\newcommand{\nz}{\bs\{0\}}
+
+\newcommand{\powerset}{\mathscr{P}}
+\newcommand{\0}{{\underline{0}}}
+\newcommand{\normal}{\triangleleft}
+
+\DeclareMathOperator*{\bigast}{{\mathlarger{\mathlarger{\ast}}}}
+
+\NewDocumentCommand{\Kon}{G{x} G{n} G{\mathbb{K}}}{
+  #3[#1_1,\cdots, #1_{#2}]
+}
+
+
+\NeedsTeXFormat{LaTeX2e}
+%\ProvidesPackage{quiver}[2021/01/11 quiver]
+
+% `tikz-cd` is necessary to draw commutative diagrams.
+\RequirePackage{tikz-cd}
+% `amssymb` is necessary for `\lrcorner` and `\ulcorner`.
+\RequirePackage{amssymb}
+% `calc` is necessary to draw curved arrows.
+\usetikzlibrary{calc}
+% `pathmorphing` is necessary to draw squiggly arrows.
+\usetikzlibrary{decorations.pathmorphing}
+
+% A TikZ style for curved arrows of a fixed height, due to AndréC.
+\tikzset{curve/.style={settings={#1},to path={(\tikztostart)
+    .. controls ($(\tikztostart)!\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+    and ($(\tikztostart)!1-\pv{pos}!(\tikztotarget)!\pv{height}!270:(\tikztotarget)$)
+    .. (\tikztotarget)\tikztonodes}},
+    settings/.code={\tikzset{quiver/.cd,#1}
+        \def\pv##1{\pgfkeysvalueof{/tikz/quiver/##1}}},
+    quiver/.cd,pos/.initial=0.35,height/.initial=0}
+
+% TikZ arrowhead/tail styles.
+\tikzset{tail reversed/.code={\pgfsetarrowsstart{tikzcd to}}}
+\tikzset{2tail/.code={\pgfsetarrowsstart{Implies[reversed]}}}
+\tikzset{2tail reversed/.code={\pgfsetarrowsstart{Implies}}}
+% TikZ arrow styles.
+\tikzset{no body/.style={/tikz/dash pattern=on 0 off 1mm}}
