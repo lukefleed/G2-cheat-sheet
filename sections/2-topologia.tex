@@ -1901,5 +1901,162 @@ Dato $X$ e dato $P\in X$ le seguenti condizioni su $U$ intorno aperto di $P$ son
 Uno spazio localmente euclideo non \`e necessariamente $T_2$ (\ref{LocalmenteEuclideoNonT2})
 \end{remark}
 
+\section{Appendice al capitolo 2}
+
+\subsection{Esempi e controesempi}
+
+\subsubsection{Spazi topologici}
+\begin{example}[Distanze non topologicamente equivalenti]\label{DistanzeNonTopEquivalenti}
+Le distanze $d_1$ e $d_\infty$ su $C([0,1])$ non sono topologicamente equivalenti.
+\end{example}
+
+
+\begin{example}[Punto aderente non di accumulazione]\label{AderenteNonAccumulazione}
+Siano $X=\R$ e $Z=[0,1)\cup \{2\}$. Osserviamo che $2$ \`e aderente ma non di accumulazione. Sempre da questo esempio notiamo che $1$ \`e un punto di accumulazione che non appartiene a $Z$.
+\end{example}
+
+\subsubsection{Assiomi di numerabilit\`a}
+\begin{example}[Insieme $I-$numerabile ma non $II-$numerabile]\label{INumerabileNonIINumerabile}
+Sia $X$ un insieme  pi\`u che numerabile dotato della topologia discreta. Esso \`e chiaramente I-numerabile in quanto metrizzabile e un SFI per $x_0$ \`e $\{x_0\}$. Osserviamo per\`o che lo spazio non \`e secondo numerabile perch\'e ogni base deve contenere i singoletti (aperti scrivibili solo come unione di se stessi ed eventualmente $\emptyset$) e ce ne sono di una quantit\`a pi\`u che numerabile.
+\end{example}
+
+\subsubsection{Prodotti}
+\begin{example}[Prodotto di $I-$numerabili non $I-$numerabile]\label{ProdottoDiINumerabileNonINumerabile}
+Sia $I$ tale che $|I|>|\N|$ e per ogni $i\in I$ sia $X_i=\{0,1\}$ con la topologia discreta. Si ha che $X=\prod_{i\in I}X_i$ non \`e $I-$numerabile.
+\end{example}
+\begin{remark}
+L'esempio precedente mostra anche che il prodotto pi\`u che numerabile di spazi metrizzabili pu\`o non essere metrizzabile.
+\end{remark}
+
+
+\begin{example}[Le proiezioni non sono sempre chiuse]\label{ProiezioniNonSempreChiuse}
+Consideriamo $C=\{(x,y)\in\R^2\mid xy=1\}$: esso \`e preimmagine di $1$ tramite la mappa continua $(x,y)\mapsto xy$, quindi \`e un chiuso in quanto preimmagine di un chiuso tramite una mappa continua, eppure $\pi_1(C)=\R\nz$ che non \`e chiuso in $\R$.
+\end{example}
+
+\subsubsection{Assiomi di separazione}
+\begin{proposition}\label{T1NonT2-T0NonT1}
+Le implicazioni $T_2\implies T_1\implies T_0$ sono strette.
+\end{proposition}
+
+\begin{example}[Spazio $T_4$ non $T_0$]\label{SpazioT4NonT0}
+La topologia indiscreta su $X$ di cardinalit\`a almeno $2$ rende lo spazio vuotamente sia $T_3$ che $T_4$, ma come sappiamo questo tipo di spazio non \`e $T_0$
+\end{example}
+
+\begin{definition}[Retta di Sorgenfrey]
+La \textbf{retta di Sorgenfrey} \`e $\R$ dotato della topologia con la seguente base:
+\[\{[a,b)\mid a<b,\ a,b\in\R\}.\]
+\end{definition}
+\begin{remark}
+La topologia di Sorgenfrey \`e pi\`u fine della topologia euclidea, infatti posso scrivere $(a-\e,a+\e)$ come unione di aperti di Sorgenfrey come segue: sia $x_n\to a-\e$ una successione monotona contenuta in $(a-\e,a+\e)$. Segue che
+\[(a-\e,a+\e)=\bigcup_{i}[x_i,a+\e).\]
+\end{remark}
+
+\begin{example}\label{RettaDiSorgenfreyENormale}
+La retta di Sorgenfrey \`e normale.
+\end{example}
+
+\begin{lemma}\label{T4SeparabileAlloraSottoinsiemeDiscretoChiusoHaCardinalitaMinoreDelContinuo}
+Sia $Z$ uno spazio $T_4$ e separabile. Se $D$ \`e un suo sottoinsieme chiuso e discreto allora $|D|<|\R|$.
+\end{lemma}
+
+\begin{example}[Piano di Sorgenfrey]\label{PianoDiSorgenfrey}
+Il piano di Sorgenfrey, cio\`e il prodotto di due rette di Sorgenfrey, non \`e $T_4$.
+\end{example}
+
+\begin{example}[Spazio Hausdorff non regolare]\label{EsempioT2NonRegolare}
+Consideriamo $\R$ dotato della topologia generata dagli aperti euclidei e $\R\bs\{\frac1n\mid n\in\N\nz\}$.
+\end{example}
+
+\subsubsection{Ricoprimenti}
+\begin{example}[Ricoprimento chiuso non fondamentale]\label{RicoprimentoChiusoNonFondamentale}
+Su $\R$ il ricoprimento $\{\{x\}\}_{x\in \R}$ non \`e fondamentale.
+\end{example}
+
+\subsubsection{Connessi}
+\begin{example}[Connesso ma non connesso per archi]\label{ConnessoNonConnessoPerArchi}
+L'insieme $Y=\{(0,0)\}\cup\{(x,\sin(1/x))\mid x>0,x\in \R\}\subseteq \R^2$ \`e connesso ma non connesso per archi
+\end{example}
+
+\begin{example}[Pettine infinito]\label{PettineInfinito}
+Sia $X=(\R\times\{0\})\cup(\Q\times \R)\subseteq \R^2$. Dotato della topologia di sottospazio di $\R^2$, $X$ \`e uno spazio connesso per archi ma non localmente connesso per archi.
+\end{example}
+
+\begin{example}[Insieme con parti connesse non aperte]\label{PartiConnesseAperte}
+$\Q$ \`e totalmente sconnesso ma i singoletti non sono aperti.
+\end{example}
+
+\begin{example}[Insieme con parti conn. per archi n\'e aperte n\'e chiuse]\label{PartiConnessePerArchiNeAperteNeChiuse}
+$Y=\{(0,0)\}\cup\{(x,\sin(1/x)\mid x>0)\}\subseteq\R^2$. Sappiamo che i due pezzi specificati sono connessi per archi ma l'insieme non \`e connesso per archi, dunque questa \`e la partizione. Osserviamo che $\{(0,0)\}$ non \`e aperto e $\{(x,\sin(1/x)\mid x>0)\}$ non \`e chiuso.
+\end{example}
+
+\subsubsection{Compattezza}
+\begin{example}[$\R^n$ non \`e compatto]\label{RnNonECompatto}
+$\R^n$ non \`e compatto, infatti il ricoprimento $\{B(x_0,n)\}_{n\in \N}$ non ammette un sottoricoprimento finito (se $m$ fosse il massimo raggio allora tutti gli elementi fuori da $B(x_0,m)$ non sarebbero coperti).
+\end{example}
+
+\begin{example}[Famiglie che godono della propriet\`a dell'intersezione finita]\label{EsempioIntersezioneFinita}
+Se $X=\R$ gli insiemi della forma $[n,+\infty)$ godono della propriet\`a dell'intersezione finita. Similmente per $X=[0,1]$ e gli insiemi della forma $(0,\frac1n)$. Inoltre in entrambi i casi l'intersezione di tutti i termini \`e vuota.
+\end{example}
+
+\begin{example}[Sottoinsiemi compatti non sono necessariamente chiusi]\label{SottoinsiemeCompattoNonChiuso}
+Si consideri $\{1,2\}$ con la topologia $\{\emptyset, \{1,2\}\}$. Chiaramente $\{1\}$ \`e un sottospazio compatto ma non \`e un chiuso.
+
+
+Un esempio meno particolare \`e dato dalla topologia cofinita su $\N$, infatti anche in questo spazio ogni sottoinsieme \`e compatto. Infatti se $A\subseteq \R$ e $\{U_i\}$ \`e un ricoprimento aperto, osservo che $|A\bs U_{i}|\in\N$ per ogni $i$, dunque fissato un primo insieme bastano finiti altri per finire di coprire $A$.
+\end{example}
+
+\begin{example}[Spazio compatto ma non compatto per successioni]\label{CompattoNonCompattoPerSuccessioni}
+Lo spazio $X=[0,1]^{[0,1]}$ con la topologia della convergenza puntuale \`e compatto ma non compatto per successioni.
+\end{example}
+\begin{example}[Spazio compatto per successioni ma non compatto]\label{CompattoPerSuccessioniNonCompatto}
+Sia $X=[0,1]^{[0,1]}$ e per ogni $f\in X$ sia $\supp(f)=\{x\in [0,1]\mid f(x)\neq0\}$ il supporto di $f$. Poniamo
+\[Y=\{f\in X\mid \supp(f)\text{ \`e al pi\`u numerabile}\}.\]
+Si ha che $Y$ \`e compatto per successioni ma non compatto con la topologia di sottospazio.
+\end{example}
+
+\begin{example}[Spazio limitato, completo ma non compatto]\label{LimiatoCompletoNonCompatto}
+Sia $X$ un insieme infinito dotato della distanza discreta. Questo \`e uno spazio metrico limitato e completo ma non compatto.
+\end{example}
+
+\begin{example}[Ricoprimento senza numero di Lebesgue]\label{RicoprimentoSenzaNumeroDiLebesgue}
+Consideriamo $X=\R$ e $\Omega=\{B(x,\frac1{x^2+1}\mid x\in \R)\}$. Chiaramente $\Omega$ \`e un ricoprimento aperto di $X$ perch\'e ho una palla per ogni punto, ma per $|x|\to\infty$ si ha che il raggio delle palle diminuisce quindi se $\e$ fosse un ipotetico numero di Lebesgue possiamo trovare un elemento del ricoprimento che non contiene alcuna palla di raggio $\e$ spostandoci abbastanza.
+\end{example}
+
+\begin{example}[Funzione continua non estendibile alla chiusura del dominio]\label{ContinuaNonEstendibileAllaChiusura}
+Siano $X=Y=\R$, $A=(0,+\infty)$ e $f(x)=\frac1x$. Osserviamo che non possiamo estendere $f$ a $[0,+\infty)$ in modo continuo, infatti porre $f(0)\in \R$ creerebbe una discontinuit\`a in $0$.
+\end{example}
+
+\begin{example}[Funzione continua ma non uniformemente continua]\label{ContinuaNonUniformementeContinua}
+Sia $X=(0,+\infty)$ e definiamo $f:X\to\R$ con $f(x)=x^2$. Affermiamo che $f$ è continua ma non uniformemente continua.
+\end{example}
+
+\subsubsection{Quozienti}
+\begin{example}[Identificazione n\'e aperta n\'e chiusa]\label{IdentificazioneNeApertaNeChiusa}
+Sia $X=\{(x,y)\mid x\geq 0\}\cup \{(x,0)\}\subseteq \R^2$ e consideriamo la mappa \[\pi:\funcDef{X}{\R}{(x,y)}{x}.\]
+Osservo che $\pi$ non \`e n\'e aperta n\'e chiusa, per esempio $B((0,1),\frac12)$ \`e aperto in $X$ ma la sua immagine tramite $\pi$ \`e $[0,\frac12)$ che non \`e aperto. Similmente l'immagine di $\{(x,y)\mid xy=1\}$, che \`e un chiuso, \`e $(0,+\infty)$ che non \`e chiusa.
+
+Ma $\pi$ \`e una identificazione: \`e chiaramente surgettiva e in quanto restrizione di una proiezione di $\R^2\to \R$ si ha che $\pi$ \`e continua. Se $C\subseteq \R$ \`e tale che $\pi\ii(C)$ \`e chiuso in $X$ osserviamo che $C$ \`e chiuso per successione, che in uno spazio metrico \`e equivalente ad essere chiuso. Infatti se $\{x_n\}$ \`e una successione a valori in $C$ convergente in $\R$ ($x_n\to \ol x$) considero $(x_n,0)\in \pi\ii(C)$. Dato che $\pi\ii(C)$ \`e chiuso e $(x_n,0)\to (\ol x,0)$ si deve avere che $(\ol x, 0)\in \pi\ii(C)$ e quindi $\ol x\in C$.
+\end{example}
+
+\begin{example}[Proiezione a quoziente per azione non chiusa]\label{ProiezioneQuozienteAzioneNonChiusa}
+Considerando l'azione $\Z\acts \R$ data dalla traslazione si ha che
+\[\pi:\R\to \quot\R\Z\]
+non \`e una mappa chiusa.
+\end{example}
+
+\begin{example}[$\R$ quoziente $\Q$]\label{RQuozienteQ}
+Consideriamo l'azione $\Q\acts \R$ di traslazione. Si ha che $\quot \R\Q$ non \`e $T_1$.
+\end{example}
+
+\begin{example}[$M(2,\R)$ quoziente similitudine]\label{Matrici2x2QuozienteSimilitudine}
+Consideriamo lo spazio delle matrici $X=M(2,\R)\cong \R^4$ e definiamo l'azione di $GL(2,\R)\acts X$ come
+\[\ell_P(A)=PAP\ii.\]
+Si ha che $\quot X{GL(2,\R)}$ non \`e $T_1$.
+\end{example}
+
+\begin{example}[Spazio localmente euclideo ma non $T_2$]\label{LocalmenteEuclideoNonT2}
+Lo spazio quoziente definito da $X=\R\times \{1,-1\}$ con la relazione $(x,\e)\sim(y,\e')\coimplies x=y\neq0$ oppure $(x,\e)=(y,\e')$, \`e localmente euclideo ma non $T_2$. Questo spazio si chiama \textbf{retta con due origini}.
+\end{example}
+
 
 \end{multicols*}
