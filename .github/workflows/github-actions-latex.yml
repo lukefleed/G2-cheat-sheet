@@ -12,7 +12,7 @@ jobs:
         with:
           root_file: "G2_cheat_sheet.tex"
       - name: move
-        run: mkdir -p github_deploy && mv main.pdf github_deploy/
+        run: mkdir -p github_deploy && mv G2_cheat_sheet.pdf github_deploy/
       - name: deploy on orphan branch
         uses: peaceiris/actions-gh-pages@v3
         with:
