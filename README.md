@@ -8,4 +8,4 @@ Versione in due colonne e senza dimostrazioni delle dispense di [Francesco Sorce
 
 PDF delle dispense:
 
-> ![clicca qui][https://github.com/lukefleed/G2-cheat-sheet/raw/build/main.pdf]
+> [Clicca Qui](https://github.com/lukefleed/G2-cheat-sheet/raw/build/main.pdf) :blue_book::
